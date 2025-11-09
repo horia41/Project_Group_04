@@ -2,8 +2,8 @@ import os
 import shutil
 from pathlib import Path
 
-SOURCE_DIR = Path("current_data")  # has 2019/ and 2022/, each with 0/ and 1/
-OUTPUT_DIR = Path("DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1_2022train_2019test")
+SOURCE_DIR = Path("../current_data") # has 2019/ and 2022/, each with 0/ and 1/
+OUTPUT_DIR = Path("../DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2_2022train_2019test")
 USE_SYMLINKS = False  # set True if you prefer symlinks instead of copying (faster, saves disk)
 # ======================
 
@@ -77,7 +77,7 @@ def create_train_test():
             n = len(list((OUTPUT_DIR / split / cname).glob("*")))
             print(f"    - {cname}: {n} files")
 
-    print(f"\n2022 -> train (100%), 2019 -> test (100%).") # <-- CHANGED
+    print(f"\n2022 -> train (100%), 2019 -> test (100%).")
 
 if __name__ == "__main__":
     create_train_test()

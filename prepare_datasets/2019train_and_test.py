@@ -3,8 +3,8 @@ import shutil
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 
-SOURCE_DIR = Path("current_data")  # has 2019/ and 2022/
-OUTPUT_DIR = Path("DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2019")
+SOURCE_DIR = Path("../current_data")  # has 2019/ and 2022/
+OUTPUT_DIR = Path("../DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2019")
 TRAIN_SPLIT = 0.75
 RANDOM_STATE = 42
 USE_SYMLINKS = False  # set True if you prefer symlinks instead of copying (faster, saves disk)
