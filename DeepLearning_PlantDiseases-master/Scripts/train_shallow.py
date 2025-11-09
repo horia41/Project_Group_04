@@ -13,7 +13,7 @@ from torchvision.models import ResNet50_Weights, VGG11_Weights
 
 # Configuration
 torch.manual_seed(0)
-batch_size = 20 # should be 128
+batch_size = 128
 
 use_gpu = torch.cuda.is_available()
 print("For mac gpu available: ", torch.backends.mps.is_available())
@@ -51,7 +51,7 @@ def load_model_for_finetuning(name, num_classes):
 
 
 # Fine-tuning function
-def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes, epochs):
+def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs):
     # Load pre-trained model for fine-tuning
     model = load_model_for_finetuning(model_name, num_classes)
 
@@ -67,8 +67,6 @@ def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes,
     else:  # for resnet50
         optimizer = optim.SGD(model.fc.parameters(), lr=0.001, momentum=0.9)
 
-    best_f1 = -1.0
-    best_state = None
     losses = []
 
     # Training loop
@@ -94,22 +92,8 @@ def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes,
                 print(f'[Epoch {epoch+1}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
 
-        # validation part
-        model.eval()
-        with torch.no_grad():
-            val_stats = evaluate_stats(model, valloader)
-        f1m = float(val_stats.get('f1_macro', 0.0))
-        if f1m > best_f1:
-            best_f1 = f1m
-            best_state = {k: v.cpu() for k, v in model.state_dict().items()}
-
     print("Finished Fine-Tuning")
     print("\nTesting:")
-
-    if best_state is not None:
-        model.load_state_dict(best_state)
-        model = model.to(device)
-        print(f"Loaded best checkpoint (val F1-macro={best_f1:.4f}) for final test.")
 
     print("\nTesting:")
     evaluate_stats(model, testloader)
@@ -125,38 +109,23 @@ def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes,
     return losses
 
 # Function to load data and apply data augmentation
-# Splits it as follows, 80/20 train/val for 2019, test fully on 2022
-def load_data(resize):
+def load_data():
     data_transforms = {
         'train': transforms.Compose([
             # transforms.RandomRotation(20),
             # transforms.GaussianBlur(5),
-            # transforms.Resize(int(resize / 224 * 256)),
-            # transforms.RandomResizedCrop(resize),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
-        ]),
-        'val': transforms.Compose([
-            # transforms.RandomRotation(20),
-            # transforms.GaussianBlur(5),
-            # transforms.Resize(int(resize / 224 * 256)),
-            # transforms.CenterCrop(resize),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomVerticalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
         'test': transforms.Compose([
             # transforms.RandomRotation(20),
             # transforms.GaussianBlur(5),
-            # transforms.Resize(int(resize / 224 * 256)),
-            # transforms.CenterCrop(resize),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
     }
 
@@ -164,15 +133,14 @@ def load_data(resize):
     data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
-             for split in ['train', 'val', 'test']}
+             for split in ['train', 'test']}
 
     dset_loaders = {
         'train': torch.utils.data.DataLoader(dsets['train'], batch_size=batch_size, shuffle=True),
-        'val'  : torch.utils.data.DataLoader(dsets['val'],   batch_size=batch_size, shuffle=False),
         'test' : torch.utils.data.DataLoader(dsets['test'],  batch_size=batch_size, shuffle=False),
     }
 
-    return dset_loaders['train'], dset_loaders['val'], dset_loaders['test']
+    return dset_loaders['train'], dset_loaders['test']
 
 # Function to evaluate the model's performance on test data
 def evaluate_stats(net, testloader):
@@ -247,11 +215,11 @@ def evaluate_stats(net, testloader):
 
 
 # Fine-tune model
-trainloader, valloader, testloader = load_data(224)  # Set resize to 224 for models like ResNet50
+trainloader, testloader = load_data()
 
 # Fine-tune model for 15 epochs
 # resnet50
-losses = fine_tune_model('resnet50', trainloader, valloader, testloader, num_classes=2, epochs=15)
+losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epochs=15)
 
 # vgg11
-# losses = fine_tune_model('vgg11', trainloader,valloader, testloader, num_classes=2, epochs=15)
+# losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=15)
