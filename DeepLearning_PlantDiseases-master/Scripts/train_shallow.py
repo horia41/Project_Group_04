@@ -129,33 +129,39 @@ def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes,
 def load_data(resize):
     data_transforms = {
         'train': transforms.Compose([
-            transforms.RandomRotation(20),
-            transforms.GaussianBlur(5),
-            transforms.RandomResizedCrop(resize),
+            # transforms.RandomRotation(20),
+            # transforms.GaussianBlur(5),
+            # transforms.Resize(int(resize / 224 * 256)),
+            # transforms.RandomResizedCrop(resize),
             transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
         ]),
         'val': transforms.Compose([
-            transforms.RandomRotation(20),
-            transforms.GaussianBlur(5),
-            transforms.Resize(int(resize / 224 * 256)),
-            transforms.CenterCrop(resize),
+            # transforms.RandomRotation(20),
+            # transforms.GaussianBlur(5),
+            # transforms.Resize(int(resize / 224 * 256)),
+            # transforms.CenterCrop(resize),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
         ]),
         'test': transforms.Compose([
-            transforms.RandomRotation(20),
-            transforms.GaussianBlur(5),
-            transforms.Resize(int(resize / 224 * 256)),
-            transforms.CenterCrop(resize),
+            # transforms.RandomRotation(20),
+            # transforms.GaussianBlur(5),
+            # transforms.Resize(int(resize / 224 * 256)),
+            # transforms.CenterCrop(resize),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now
         ]),
     }
 
     # data_dir = "PlantVillage"
-    data_dir = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/PlantVillage'
+    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'val', 'test']}
@@ -249,13 +255,3 @@ losses = fine_tune_model('resnet50', trainloader, valloader, testloader, num_cla
 
 # vgg11
 # losses = fine_tune_model('vgg11', trainloader,valloader, testloader, num_classes=2, epochs=15)
-
-
-# Results ResNet50
-# trained (15 epochs) on 2019, validation also on 2019, tested on 2022
-# Stats : Accuracy: 0.5546 | Precision(+): 0.8943 | Recall(+): 0.3854 | F1(+): 0.5387 | F1-macro: 0.5541
-
-
-# Results VGG11
-# trained (15 epochs) on 2019, validation also on 2019, tested on 2022
-# Stats : Accuracy: 0.6379 | Precision(+): 0.8507 | Recall(+): 0.5620 | F1(+): 0.6768 | F1-macro: 0.6326

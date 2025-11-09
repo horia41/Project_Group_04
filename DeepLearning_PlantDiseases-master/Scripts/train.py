@@ -133,7 +133,7 @@ def load_data(resize):
         ]),
     }
 
-    data_dir = 'PlantVillage'
+    data_dir = 'PlantVillage_1_2019train_2022test'
     dsets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x])
              for x in ['train', 'val']}
     dset_loaders = {x: torch.utils.data.DataLoader(dsets[x], batch_size=batch_size,

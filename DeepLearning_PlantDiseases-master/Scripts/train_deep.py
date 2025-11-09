@@ -154,7 +154,7 @@ def load_data(resize):
     }
 
     # data_dir = "PlantVillage"
-    data_dir = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/PlantVillage'
+    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'val', 'test']}
@@ -247,26 +247,3 @@ losses = fine_tune_model('resnet50', trainloader, valloader, testloader, num_cla
 
 # vgg11
 # losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=15)
-
-
-
-# Results ResNet50 - learning rate = 0.001
-# trained (15 epochs) on 2019, validation also on 2019, tested on 2022
-# Stats : Accuracy: 0.7837 | Precision(+): 0.9750 | Recall(+): 0.6972 | F1(+): 0.8130 | F1-macro: 0.7782
-
-# trained (100 epochs) on 2019, validation also on 2019,tested on 2022
-# Stats : Accuracy: 0.8622 | Precision(+): 0.9544 | Recall(+): 0.8357 | F1(+): 0.8911 | F1-macro: 0.8518
-
-# trained (15 epochs) on 2019, tested also on 2019
-# Accuracy : 0.89623
-
-# trained (100 epochs) on 2019, tested also on 2019
-# Accuracy on test images: 0.867925  - most probably overfitted due to small dataset and at the same time having a big number of epochs
-
-
-# Results VGG11 - learning rate = 0.001
-# trained (15 epochs) on 2019, validation also on 2019,tested on 2022
-# Stats : Accuracy: 0.8068 | Precision(+): 0.9691 | Recall(+): 0.7371 | F1(+): 0.8373 | F1-macro: 0.7997
-
-# trained (100 epochs) on 2019, validation also on 2019,tested on 2022
-# Stats : Accuracy: 0.8153 | Precision(+): 0.9585 | Recall(+): 0.7592 | F1(+): 0.8473 | F1-macro: 0.8069
