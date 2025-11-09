@@ -13,7 +13,7 @@ from torchvision.models import ResNet50_Weights, VGG11_Weights
 
 # Configuration
 torch.manual_seed(0)
-batch_size = 20
+batch_size = 20 # should be 128
 
 use_gpu = torch.cuda.is_available()
 print("For mac gpu available: ", torch.backends.mps.is_available())
@@ -63,7 +63,7 @@ def fine_tune_model(model_name, trainloader, valloader ,testloader, num_classes,
 
     # Optimizer to fine-tune only the last layer
     if model_name == 'vgg11':
-        optimizer = optim.SGD(model.classifier[6].parameters(), lr=0.001, momentum=0.9)
+        optimizer = optim.SGD(model.classifier[6].parameters(), lr=0.0001, momentum=0.9)
     else:  # for resnet50
         optimizer = optim.SGD(model.fc.parameters(), lr=0.001, momentum=0.9)
 

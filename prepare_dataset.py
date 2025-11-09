@@ -16,8 +16,8 @@ CLASS_MAPPING = {
     "1": "Alternaria solani"
 }
 
-YEAR_2019 = SOURCE_DIR / "Alternaria_2019/2019"
-YEAR_2022 = SOURCE_DIR / "Alternaria_2022/2022"
+YEAR_2019 = SOURCE_DIR / "2019"
+YEAR_2022 = SOURCE_DIR / "2022"
 
 def _ensure_clean_dirs():
     # make clean train/val/test class dirs
