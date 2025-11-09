@@ -9,11 +9,13 @@ def get_stats():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    train_data_path = os.path.join(script_dir, '..', 'current_data', '2019')
+    # train_data_path = os.path.join(script_dir, '..', 'current_data', '2019')
+    # train_data_path = os.path.join(script_dir, '..', 'current_data', '2022')
+    # train_data_path = os.path.join(script_dir, '..', 'DeepLearning_PlantDiseases-master', 'Scripts', 'PlantVillage_2019', 'train')
+    train_data_path = os.path.join(script_dir, '..', 'DeepLearning_PlantDiseases-master', 'Scripts', 'PlantVillage_2022', 'train')
 
     if not os.path.exists(train_data_path):
         print(f"Error: Data path not found at {train_data_path}")
-        print("Please check the path logic in the script.")
         return
 
     print(f"Calculating stats for dataset at: {train_data_path}")
@@ -34,7 +36,7 @@ def get_stats():
         return
 
     loader = DataLoader(train_dataset,
-                        batch_size=64,
+                        batch_size=128,
                         shuffle=False,
                         num_workers=4,
                         pin_memory=True)
@@ -47,7 +49,7 @@ def get_stats():
         for images, _ in loader:
             batch_samples = images.size(0)
             images = images.view(batch_samples, images.size(1), -1)
-            mean += images.mean(dim=[0, 2]).sum(dim=0)
+            mean += images.mean(dim=2).sum(dim=0)
             total_samples += batch_samples
 
     mean /= total_samples
@@ -76,3 +78,8 @@ def get_stats():
 
 if __name__ == '__main__':
     get_stats()
+
+# 2019 train entirely normalization params : mean 0.7553, 0.3109, 0.1059 || std 0.1774, 0.1262, 0.0863
+# 2022 train entirely normalization params : mean 0.7083, 0.2776, 0.0762 || std 0.1704, 0.1296, 0.0815
+# 2019 split normalization params : mean 0.7551, 0.3113, 0.1063 || std 0.1780, 0.1264, 0.0868
+# 2022 split normalization params : mean 0.7074, 0.2772, 0.0759 || std 0.1713, 0.1298, 0.0812
