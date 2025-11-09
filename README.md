@@ -13,7 +13,7 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 In this current implementation, I didn't really pay attetion to these details, and simply trained in both Shallow and Deep Transfer Learning, both ResNet50 and VGG11 with just learning rate of `0.001`, batch size of `20`, epochs = `15` and `100`. However, as you can tell already, we can't do any comparisons with these.
 
 <br><br> All the abovementioned things indicate that we need to retrain. So, the next tasks until the meeting we have on Wednesday are the following:
-1. Modify data splits like I mentioned above; 
+1. Modify data splits like I mentioned above ; 
 2. Change the batch size to `128` ;
 3. Modify the learning rates like I mentioned above ;
 4. Add 5-fold cross validation in the case when using `2019` as train/test and also for `2022` as train/test. Run ResNet50 and VGG11 once ;
