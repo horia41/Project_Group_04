@@ -8,7 +8,7 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 - They use an initial learning rate of `0.001`. which I also used, however they also use it in a combination with Adam + L2 regularization of `0.0001`. This is the case for ResNet. For VGG11, they used an initial learning rate of `0.0001`, I assume again with Adam and the L2, which I didn't. So, we need to change these.
 - There are 2 types of comparisons we can do directly with the paper.
   - Test and train on 2019 with split `75/25` + Test and train on 2022 with split `62/38`. For these, only one run with `5-fold` cross validation, `100` epochs.
-  - Train entirely on 2019, test entirely on 2022 and vice versa. Final results to be reported are F1 and Accuracy over `10` runs, 100 epochs each. Here without 5-fold cross validation. 
+  - Train entirely on 2019, test entirely on 2022 and vice versa. Final results to be reported are F1 and Accuracy over `10` runs, `100` epochs each. Here without `5-fold` cross validation. 
 
 In this current implementation, I didn't really pay attention to these details, and simply trained in both Shallow and Deep Transfer Learning, both ResNet50 and VGG11 with just learning rate of `0.001`, batch size of `20`, epochs = `15` and `100`, only a single run. However, as you can tell already, we can't do any comparisons with these.
 
