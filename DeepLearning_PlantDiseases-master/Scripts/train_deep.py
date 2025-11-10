@@ -67,8 +67,6 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
 
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 80], gamma=0.1)
 
-    best_f1 = -1.0
-    best_state = None
     losses = []
 
     # Training loop
@@ -88,8 +86,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
             optimizer.step()
 
             running_loss += loss.item()
-            if i % 30 == 29:
-                avg_loss = running_loss / 30
+            if i % 10 == 9:
+                avg_loss = running_loss / 10
                 losses.append(avg_loss)
                 print(f'[Epoch {epoch+1}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
@@ -226,6 +224,55 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 
 # vgg11
 # losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=100)
+
+
+# ResNet50 train 2019 test 2022
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+
+# VGG11 train 2019 test 2022
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+
+# ResNet50 train 2022 test 2019
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+
+# VGG11 train 2022 test 2019
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
 
 # ResNet50 on train 2019 test 2022
 # run 1 stats

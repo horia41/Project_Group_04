@@ -97,8 +97,8 @@ def train_one_fold(model_name, train_loader, val_loader, num_classes, epochs, fo
             optimizer.step()
 
             running_loss += loss.item()
-            if i % 30 == 29:
-                avg_loss = running_loss / 30
+            if i % 10 == 9:
+                avg_loss = running_loss / 10
                 losses.append(avg_loss)
                 print(f'[Epoch {epoch+1}/{epochs}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
@@ -132,7 +132,7 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1713, 0.1298, 0.0812]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
         'test': transforms.Compose([
             # transforms.RandomRotation(20),
@@ -140,11 +140,11 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1713, 0.1298, 0.0812]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
     }
 
-    data_dir = 'PlantVillage_2022'
+    data_dir = 'PlantVillage_2019'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
@@ -319,12 +319,9 @@ def run_kfold_training(model_name, num_classes, epochs):
     test_stats = evaluate_stats(best_fold_model, testloader)
     
     # Save the best model
-    # 'C:\\Users\\Dan Loznean\\Desktop\\proiect_plant_master_y1_s1\\DeepLearning_PlantDiseases-master\\Scripts\\model_saves'
-    # '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
-
-    save_folder = 'C:\\Users\\Dan Loznean\\Desktop\\proiect_plant_master_y1_s1\\DeepLearning_PlantDiseases-master\\Scripts\\model_saves'
+    save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
     os.makedirs(save_folder, exist_ok=True)
-    model_save_path = os.path.join(save_folder, f'{model_name}_shallowTL_5fold_best_2022.pth')
+    model_save_path = os.path.join(save_folder, f'{model_name}_shallowTL_5fold_best.pth')
     torch.save(best_fold_model.state_dict(), model_save_path)
     print(f'\nBest model (fold {best_fold_num}) saved to {model_save_path}')
     
@@ -344,24 +341,45 @@ if __name__ == "__main__":
     
     # Run 5-fold cross-validation on training data, then evaluate on test set
     # ResNet50
-    #fold_results, test_stats, losses = run_kfold_training(
-    #    'resnet50',
-    ##   epochs=100
-    #)
+    fold_results, test_stats, losses = run_kfold_training(
+        'resnet50', 
+        num_classes=2, 
+        epochs=100
+    )
     
     # VGG11 (uncomment to use)
-     fold_results, test_stats, losses = run_kfold_training(
-         'vgg11',
-         num_classes=2,
-         epochs=100
-     )
+    # fold_results, test_stats, losses = run_kfold_training(
+    #     'vgg11', 
+    #     num_classes=2, 
+    #     epochs=100
+    # )
 
 
-# ResNet50 5-fold train 2022
-# Stats : ============================================================
+# ResNet50 5-fold shallow train/test 2019
+# Stats :
 # CROSS-VALIDATION RESULTS SUMMARY
-# ============================================================
-#
+# accuracy       : 0.8209 ± 0.0148
+# Per fold: ['0.8373', '0.8121', '0.8343', '0.7970', '0.8237']
+# precision_pos  : 0.7836 ± 0.0362
+# Per fold: ['0.8288', '0.7826', '0.8139', '0.7262', '0.7665']
+# recall_pos     : 0.7333 ± 0.0236
+# Per fold: ['0.7188', '0.7004', '0.7315', '0.7461', '0.7695']
+# f1_binary      : 0.7567 ± 0.0157
+# Per fold: ['0.7699', '0.7392', '0.7705', '0.7360', '0.7680']
+# f1_macro       : 0.8074 ± 0.0142
+# Per fold: ['0.8220', '0.7962', '0.8204', '0.7856', '0.8129']
+# Best fold: 1 with F1-macro: 0.8220
+# FINAL EVALUATION ON TEST SET
+# Accuracy: 0.8429 | Precision(+): 0.8054 | Recall(+): 0.7734 | F1(+): 0.7890 | F1-macro: 0.8320
+
+
+# VGG11 5-fold shallow train/test 2019
+# Stats :
+
+
+# ResNet50 5-fold shallow train/test 2022
+# Stats :
+# CROSS-VALIDATION RESULTS SUMMARY
 # accuracy       : 0.8231 ± 0.0220
 #   Per fold: ['0.8648', '0.8056', '0.8082', '0.8107', '0.8261']
 # precision_pos  : 0.8323 ± 0.0148
@@ -372,25 +390,14 @@ if __name__ == "__main__":
 #   Per fold: ['0.9048', '0.8613', '0.8658', '0.8683', '0.8786']
 # f1_macro       : 0.7842 ± 0.0269
 #   Per fold: ['0.8357', '0.7683', '0.7648', '0.7660', '0.7861']
-#
 # Best fold: 1 with F1-macro: 0.8357
-#
-# ============================================================
 # FINAL EVALUATION ON TEST SET
-# ============================================================
-#
 # Accuracy: 0.8235 | Precision(+): 0.8300 | Recall(+): 0.9284 | F1(+): 0.8765 | F1-macro: 0.7837
-#
 
 
-
-# VGG11 5-fold train 2022
+# VGG11 5-fold shallow train/test 2022
 # Stats :
-
-# ============================================================
 # CROSS-VALIDATION RESULTS SUMMARY
-# ============================================================
-#
 # accuracy       : 0.8277 ± 0.0208
 #   Per fold: ['0.8622', '0.8005', '0.8235', '0.8159', '0.8363']
 # precision_pos  : 0.8538 ± 0.0140
@@ -401,11 +408,6 @@ if __name__ == "__main__":
 #   Per fold: ['0.9004', '0.8556', '0.8729', '0.8672', '0.8819']
 # f1_macro       : 0.7977 ± 0.0244
 #   Per fold: ['0.8386', '0.7666', '0.7921', '0.7836', '0.8076']
-#
 # Best fold: 1 with F1-macro: 0.8386
-#
-# ============================================================
 # FINAL EVALUATION ON TEST SET
-# ============================================================
-#
 # Accuracy: 0.8218 | Precision(+): 0.8363 | Recall(+): 0.9148 | F1(+): 0.8738 | F1-macro: 0.7854

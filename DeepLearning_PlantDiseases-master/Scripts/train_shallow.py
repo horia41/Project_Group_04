@@ -87,8 +87,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs):
             optimizer.step()
 
             running_loss += loss.item()
-            if i % 30 == 29:
-                avg_loss = running_loss / 30
+            if i % 10 == 9:
+                avg_loss = running_loss / 10
                 losses.append(avg_loss)
                 print(f'[Epoch {epoch+1}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
