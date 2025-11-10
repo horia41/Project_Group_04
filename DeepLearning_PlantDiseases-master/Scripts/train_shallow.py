@@ -62,9 +62,9 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs):
 
     # Optimizer to fine-tune only the last layer
     if model_name == 'vgg11':
-        optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.0001)
+        optimizer = optim.Adam(model.classifier[6].parameters(), lr=0.0001, weight_decay=0.0001)
     else:  # for resnet50
-        optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
+        optimizer = optim.Adam(model.fc.parameters(), lr=0.001, weight_decay=0.0001)
 
     losses = []
 
