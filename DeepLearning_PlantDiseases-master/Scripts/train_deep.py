@@ -11,7 +11,6 @@ from torchvision import datasets
 from torchvision.models import ResNet50_Weights, VGG11_Weights
 
 # Configuration
-torch.manual_seed(0)
 batch_size = 128
 
 use_gpu = torch.cuda.is_available()
@@ -215,9 +214,9 @@ def evaluate_stats(net, testloader):
 
 
 # Fine-tune model
-trainloader, testloader = load_data()  # Set resize to 224 for models like ResNet50
+trainloader, testloader = load_data()
 
-# Fine-tune model for 15 or 100 epochs
+# Fine-tune model for 100 epochs
 # resnet50
 losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epochs=100)
 

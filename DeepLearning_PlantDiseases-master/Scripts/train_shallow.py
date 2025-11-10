@@ -12,7 +12,6 @@ from torchvision import datasets
 from torchvision.models import ResNet50_Weights, VGG11_Weights
 
 # Configuration
-torch.manual_seed(0)
 batch_size = 128
 
 use_gpu = torch.cuda.is_available()
@@ -130,7 +129,7 @@ def load_data():
     }
 
     # data_dir = "PlantVillage"
-    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
+    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2019'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
@@ -217,9 +216,9 @@ def evaluate_stats(net, testloader):
 # Fine-tune model
 trainloader, testloader = load_data()
 
-# Fine-tune model for 15 epochs
+# Fine-tune model for 100 epochs
 # resnet50
-losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epochs=15)
+losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epochs=100)
 
 # vgg11
 # losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=15)
