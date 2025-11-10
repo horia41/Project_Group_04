@@ -371,7 +371,9 @@ if __name__ == "__main__":
 # Best fold: 1 with F1-macro: 0.8220
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8429 | Precision(+): 0.8054 | Recall(+): 0.7734 | F1(+): 0.7890 | F1-macro: 0.8320
-
+# Paper reports on ResNet50 shallow train/test 2019 :
+# F1: 0.73, ours: 0.78
+# Acc: 0.70, ours 0.84
 
 # VGG11 5-fold shallow train/test 2019
 # Stats :
@@ -393,6 +395,9 @@ if __name__ == "__main__":
 # Best fold: 1 with F1-macro: 0.8357
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8235 | Precision(+): 0.8300 | Recall(+): 0.9284 | F1(+): 0.8765 | F1-macro: 0.7837
+# Paper reports on ResNet50 shallow train/test 2022 :
+# F1: 0.77, ours: 0.87
+# Acc: 0.85, ours 0.82
 
 
 # VGG11 5-fold shallow train/test 2022
@@ -411,3 +416,6 @@ if __name__ == "__main__":
 # Best fold: 1 with F1-macro: 0.8386
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8218 | Precision(+): 0.8363 | Recall(+): 0.9148 | F1(+): 0.8738 | F1-macro: 0.7854
+# Paper reports on VGG11 shallow train/test 2022 :
+# F1: 0.73, ours: 0.87
+# Acc: 0.84, ours 0.82
