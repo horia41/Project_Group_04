@@ -65,6 +65,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
     else:  # for resnet50
         optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 80], gamma=0.1)
+
     best_f1 = -1.0
     best_state = None
     losses = []
@@ -92,6 +94,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
                 print(f'[Epoch {epoch+1}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
 
+        scheduler.step()
+
     print("Finished Fine-Tuning")
     print("\nTesting:")
 
@@ -117,7 +121,7 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
         'test': transforms.Compose([
             # transforms.RandomRotation(20),
@@ -125,12 +129,11 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
     }
 
-    # data_dir = "PlantVillage"
-    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1_2019train_2022test'
+    data_dir = 'PlantVillage_1_2019train_2022test'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}

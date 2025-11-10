@@ -66,6 +66,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs):
     else:  # for resnet50
         optimizer = optim.Adam(model.fc.parameters(), lr=0.001, weight_decay=0.0001)
 
+    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 80], gamma=0.1)
+
     losses = []
 
     # Training loop
@@ -90,6 +92,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs):
                 losses.append(avg_loss)
                 print(f'[Epoch {epoch+1}, Step {i+1}] Loss: {avg_loss:.3f}')
                 running_loss = 0.0
+
+        scheduler.step()
 
     print("Finished Fine-Tuning")
     print("\nTesting:")
@@ -128,8 +132,7 @@ def load_data():
         ]),
     }
 
-    # data_dir = "PlantVillage"
-    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
+    data_dir = 'PlantVillage_2019'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
