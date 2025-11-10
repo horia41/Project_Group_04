@@ -62,9 +62,9 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
 
     # Optimizer to fine-tune the entire model
     if model_name == 'vgg11':
-        optimizer = optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+        optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.0001)
     else:  # for resnet50
-        optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+        optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
     best_f1 = -1.0
     best_state = None
