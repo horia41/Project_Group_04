@@ -105,7 +105,8 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
     # save model
     # here, modify path for your pc
     # keep in mind it has to end up in Scripts/model_saves
-    save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
+    # save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
+    save_folder = 'C:\\Users\\Dan Loznean\\Desktop\\proiect_plant_master_y1_s1\\DeepLearning_PlantDiseases-master\\Scripts\\model_saves'
     model_save_path = os.path.join(save_folder, 'resnet50_deepTL_100epochs_run1.pth') # modify the name accordingly
     torch.save(model.state_dict(), model_save_path)
     print(f'Model saved to {model_save_path}')
@@ -225,3 +226,55 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 
 # vgg11
 # losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=100)
+
+# ResNet50 on train 2019 test 2022
+# run 1 stats
+# run 2 stats
+# run 3 stats
+# run 4 stats
+# run 5 stats
+# run 6 stats
+# run 7 stats
+# run 8 stats
+# run 9 stats
+# run 10 stats
+
+
+# VGG11 on train 2019 test 2022
+# run 1 stats
+# run 2 stats
+# run 3 stats
+# run 4 stats
+# run 5 stats
+# run 6 stats
+# run 7 stats
+# run 8 stats
+# run 9 stats
+# run 10 stats
+
+
+
+# ResNet50 on train 2022 test 2019
+# run 1 stats
+# run 2 stats
+# run 3 stats
+# run 4 stats
+# run 5 stats
+# run 6 stats
+# run 7 stats
+# run 8 stats
+# run 9 stats
+# run 10 stats
+
+
+# VGG11 on train 2022 test 2019
+# run 1 stats
+# run 2 stats
+# run 3 stats
+# run 4 stats
+# run 5 stats
+# run 6 stats
+# run 7 stats
+# run 8 stats
+# run 9 stats
+# run 10 stats

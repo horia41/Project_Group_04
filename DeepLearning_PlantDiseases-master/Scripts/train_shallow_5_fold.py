@@ -132,7 +132,7 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1713, 0.1298, 0.0812]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
         'test': transforms.Compose([
             # transforms.RandomRotation(20),
@@ -140,11 +140,11 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1713, 0.1298, 0.0812]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
     }
 
-    data_dir = 'PlantVillage_2019'
+    data_dir = 'PlantVillage_2022'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
@@ -319,9 +319,12 @@ def run_kfold_training(model_name, num_classes, epochs):
     test_stats = evaluate_stats(best_fold_model, testloader)
     
     # Save the best model
-    save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
+    # 'C:\\Users\\Dan Loznean\\Desktop\\proiect_plant_master_y1_s1\\DeepLearning_PlantDiseases-master\\Scripts\\model_saves'
+    # '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
+
+    save_folder = 'C:\\Users\\Dan Loznean\\Desktop\\proiect_plant_master_y1_s1\\DeepLearning_PlantDiseases-master\\Scripts\\model_saves'
     os.makedirs(save_folder, exist_ok=True)
-    model_save_path = os.path.join(save_folder, f'{model_name}_shallowTL_5fold_best.pth')
+    model_save_path = os.path.join(save_folder, f'{model_name}_shallowTL_5fold_best_2022.pth')
     torch.save(best_fold_model.state_dict(), model_save_path)
     print(f'\nBest model (fold {best_fold_num}) saved to {model_save_path}')
     
@@ -341,15 +344,68 @@ if __name__ == "__main__":
     
     # Run 5-fold cross-validation on training data, then evaluate on test set
     # ResNet50
-    fold_results, test_stats, losses = run_kfold_training(
-        'resnet50', 
-        num_classes=2, 
-        epochs=100
-    )
+    #fold_results, test_stats, losses = run_kfold_training(
+    #    'resnet50',
+    ##   epochs=100
+    #)
     
     # VGG11 (uncomment to use)
-    # fold_results, test_stats, losses = run_kfold_training(
-    #     'vgg11', 
-    #     num_classes=2, 
-    #     epochs=100
-    # )
+     fold_results, test_stats, losses = run_kfold_training(
+         'vgg11',
+         num_classes=2,
+         epochs=100
+     )
+
+
+# ResNet50 5-fold train 2022
+# Stats : ============================================================
+# CROSS-VALIDATION RESULTS SUMMARY
+# ============================================================
+#
+# accuracy       : 0.8231 ± 0.0220
+#   Per fold: ['0.8648', '0.8056', '0.8082', '0.8107', '0.8261']
+# precision_pos  : 0.8323 ± 0.0148
+#   Per fold: ['0.8601', '0.8310', '0.8203', '0.8188', '0.8311']
+# recall_pos     : 0.9242 ± 0.0198
+#   Per fold: ['0.9545', '0.8939', '0.9167', '0.9242', '0.9318']
+# f1_binary      : 0.8758 ± 0.0156
+#   Per fold: ['0.9048', '0.8613', '0.8658', '0.8683', '0.8786']
+# f1_macro       : 0.7842 ± 0.0269
+#   Per fold: ['0.8357', '0.7683', '0.7648', '0.7660', '0.7861']
+#
+# Best fold: 1 with F1-macro: 0.8357
+#
+# ============================================================
+# FINAL EVALUATION ON TEST SET
+# ============================================================
+#
+# Accuracy: 0.8235 | Precision(+): 0.8300 | Recall(+): 0.9284 | F1(+): 0.8765 | F1-macro: 0.7837
+#
+
+
+
+# VGG11 5-fold train 2022
+# Stats :
+
+# ============================================================
+# CROSS-VALIDATION RESULTS SUMMARY
+# ============================================================
+#
+# accuracy       : 0.8277 ± 0.0208
+#   Per fold: ['0.8622', '0.8005', '0.8235', '0.8159', '0.8363']
+# precision_pos  : 0.8538 ± 0.0140
+#   Per fold: ['0.8777', '0.8370', '0.8495', '0.8453', '0.8597']
+# recall_pos     : 0.8985 ± 0.0163
+#   Per fold: ['0.9242', '0.8750', '0.8977', '0.8902', '0.9053']
+# f1_binary      : 0.8756 ± 0.0151
+#   Per fold: ['0.9004', '0.8556', '0.8729', '0.8672', '0.8819']
+# f1_macro       : 0.7977 ± 0.0244
+#   Per fold: ['0.8386', '0.7666', '0.7921', '0.7836', '0.8076']
+#
+# Best fold: 1 with F1-macro: 0.8386
+#
+# ============================================================
+# FINAL EVALUATION ON TEST SET
+# ============================================================
+#
+# Accuracy: 0.8218 | Precision(+): 0.8363 | Recall(+): 0.9148 | F1(+): 0.8738 | F1-macro: 0.7854
