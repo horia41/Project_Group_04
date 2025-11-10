@@ -377,6 +377,23 @@ if __name__ == "__main__":
 
 # VGG11 5-fold shallow train/test 2019
 # Stats :
+# CROSS-VALIDATION RESULTS SUMMARY
+# accuracy       : 0.8123 ± 0.0084
+# Per fold: ['0.7988', '0.8077', '0.8151', '0.8163', '0.8237']
+# precision_pos  : 0.8061 ± 0.0194
+# Per fold: ['0.8125', '0.7702', '0.8235', '0.8028', '0.8216']
+# recall_pos     : 0.6669 ± 0.0330
+# Per fold: ['0.6094', '0.7043', '0.6537', '0.6836', '0.6836']
+# f1_binary      : 0.7291 ± 0.0173
+# Per fold: ['0.6964', '0.7358', '0.7289', '0.7384', '0.7463']
+# f1_macro       : 0.7927 ± 0.0109
+# Per fold: ['0.7730', '0.7923', '0.7943', '0.7984', '0.8056']
+# Best fold: 5 with F1-macro: 0.8056
+# FINAL EVALUATION ON TEST SET
+# Accuracy: 0.8110 | Precision(+): 0.7898 | Recall(+): 0.6846 | F1(+): 0.7334 | F1-macro: 0.7935
+# Paper reports on VGG11 shallow train/test 2019 :
+# F1: 0.86, ours: 0.73
+# Acc: 0.82, ours 0.81
 
 
 # ResNet50 5-fold shallow train/test 2022

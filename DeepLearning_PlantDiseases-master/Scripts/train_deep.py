@@ -226,7 +226,31 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 # losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=100)
 
 
-# ResNet50 train 2019 test 2022
+# ResNet50 train 2019 test 2022 || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Run 1 Stats Accuracy: 0.8647 | Precision(+): 0.9841 | Recall(+): 0.8127 | F1(+): 0.8902 | F1-macro: 0.8571
+# Run 2 Stats Accuracy: 0.8568 | Precision(+): 0.9839 | Recall(+): 0.8009 | F1(+): 0.8830 | F1-macro: 0.8943
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+
+# VGG11 train 2019 test 2022  || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Run 1 Stats Accuracy: 0.8518 | Precision(+): 0.9882 | Recall(+): 0.7897 | F1(+): 0.8779 | F1-macro: 0.8447
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+
+# ResNet50 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
 # Run 1 Stats
 # Run 2 Stats
 # Run 3 Stats
@@ -238,7 +262,7 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 # Run 9 Stats
 # Run 10 Stats
 
-# VGG11 train 2019 test 2022
+# VGG11 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
 # Run 1 Stats
 # Run 2 Stats
 # Run 3 Stats
@@ -249,79 +273,3 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 # Run 8 Stats
 # Run 9 Stats
 # Run 10 Stats
-
-# ResNet50 train 2022 test 2019
-# Run 1 Stats
-# Run 2 Stats
-# Run 3 Stats
-# Run 4 Stats
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
-
-# VGG11 train 2022 test 2019
-# Run 1 Stats
-# Run 2 Stats
-# Run 3 Stats
-# Run 4 Stats
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
-
-# ResNet50 on train 2019 test 2022
-# run 1 stats
-# run 2 stats
-# run 3 stats
-# run 4 stats
-# run 5 stats
-# run 6 stats
-# run 7 stats
-# run 8 stats
-# run 9 stats
-# run 10 stats
-
-
-# VGG11 on train 2019 test 2022
-# run 1 stats
-# run 2 stats
-# run 3 stats
-# run 4 stats
-# run 5 stats
-# run 6 stats
-# run 7 stats
-# run 8 stats
-# run 9 stats
-# run 10 stats
-
-
-
-# ResNet50 on train 2022 test 2019
-# run 1 stats
-# run 2 stats
-# run 3 stats
-# run 4 stats
-# run 5 stats
-# run 6 stats
-# run 7 stats
-# run 8 stats
-# run 9 stats
-# run 10 stats
-
-
-# VGG11 on train 2022 test 2019
-# run 1 stats
-# run 2 stats
-# run 3 stats
-# run 4 stats
-# run 5 stats
-# run 6 stats
-# run 7 stats
-# run 8 stats
-# run 9 stats
-# run 10 stats
