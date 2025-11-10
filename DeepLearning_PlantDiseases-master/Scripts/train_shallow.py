@@ -129,7 +129,7 @@ def load_data():
     }
 
     # data_dir = "PlantVillage"
-    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2019'
+    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}

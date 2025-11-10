@@ -102,7 +102,7 @@ def fine_tune_model(model_name, trainloader, testloader, num_classes, epochs=15)
     # here, modify path for your pc
     # keep in mind it has to end up in Scripts/model_saves
     save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
-    model_save_path = os.path.join(save_folder, 'resnet50_deepTL_100epochs_seed0.pth') # modify the name accordingly
+    model_save_path = os.path.join(save_folder, 'resnet50_deepTL_100epochs_run1.pth') # modify the name accordingly
     torch.save(model.state_dict(), model_save_path)
     print(f'Model saved to {model_save_path}')
 
@@ -130,7 +130,7 @@ def load_data():
     }
 
     # data_dir = "PlantVillage"
-    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1'
+    data_dir = '/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1_2019train_2022test'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
@@ -221,4 +221,4 @@ trainloader, testloader = load_data()
 losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epochs=100)
 
 # vgg11
-# losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=15)
+# losses = fine_tune_model('vgg11', trainloader, testloader, num_classes=2, epochs=100)
