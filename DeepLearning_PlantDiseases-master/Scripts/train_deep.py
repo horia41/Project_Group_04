@@ -227,49 +227,62 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 
 
 # ResNet50 train 2019 test 2022 || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Averaged over 10 runs
 # Run 1 Stats Accuracy: 0.8647 | Precision(+): 0.9841 | Recall(+): 0.8127 | F1(+): 0.8902 | F1-macro: 0.8571
 # Run 2 Stats Accuracy: 0.8568 | Precision(+): 0.9839 | Recall(+): 0.8009 | F1(+): 0.8830 | F1-macro: 0.8943
 # Run 3 Stats Accuracy: 0.9078 | Precision(+): 0.9699 | Recall(+): 0.8911 | F1(+): 0.9288 | F1-macro: 0.8991
 # Run 4 Stats Accuracy: 0.8847 | Precision(+): 0.9783 | Recall(+): 0.8479 | F1(+): 0.9085 | F1-macro: 0.8764
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
+# Run 5 Stats Accuracy: 0.8879 | Precision(+): 0.9837 | Recall(+): 0.8479 | F1(+): 0.9107 | F1-macro: 0.8800
+# Run 6 Stats Accuracy: 0.9015 | Precision(+): 0.9749 | Recall(+): 0.8765 | F1(+): 0.9231 | F1-macro: 0.8930
+# Run 7 Stats Accuracy: 0.8828 | Precision(+): 0.9788 | Recall(+): 0.8446 | F1(+): 0.9068 | F1-macro: 0.8745
+# Run 8 Stats Accuracy: 0.8635 | Precision(+): 0.9696 | Recall(+): 0.8235 | F1(+): 0.8906 | F1-macro: 0.8546
+# Run 9 Stats Accuracy: 0.8606 | Precision(+): 0.9818 | Recall(+): 0.8085 | F1(+): 0.8867 | F1-macro: 0.8528
+# Run 10 Stats Accuracy: 0.8407 | Precision(+): 0.9828 | Recall(+): 0.7775 | F1(+): 0.8682 | F1-macro: 0.8334
+# Averaged : Accuracy: 0.8751 +- 0.0201 | Precision(+): 0.9788 +- 0.0053 | Recall(+): 0.8331 +- 0.0333 | F1(+): 0.8997 +- 0.0180 | F1-macro: 0.8715 +- 0.0204
+# Averaged rounded : Accuracy: 0.88 +- 0.02 | Precision(+): 0.98 +- 0.01 | Recall(+): 0.83 +- 0.03 | F1(+): 0.90 +- 0.02 | F1-macro: 0.87 +- 0.02
 
 # VGG11 train 2019 test 2022  || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Averaged over 10 runs
 # Run 1 Stats Accuracy: 0.8518 | Precision(+): 0.9882 | Recall(+): 0.7897 | F1(+): 0.8779 | F1-macro: 0.8447
 # Run 2 Stats Accuracy: 0.8407 | Precision(+): 0.9874 | Recall(+): 0.7737 | F1(+): 0.8676 | F1-macro: 0.8338
-# Run 3 Stats
-# Run 4 Stats
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
+# Run 3 Stats Accuracy: 0.8552 | Precision(+): 0.9918 | Recall(+): 0.7920 | F1(+): 0.8807 | F1-macro: 0.8483
+# Run 4 Stats Accuracy: 0.8540 | Precision(+): 0.9889 | Recall(+): 0.7925 | F1(+): 0.8799 | F1-macro: 0.8469
+# Run 5 Stats Accuracy: 0.8109 | Precision(+): 0.9936 | Recall(+): 0.7244 | F1(+): 0.8379 | F1-macro: 0.8055
+# Run 6 Stats Accuracy: 0.8309 | Precision(+): 0.9957 | Recall(+): 0.7526 | F1(+): 0.8572 | F1-macro: 0.8249
+# Run 7 Stats Accuracy: 0.8571 | Precision(+): 0.9901 | Recall(+): 0.7962 | F1(+): 0.8826 | F1-macro: 0.8501
+# Run 8 Stats Accuracy: 0.8765 | Precision(+): 0.9871 | Recall(+): 0.8277 | F1(+): 0.9004 | F1-macro: 0.8689
+# Run 9 Stats Accuracy: 0.8514 | Precision(+): 0.9882 | Recall(+): 0.7892 | F1(+): 0.8776 | F1-macro: 0.8443
+# Run 10 Stats Accuracy: 0.8495 | Precision(+): 0.9899 | Recall(+): 0.7850 | F1(+): 0.8756 | F1-macro: 0.8426
+# Averaged : Accuracy: 0.8478 +- 0.0165 | Precision(+): 0.9901 +- 0.0027 | Recall(+): 0.7823 +- 0.0262 | F1(+): 0.8737 +- 0.0158 | F1-macro: 0.8410 +- 0.0160
+# Averaged rounded : Accuracy: 0.85 +- 0.02 | Precision(+): 0.99 +- 0.0027 | Recall(+): 0.78 +- 0.03 | F1(+): 0.87 +- 0.02 | F1-macro: 0.84 +- 0.02
+
 
 # ResNet50 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
-# Run 1 Stats
-# Run 2 Stats
-# Run 3 Stats
-# Run 4 Stats
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
+# Averaged over 10 runs
+# Run 1 Stats Accuracy: 0.8828 | Precision(+): 0.7777 | Recall(+): 0.9678 | F1(+): 0.8624 | F1-macro: 0.8802
+# Run 2 Stats Accuracy: 0.8772 | Precision(+): 0.7657 | Recall(+): 0.9749 | F1(+): 0.8577 | F1-macro: 0.8749
+# Run 3 Stats Accuracy: 0.8797 | Precision(+): 0.7719 | Recall(+): 0.9696 | F1(+): 0.8595 | F1-macro: 0.8772
+# Run 4 Stats Accuracy: 0.8775 | Precision(+): 0.7644 | Recall(+): 0.9789 | F1(+): 0.8585 | F1-macro: 0.8752
+# Run 5 Stats Accuracy: 0.8886 | Precision(+): 0.7865 | Recall(+): 0.9696 | F1(+): 0.8685 | F1-macro: 0.8859
+# Run 6 Stats Accuracy: 0.8788 | Precision(+): 0.7689 | Recall(+): 0.9731 | F1(+): 0.8591 | F1-macro: 0.8764
+# Run 7 Stats Accuracy: 0.8755 | Precision(+): 0.7627 | Recall(+): 0.9754 | F1(+): 0.8560 | F1-macro: 0.8732
+# Run 8 Stats Accuracy: 0.8837 | Precision(+): 0.7792 | Recall(+): 0.9678 | F1(+): 0.8633 | F1-macro: 0.8810
+# Run 9 Stats Accuracy: 0.8675 | Precision(+): 0.7490 | Recall(+): 0.9789 | F1(+): 0.8487 | F1-macro: 0.8654
+# Run 10 Stats Accuracy: 0.8777 | Precision(+): 0.7664 | Recall(+): 0.9749 | F1(+): 0.8582 | F1-macro: 0.8753
+# Averaged : Accuracy: 0.8789 +- 0.0053 | Precision(+): 0.7692 +- 0.0099 | Recall(+): 0.9731 +- 0.0040 | F1(+): 0.8592 +- 0.0049 | F1-macro: 0.8765 +- 0.0051
+# Averaged rounded : Accuracy: 0.88 +- 0.01 | Precision(+): 0.77 +- 0.01 | Recall(+): 0.97 +- 0.01 | F1(+): 0.86 +- 0.01 | F1-macro: 0.88 +- 0.01
 
 # VGG11 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
-# Run 1 Stats
-# Run 2 Stats
-# Run 3 Stats
-# Run 4 Stats
-# Run 5 Stats
-# Run 6 Stats
-# Run 7 Stats
-# Run 8 Stats
-# Run 9 Stats
-# Run 10 Stats
+# Averaged over 10 runs
+# Run 1 Stats Accuracy: 0.8815 | Precision(+): 0.7819 | Recall(+): 0.9538 | F1(+): 0.8593 | F1-macro: 0.8785
+# Run 2 Stats Accuracy: 0.8846 | Precision(+): 0.7855 | Recall(+): 0.9573 | F1(+): 0.8629 | F1-macro: 0.8816
+# Run 3 Stats Accuracy: 0.8906 | Precision(+): 0.7958 | Recall(+): 0.9573 | F1(+): 0.8691 | F1-macro: 0.8875
+# Run 4 Stats Accuracy: 0.8808 | Precision(+): 0.7757 | Recall(+): 0.9649 | F1(+): 0.8600 | F1-macro: 0.8781
+# Run 5 Stats Accuracy: 0.8759 | Precision(+): 0.7671 | Recall(+): 0.9667 | F1(+): 0.8554 | F1-macro: 0.8734
+# Run 6 Stats Accuracy: 0.8795 | Precision(+): 0.7748 | Recall(+): 0.9620 | F1(+): 0.8583 | F1-macro: 0.8767
+# Run 7 Stats Accuracy: 0.8790 | Precision(+): 0.7726 | Recall(+): 0.9655 | F1(+): 0.8583 | F1-macro: 0.8764
+# Run 8 Stats Accuracy: 0.8770 | Precision(+): 0.7683 | Recall(+): 0.9678 | F1(+): 0.8566 | F1-macro: 0.8745
+# Run 9 Stats Accuracy: 0.8812 | Precision(+): 0.7762 | Recall(+): 0.9655 | F1(+): 0.8606 | F1-macro: 0.8786
+# Run 10 Stats Accuracy: 0.8832 | Precision(+): 0.7854 | Recall(+): 0.9526 | F1(+): 0.8610 | F1-macro: 0.8802
+# Averaged : Accuracy: 0.8813 +- 0.0040 | Precision(+): 0.7783 +- 0.0084 | Recall(+): 0.9613 +- 0.0053 | F1(+): 0.8601 +- 0.0036 | F1-macro: 0.8786 +- 0.0038
+# Averaged rounded : Accuracy: 0.88 +- 0.01 | Precision(+): 0.78 +- 0.01 | Recall(+): 0.96 +- 0.01 | F1(+): 0.86 +- 0.01 | F1-macro: 0.88 +- 0.01

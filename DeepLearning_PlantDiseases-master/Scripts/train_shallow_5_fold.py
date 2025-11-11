@@ -372,8 +372,10 @@ if __name__ == "__main__":
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8429 | Precision(+): 0.8054 | Recall(+): 0.7734 | F1(+): 0.7890 | F1-macro: 0.8320
 # Paper reports on ResNet50 shallow train/test 2019 :
-# F1: 0.73, ours: 0.78
+# F1: 0.73, ours 0.78
 # Acc: 0.70, ours 0.84
+# Precision: 0.82, ours 0.81
+# Recall: 0.71, ours 0.77
 
 # VGG11 5-fold shallow train/test 2019
 # Stats :
@@ -392,8 +394,10 @@ if __name__ == "__main__":
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8110 | Precision(+): 0.7898 | Recall(+): 0.6846 | F1(+): 0.7334 | F1-macro: 0.7935
 # Paper reports on VGG11 shallow train/test 2019 :
-# F1: 0.86, ours: 0.73
+# F1: 0.86, ours 0.73
 # Acc: 0.82, ours 0.81
+# Precision: 0.84, ours 0.79
+# Recall: 0.89, ours 0.69
 
 
 # ResNet50 5-fold shallow train/test 2022
@@ -413,8 +417,10 @@ if __name__ == "__main__":
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.8235 | Precision(+): 0.8300 | Recall(+): 0.9284 | F1(+): 0.8765 | F1-macro: 0.7837
 # Paper reports on ResNet50 shallow train/test 2022 :
-# F1: 0.77, ours: 0.87
+# F1: 0.77, ours 0.87
 # Acc: 0.85, ours 0.82
+# Precision: 0.79, ours 0.83
+# Recall: 0.76, ours 0.83
 
 
 # VGG11 5-fold shallow train/test 2022
@@ -436,3 +442,5 @@ if __name__ == "__main__":
 # Paper reports on VGG11 shallow train/test 2022 :
 # F1: 0.73, ours: 0.87
 # Acc: 0.84, ours 0.82
+# Precision: 0.78, ours 0.84
+# Recall: 0.69, ours 0.82
