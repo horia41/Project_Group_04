@@ -229,8 +229,8 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 # ResNet50 train 2019 test 2022 || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
 # Run 1 Stats Accuracy: 0.8647 | Precision(+): 0.9841 | Recall(+): 0.8127 | F1(+): 0.8902 | F1-macro: 0.8571
 # Run 2 Stats Accuracy: 0.8568 | Precision(+): 0.9839 | Recall(+): 0.8009 | F1(+): 0.8830 | F1-macro: 0.8943
-# Run 3 Stats
-# Run 4 Stats
+# Run 3 Stats Accuracy: 0.9078 | Precision(+): 0.9699 | Recall(+): 0.8911 | F1(+): 0.9288 | F1-macro: 0.8991
+# Run 4 Stats Accuracy: 0.8847 | Precision(+): 0.9783 | Recall(+): 0.8479 | F1(+): 0.9085 | F1-macro: 0.8764
 # Run 5 Stats
 # Run 6 Stats
 # Run 7 Stats
@@ -240,7 +240,7 @@ losses = fine_tune_model('resnet50', trainloader, testloader, num_classes=2, epo
 
 # VGG11 train 2019 test 2022  || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
 # Run 1 Stats Accuracy: 0.8518 | Precision(+): 0.9882 | Recall(+): 0.7897 | F1(+): 0.8779 | F1-macro: 0.8447
-# Run 2 Stats
+# Run 2 Stats Accuracy: 0.8407 | Precision(+): 0.9874 | Recall(+): 0.7737 | F1(+): 0.8676 | F1-macro: 0.8338
 # Run 3 Stats
 # Run 4 Stats
 # Run 5 Stats

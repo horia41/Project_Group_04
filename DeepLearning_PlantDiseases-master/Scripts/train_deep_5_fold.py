@@ -129,7 +129,7 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1780, 0.1264, 0.0868]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
         'test': transforms.Compose([
             # transforms.RandomRotation(20),
@@ -137,11 +137,11 @@ def load_data():
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
+            transforms.Normalize([0.7074, 0.2772, 0.0759], [0.1780, 0.1264, 0.0868]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
         ]),
     }
 
-    data_dir = 'PlantVillage_2019'
+    data_dir = 'PlantVillage_2022'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}
@@ -350,3 +350,8 @@ if __name__ == "__main__":
     #     num_classes=2, 
     #     epochs=100
     # )
+
+
+# ResNet50 5-fold deep train/test 2022
+
+# VGG11 5-fold deep train/test 2022
