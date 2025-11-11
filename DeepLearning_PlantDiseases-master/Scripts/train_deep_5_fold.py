@@ -353,5 +353,43 @@ if __name__ == "__main__":
 
 
 # ResNet50 5-fold deep train/test 2022
+# CROSS-VALIDATION RESULTS SUMMARY
+# accuracy       : 0.9468 ± 0.0044
+# Per fold: ['0.9464', '0.9540', '0.9488', '0.9437', '0.9412']
+# precision_pos  : 0.9460 ± 0.0117
+# Per fold: ['0.9418', '0.9624', '0.9552', '0.9416', '0.9288']
+# recall_pos     : 0.9773 ± 0.0072
+# Per fold: ['0.9811', '0.9697', '0.9697', '0.9773', '0.9886']
+# f1_binary      : 0.9613 ± 0.0029
+# Per fold: ['0.9610', '0.9660', '0.9624', '0.9591', '0.9578']
+# f1_macro       : 0.9382 ± 0.0058
+# Per fold: ['0.9377', '0.9473', '0.9412', '0.9345', '0.9304']
+# Best fold: 2 with F1-macro: 0.9473
+# FINAL EVALUATION ON TEST SET
+# Accuracy: 0.9517 | Precision(+): 0.9552 | Recall(+): 0.9741 | F1(+): 0.9645 | F1-macro: 0.9444
+# Paper reports on ResNet50 deep train/test 2022 :
+# F1: 0.91, ours 0.96
+# Acc: 0.94, ours 0.95
+# Precision: 0.93, ours 0.95
+# Recall: 0.89, ours 0.97
 
 # VGG11 5-fold deep train/test 2022
+# CROSS-VALIDATION RESULTS SUMMARY
+# accuracy       : 0.9473 ± 0.0116
+# Per fold: ['0.9643', '0.9488', '0.9437', '0.9514', '0.9284']
+# precision_pos  : 0.9600 ± 0.0118
+# Per fold: ['0.9771', '0.9586', '0.9618', '0.9623', '0.9403']
+# recall_pos     : 0.9621 ± 0.0063
+# Per fold: ['0.9697', '0.9659', '0.9545', '0.9659', '0.9545']
+# f1_binary      : 0.9611 ± 0.0085
+# Per fold: ['0.9734', '0.9623', '0.9582', '0.9641', '0.9474']
+# f1_macro       : 0.9399 ± 0.0135
+# Per fold: ['0.9596', '0.9414', '0.9361', '0.9445', '0.9177']
+# Best fold: 1 with F1-macro: 0.9596
+# FINAL EVALUATION ON TEST SET
+# Accuracy: 0.9509 | Precision(+): 0.9563 | Recall(+): 0.9716 | F1(+): 0.9639 | F1-macro: 0.9436
+# Paper reports on VGG11 deep train/test 2022 :
+# F1: 0.92, ours 0.
+# Acc: 0.95, ours 0.
+# Precision: 0.93, ours 0.
+# Recall: 0.92, ours 0.
