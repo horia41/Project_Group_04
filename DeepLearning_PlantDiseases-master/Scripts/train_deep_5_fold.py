@@ -389,7 +389,7 @@ if __name__ == "__main__":
 # FINAL EVALUATION ON TEST SET
 # Accuracy: 0.9509 | Precision(+): 0.9563 | Recall(+): 0.9716 | F1(+): 0.9639 | F1-macro: 0.9436
 # Paper reports on VGG11 deep train/test 2022 :
-# F1: 0.92, ours 0.
-# Acc: 0.95, ours 0.
-# Precision: 0.93, ours 0.
-# Recall: 0.92, ours 0.
+# F1: 0.92, ours 0.96
+# Acc: 0.95, ours 0.95
+# Precision: 0.93, ours 0.95
+# Recall: 0.92, ours 0.97
