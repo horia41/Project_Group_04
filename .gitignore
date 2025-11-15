@@ -2,6 +2,21 @@
 __pycache__/
 *.py[codz]
 *$py.class
+.idea/
+current_data/
+!current_data/random
+.DS_Store
+PlantVillage/
+!PlantVillage/random 
+PlantVillage_1_2019train_2022test/
+!PlantVillage_1_2019train_2022test/random 
+PlantVillage_2_2022train_2019test/
+!PlantVillage_2_2022train_2019test/random 
+PlantVillage_2019/
+!PlantVillage_2019/random
+PlantVillage_2022/
+!PlantVillage_2019/random
+cswin_fpn_hybrid/dataset/
 
 # C extensions
 *.so
