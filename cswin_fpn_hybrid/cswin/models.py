@@ -8,7 +8,7 @@
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 from timm.models import register_model
 
-from cswin.cswin_transformer import CSWinTransformer
+from cswin_fpn_hybrid.cswin.cswin_transformer import CSWinTransformer
 
 def _cfg(url='', **kwargs):
     return {

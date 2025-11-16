@@ -8,8 +8,8 @@
 import torch
 import torch.nn as nn
 from timm.layers import DropPath
-from cswin.lepe_attention import LePEAttention
-from cswin.mlp import Mlp
+from cswin_fpn_hybrid.cswin.lepe_attention import LePEAttention
+from cswin_fpn_hybrid.cswin.mlp import Mlp
 
 class CSWinBlock(nn.Module):
 

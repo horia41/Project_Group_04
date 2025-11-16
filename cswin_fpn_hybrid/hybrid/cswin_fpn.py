@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from hybrid.cswin_backbone import CSWinBackbone
+from cswin_fpn_hybrid.hybrid.cswin_backbone import CSWinBackbone
 from collections import OrderedDict
 from torchvision.ops import FeaturePyramidNetwork
 

@@ -10,7 +10,7 @@
 import torch
 import torch.utils.checkpoint as checkpoint
 from einops import rearrange
-from cswin.cswin_transformer import CSWinTransformer
+from cswin_fpn_hybrid.cswin import CSWinTransformer
 
 class CSWinBackbone(CSWinTransformer):
     """

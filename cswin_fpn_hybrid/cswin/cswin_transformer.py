@@ -11,8 +11,8 @@ from timm.layers import trunc_normal_
 from einops.layers.torch import Rearrange
 import torch.utils.checkpoint as checkpoint
 import numpy as np
-from cswin.cswin_block import CSWinBlock
-from cswin.merge_block import MergeBlock
+from cswin_fpn_hybrid.cswin.cswin_block import CSWinBlock
+from cswin_fpn_hybrid.cswin.merge_block import MergeBlock
 
 class CSWinTransformer(nn.Module):
     """
