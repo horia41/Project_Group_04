@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>alternar</w>
+      <w>hpem</w>
       <w>preds</w>
       <w>testloader</w>
       <w>trainloader</w>
