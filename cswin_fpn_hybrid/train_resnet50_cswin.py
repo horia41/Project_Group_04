@@ -264,8 +264,14 @@ if __name__ == '__main__':
     )
 
 
-# Train 2019 -> Test 2022 first run (100 epochs)
+# Train 2019 -> Test 2022 first run (100 epochs), only resnet pretrained
 # Stats Accuracy: 0.8160 | Precision(+): 0.9826 | Recall(+): 0.7404 | F1(+): 0.8444 | F1-macro: 0.8096
 
-# Train 2019 -> Test 2022 second run, added class weights, modified lr for backbone from 1e-4 to 1e-5 (100 epochs)
+# Train 2019 -> Test 2022 second run, only resnet pretrained, added class weights, modified lr for backbone from 1e-4 to 1e-5 (100 epochs)
 # Stats Accuracy: 0.7868 | Precision(+): 0.9734 | Recall(+): 0.7033 | F1(+): 0.8166 | F1-macro: 0.7811
+
+# Train 2019 -> Test 2022 3rd run (100 epochs), both resnet stages and cswin blocks pretrained, cosine annealing for optimizer, 1e-4
+# Stats Accuracy: 0.8198 | Precision(+): 0.9815 | Recall(+): 0.7469 | F1(+): 0.8483 | F1-macro: 0.8132
+
+# Train 2019 -> Test 2022 4th run (100 epochs), both resnet stages and cswin blocks pretrained, focal loss with cosine annealing, 1e-4
+# Stats Accuracy: 0.8508 | Precision(+): 0.9809 | Recall(+): 0.7944 | F1(+): 0.8778 | F1-macro: 0.8431

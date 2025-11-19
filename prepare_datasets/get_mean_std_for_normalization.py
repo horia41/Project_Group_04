@@ -81,5 +81,3 @@ if __name__ == '__main__':
 
 # 2019 train entirely normalization params : mean 0.7553, 0.3109, 0.1059 || std 0.1774, 0.1262, 0.0863
 # 2022 train entirely normalization params : mean 0.7083, 0.2776, 0.0762 || std 0.1704, 0.1296, 0.0815
-# 2019 split normalization params : mean 0.7551, 0.3113, 0.1063 || std 0.1780, 0.1264, 0.0868
-# 2022 split normalization params : mean 0.7074, 0.2772, 0.0759 || std 0.1713, 0.1298, 0.0812

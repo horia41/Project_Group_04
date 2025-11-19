@@ -31,48 +31,48 @@ np.random.seed(random_seed)
 if torch.cuda.is_available():
     torch.cuda.manual_seed(random_seed)
 
-# Function to load the model for fine-tuning
-def load_model_for_finetuning(name, num_classes):
+# Function to load the model for deep fine-tuning
+def load_model_for_deep_finetuning(name, num_classes):
     if name == 'resnet50':
         model = models.resnet50(weights=ResNet50_Weights.IMAGENET1K_V2)
-        for p in model.parameters(): 
+        for p in model.parameters():
             p.requires_grad = False
         model.fc = nn.Linear(model.fc.in_features, num_classes)
         num_trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
         num_total = sum(p.numel() for p in model.parameters())
-        print(f"Trainable params: {num_trainable:,} / {num_total:,}  (shallow TL)")
+        print(f"Trainable params: {num_trainable:,} / {num_total:,}  (deep TL)")
         return model
 
     if name == 'vgg11':
         model = models.vgg11(weights=VGG11_Weights.IMAGENET1K_V1)
-        for p in model.parameters(): 
+        for p in model.parameters():
             p.requires_grad = False
         in_feat = model.classifier[6].in_features
         model.classifier[6] = nn.Linear(in_feat, num_classes)
         num_trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
         num_total = sum(p.numel() for p in model.parameters())
-        print(f"Trainable params: {num_trainable:,} / {num_total:,}  (shallow TL)")
+        print(f"Trainable params: {num_trainable:,} / {num_total:,}  (deep TL)")
         return model
 
 
-# Fine-tuning function for one fold
+# Deep fine-tuning function for one fold
 def train_one_fold(model_name, train_loader, val_loader, num_classes, epochs, fold_num):
     print(f"\n{'='*60}")
     print(f"Training Fold {fold_num + 1}/{n_folds}")
     print(f"{'='*60}")
-    
-    # Load pre-trained model for fine-tuning
-    model = load_model_for_finetuning(model_name, num_classes)
+
+    # Load pre-trained model for deep fine-tuning
+    model = load_model_for_deep_finetuning(model_name, num_classes)
     model = model.to(device)
 
     # Loss function and optimizer
     criterion = nn.CrossEntropyLoss().to(device)
 
-    # Optimizer to fine-tune only the last layer
+    # Optimizer to fine-tune the entire model
     if model_name == 'vgg11':
-        optimizer = optim.Adam(model.classifier[6].parameters(), lr=0.0001, weight_decay=0.0001)
+        optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=0.0001)
     else:  # for resnet50
-        optimizer = optim.Adam(model.fc.parameters(), lr=0.001, weight_decay=0.0001)
+        optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
     scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 80], gamma=0.1)
 
@@ -97,15 +97,12 @@ def train_one_fold(model_name, train_loader, val_loader, num_classes, epochs, fo
             optimizer.step()
 
             running_loss += loss.item()
-            if i % 10 == 9:
-                avg_loss = running_loss / 10
-                losses.append(avg_loss)
-                print(f'[Epoch {epoch+1}/{epochs}, Step {i+1}] Loss: {avg_loss:.3f}')
-                running_loss = 0.0
-
+            losses.append(loss.item())
+            print(f'[Epoch {epoch+1}/{epochs}, Batch {i+1}] Loss: {loss.item():.3f}')
+        print(f'  Epoch {epoch+1}/{epochs} completed')
         scheduler.step()
-        
-        # Validation after each epoch
+
+        # Validation after each epoch (every 10 epochs or last epoch)
         if (epoch + 1) % 10 == 0 or epoch == epochs - 1:
             print(f"\nValidation at epoch {epoch+1}:")
             val_stats = evaluate_stats(model, val_loader)
@@ -115,11 +112,11 @@ def train_one_fold(model_name, train_loader, val_loader, num_classes, epochs, fo
 
     print(f"\nFold {fold_num + 1} Training Complete!")
     print(f"Best F1-macro: {best_f1:.4f} at epoch {best_epoch}")
-    
+
     # Final validation
     print(f"\nFinal Validation Results for Fold {fold_num + 1}:")
     final_stats = evaluate_stats(model, val_loader)
-    
+
     return model, final_stats, losses
 
 
@@ -127,52 +124,41 @@ def train_one_fold(model_name, train_loader, val_loader, num_classes, epochs, fo
 def load_data():
     data_transforms = {
         'train': transforms.Compose([
-            # transforms.RandomRotation(20),
-            # transforms.GaussianBlur(5),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
             transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
-        ]),
-        'test': transforms.Compose([
-            # transforms.RandomRotation(20),
-            # transforms.GaussianBlur(5),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomVerticalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize([0.7553, 0.3109, 0.1059], [0.1774, 0.1262, 0.0863]) # these values have to be extracted from training set of what you are using now, check get_mean_std_for_normalisation.py
-        ]),
+        ])
     }
 
     data_dir = 'PlantVillage_2019'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
-             for split in ['train', 'test']}
+             for split in ['train']}
 
     dset_loaders = {
-        'train': torch.utils.data.DataLoader(dsets['train'], batch_size=batch_size, shuffle=True),
-        'test' : torch.utils.data.DataLoader(dsets['test'],  batch_size=batch_size, shuffle=False),
+        'train': torch.utils.data.DataLoader(dsets['train'], batch_size=batch_size, shuffle=True)
     }
 
-    return dset_loaders['train'], dset_loaders['test']
+    return dset_loaders['train']
 
 
 # Function to create data loaders for a specific fold
 def get_fold_loaders(dataset, train_indices, val_indices):
     train_sampler = SubsetRandomSampler(train_indices)
     val_sampler = SubsetRandomSampler(val_indices)
-    
+
     train_loader = torch.utils.data.DataLoader(
-        dataset, 
-        batch_size=batch_size, 
+        dataset,
+        batch_size=batch_size,
         sampler=train_sampler
     )
     val_loader = torch.utils.data.DataLoader(
-        dataset, 
-        batch_size=batch_size, 
+        dataset,
+        batch_size=batch_size,
         sampler=val_sampler
     )
-    
+
     return train_loader, val_loader
 
 
@@ -254,108 +240,110 @@ def run_kfold_training(model_name, num_classes, epochs):
     print(f"Starting {n_folds}-Fold Cross-Validation")
     print(f"Model: {model_name} | Epochs: {epochs}")
     print(f"{'#'*60}\n")
-    
+
     # Load the training dataset (using original data structure)
-    trainloader, testloader = load_data()
-    
+    trainloader = load_data()
+
     # Get the full training dataset for cross-validation
     train_dataset = trainloader.dataset
-    
+
     # Get labels for stratification
     labels = [label for _, label in train_dataset.samples]
-    
+
     # Initialize StratifiedKFold
     skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=random_seed)
-    
+
     # Storage for results
     fold_results = []
     all_losses = []
     best_fold_model = None
     best_fold_f1 = 0.0
     best_fold_num = 0
-    
+
     # Cross-validation loop (only on training data)
     for fold, (train_idx, val_idx) in enumerate(skf.split(np.zeros(len(labels)), labels)):
         # Create data loaders for this fold
         fold_train_loader, fold_val_loader = get_fold_loaders(train_dataset, train_idx, val_idx)
-        
+
         print(f"\nFold {fold + 1}: Train samples = {len(train_idx)}, Val samples = {len(val_idx)}")
-        
+
         # Train model for this fold
         model, fold_stats, losses = train_one_fold(
             model_name, fold_train_loader, fold_val_loader, num_classes, epochs, fold
         )
-        
+
         # Store results
         fold_results.append(fold_stats)
         all_losses.extend(losses)
-        
+
         # Keep track of best model
         if fold_stats['f1_macro'] > best_fold_f1:
             best_fold_f1 = fold_stats['f1_macro']
             best_fold_model = model
             best_fold_num = fold + 1
-    
+
     # Aggregate results across all folds
     print(f"\n{'='*60}")
     print("CROSS-VALIDATION RESULTS SUMMARY")
     print(f"{'='*60}\n")
-    
+
     metrics = ['accuracy', 'precision_pos', 'recall_pos', 'f1_binary', 'f1_macro']
-    
+
     for metric in metrics:
         values = [result[metric] for result in fold_results]
         mean_val = np.mean(values)
         std_val = np.std(values)
         print(f"{metric:15s}: {mean_val:.4f} ± {std_val:.4f}")
         print(f"  Per fold: {[f'{v:.4f}' for v in values]}")
-    
+
     print(f"\nBest fold: {best_fold_num} with F1-macro: {best_fold_f1:.4f}")
-    
-    # Final evaluation on original test set
-    print(f"\n{'='*60}")
-    print("FINAL EVALUATION ON TEST SET")
-    print(f"{'='*60}\n")
-    test_stats = evaluate_stats(best_fold_model, testloader)
-    
+
     # Save the best model
-    save_folder = '/Users/horiaionescu/Main Folder/project_master_y1_s1/DeepLearning_PlantDiseases-master/Scripts/model_saves'
+    save_folder = 'model_saves'
     os.makedirs(save_folder, exist_ok=True)
-    model_save_path = os.path.join(save_folder, f'{model_name}_shallowTL_5fold_best.pth')
+    model_save_path = os.path.join(save_folder, f'{model_name}_deepTL_5fold_best.pth')
     torch.save(best_fold_model.state_dict(), model_save_path)
     print(f'\nBest model (fold {best_fold_num}) saved to {model_save_path}')
-    
-    return fold_results, test_stats, all_losses
+
+    return fold_results, all_losses
 
 
 # Main execution
 if __name__ == "__main__":
     # Uses the same data structure as original:
-    # PlantVillage_2019/
+    # PlantVillage_1_2019train_2022test/
     #   ├── train/
     #   │   ├── other (Not alternaria solani)/
     #   │   └── Alternaria solani/
     #   └── test/
     #       ├── other (Not alternaria solani)/
     #       └── Alternaria solani/
-    
+
     # Run 5-fold cross-validation on training data, then evaluate on test set
     # ResNet50
-    fold_results, test_stats, losses = run_kfold_training(
-        'resnet50', 
-        num_classes=2, 
+    fold_results, losses = run_kfold_training(
+        'resnet50',
+        num_classes=2,
         epochs=100
     )
-    
+
     # VGG11 (uncomment to use)
     # fold_results, test_stats, losses = run_kfold_training(
-    #     'vgg11', 
-    #     num_classes=2, 
+    #     'vgg11',
+    #     num_classes=2,
     #     epochs=100
     # )
 
 
+# ------------------------------------------------------------------------------------------------------------
+#  RESULTS
+# ------------------------------------------------------------------------------------------------------------
+
+
 # ResNet50 5-fold shallow train/test 2019
+# ------------------------------------------------------------------------------------------------------------
+#  WRONG
+# ------------------------------------------------------------------------------------------------------------
 # Stats :
 # CROSS-VALIDATION RESULTS SUMMARY
 # accuracy       : 0.8209 ± 0.0148
@@ -377,7 +365,17 @@ if __name__ == "__main__":
 # Precision: 0.82, ours 0.81
 # Recall: 0.71, ours 0.77
 
+# ResNet50 5-fold shallow train/test 2019
+# ------------------------------------------------------------------------------------------------------------
+# CORRECT
+# ------------------------------------------------------------------------------------------------------------
+
+
+
 # VGG11 5-fold shallow train/test 2019
+# ------------------------------------------------------------------------------------------------------------
+# WRONG
+# ------------------------------------------------------------------------------------------------------------
 # Stats :
 # CROSS-VALIDATION RESULTS SUMMARY
 # accuracy       : 0.8123 ± 0.0084
@@ -399,8 +397,16 @@ if __name__ == "__main__":
 # Precision: 0.84, ours 0.79
 # Recall: 0.89, ours 0.69
 
+# VGG11 5-fold shallow train/test 2019
+# ------------------------------------------------------------------------------------------------------------
+# CORRECT
+# ------------------------------------------------------------------------------------------------------------
+
 
 # ResNet50 5-fold shallow train/test 2022
+# ------------------------------------------------------------------------------------------------------------
+# WRONG
+# ------------------------------------------------------------------------------------------------------------
 # Stats :
 # CROSS-VALIDATION RESULTS SUMMARY
 # accuracy       : 0.8231 ± 0.0220
@@ -422,8 +428,16 @@ if __name__ == "__main__":
 # Precision: 0.79, ours 0.83
 # Recall: 0.76, ours 0.83
 
+# ResNet50 5-fold shallow train/test 2022
+# ------------------------------------------------------------------------------------------------------------
+# CORRECT
+# ------------------------------------------------------------------------------------------------------------
+
 
 # VGG11 5-fold shallow train/test 2022
+# ------------------------------------------------------------------------------------------------------------
+# WRONG
+# ------------------------------------------------------------------------------------------------------------
 # Stats :
 # CROSS-VALIDATION RESULTS SUMMARY
 # accuracy       : 0.8277 ± 0.0208
@@ -444,3 +458,8 @@ if __name__ == "__main__":
 # Acc: 0.84, ours 0.82
 # Precision: 0.78, ours 0.84
 # Recall: 0.69, ours 0.82
+
+# VGG11 5-fold shallow train/test 2022
+# ------------------------------------------------------------------------------------------------------------
+# CORRECT
+# ------------------------------------------------------------------------------------------------------------

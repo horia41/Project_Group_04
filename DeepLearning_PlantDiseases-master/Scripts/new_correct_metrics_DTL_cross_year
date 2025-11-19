@@ -1,0 +1,97 @@
+# ------------------------------------------------------------------------------------------------------------
+#  TRAIN 2019 -> TEST 2022
+# ------------------------------------------------------------------------------------------------------------
+
+
+# ResNet50 train 2019 test 2022 || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Averaged over 10 runs
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+# Averaged :
+# Averaged rounded :
+
+
+# VGG11 train 2019 test 2022  || Paper has 0.87 +- 0.02 accuracy, 0.82 +- 0.02 F1 score, when training on 2019, testing on 2022 (AlternarAI model)
+# Averaged over 10 runs
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+# Averaged :
+# Averaged rounded :
+
+
+
+# ------------------------------------------------------------------------------------------------------------
+#  TRAIN 2022 -> TEST 2019
+# ------------------------------------------------------------------------------------------------------------
+
+
+# ResNet50 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
+# Averaged over 10 runs
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+# Averaged :
+# Averaged rounded :
+
+
+# VGG11 train 2022 test 2019  || Paper has 0.91 +- 0.03 accuracy, 0.83 +- 0.03 F1 score, when training on 2022, testing on 2019 (AlternarAI model)
+# Averaged over 10 runs
+# Run 1 Stats
+# Run 2 Stats
+# Run 3 Stats
+# Run 4 Stats
+# Run 5 Stats
+# Run 6 Stats
+# Run 7 Stats
+# Run 8 Stats
+# Run 9 Stats
+# Run 10 Stats
+# Averaged :
+# Averaged rounded :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------------------------------------------------------
+#  TRAIN 2022 -> TEST 2019
+# ------------------------------------------------------------------------------------------------------------
