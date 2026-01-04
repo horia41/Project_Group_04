@@ -9,10 +9,10 @@ def get_stats():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # train_data_path = os.path.join(script_dir, '..', 'current_data', '2019')
+    train_data_path = os.path.join(script_dir, '..', 'current_data', '2019')
     # train_data_path = os.path.join(script_dir, '..', 'current_data', '2022')
     # train_data_path = os.path.join(script_dir, '..', 'DeepLearning_PlantDiseases-master', 'Scripts', 'PlantVillage_2019', 'train')
-    train_data_path = os.path.join(script_dir, '..', 'DeepLearning_PlantDiseases-master', 'Scripts', 'PlantVillage_2022', 'train')
+    # train_data_path = os.path.join(script_dir, '..', 'DeepLearning_PlantDiseases-master', 'Scripts', 'PlantVillage_2022', 'train')
 
     if not os.path.exists(train_data_path):
         print(f"Error: Data path not found at {train_data_path}")
@@ -20,9 +20,9 @@ def get_stats():
 
     print(f"Calculating stats for dataset at: {train_data_path}")
 
-    # --- 2. Setup Dataset & Loader ---
     stats_transform = transforms.Compose([
-        transforms.ToTensor()
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
     ])
 
     try:
@@ -79,5 +79,8 @@ def get_stats():
 if __name__ == '__main__':
     get_stats()
 
-# 2019 train entirely normalization params : mean 0.7553, 0.3109, 0.1059 || std 0.1774, 0.1262, 0.0863
-# 2022 train entirely normalization params : mean 0.7083, 0.2776, 0.0762 || std 0.1704, 0.1296, 0.0815
+# 2019 train entirely normalization params :
+# mean 0.7553, 0.3109, 0.1059 || std 0.1774, 0.1262, 0.0863
+
+# 2022 train entirely normalization params :
+# mean 0.7083, 0.2776, 0.0762 || std 0.1704, 0.1296, 0.0815

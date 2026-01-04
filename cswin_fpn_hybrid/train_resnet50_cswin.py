@@ -1,4 +1,5 @@
 # cswin_hybrid training
+# NOT USED ANYMORE
 
 import os
 import time
@@ -275,3 +276,69 @@ if __name__ == '__main__':
 
 # Train 2019 -> Test 2022 4th run (100 epochs), both resnet stages and cswin blocks pretrained, focal loss with cosine annealing, 1e-4
 # Stats Accuracy: 0.8508 | Precision(+): 0.9809 | Recall(+): 0.7944 | F1(+): 0.8778 | F1-macro: 0.8431
+
+
+# modified version in the architecture with fix for positional embedding not lost anymore in rearrange
+
+# Train 2022 -> Test 2019 (100 epochs), both resnet stages and cswin blocks pretrained, focal loss with cosine annealing, 1e-4
+# Stats : Accuracy: 0.8395 | Precision(+): 0.7101 | Recall(+): 0.9754 | F1(+): 0.8219 | F1-macro: 0.8379
+
+# Train 2022 -> Test 2019 (100 epochs), both resnet stages and cswin blocks pretrained, cross entropy loss with cosine annealing, 1e-4, and SE block added at bridge
+# Stats : Accuracy: 0.8697 | Precision(+): 0.7535 | Recall(+): 0.9760 | F1(+): 0.8504 | F1-macro: 0.8675
+
+# new learning rates resent 1e-5 / weight decay 0.05 | head 5e-5 / weight decay 0.05 | body 5e-4 / weight decay 0.05
+
+# Train 2022 -> Test 2019 (100 epochs), both resnet stages and cswin blocks pretrained, cross entropy loss with cosine annealing, different LR for parts in network , and SE block added at bridge
+# Stats : Accuracy: 0.8602 | Precision(+): 0.7509 | Recall(+): 0.9450 | F1(+): 0.8369 | F1-macro: 0.8572
+
+# Same as the one above, though using Test time augmentation
+# Stats : Accuracy: 0.8502 | Precision(+): 0.7297 | Recall(+): 0.9614 | F1(+): 0.8297 | F1-macro: 0.8480
+
+# Same as the one above, now using more aggressive class weights, care 3x more for positive class due to imbalance of testing dataset
+# Stats : Accuracy: 0.8688 | Precision(+): 0.7704 | Recall(+): 0.9322 | F1(+): 0.8436 | F1-macro: 0.8653
+
+# Train 2022 -> Test 2019 (100 epochs), both resnet stages and cswin blocks pretrained, asymmetric loss (gama neg/pos 4/1) with cosine annealing, different LR for parts in network , and SE block added at bridge
+# Stats : Accuracy: 0.8575 | Precision(+): 0.7479 | Recall(+): 0.9421 | F1(+): 0.8339 | F1-macro: 0.8545
+
+# Train 2022 -> Test 2019 (100 epochs), both resnet stages and cswin blocks pretrained, focal loss with cosine annealing, different LR for parts in network , and SE block added at bridge
+# Stats : Accuracy: 0.8608 | Precision(+): 0.7661 | Recall(+): 0.9117 | F1(+): 0.8326 | F1-macro: 0.8567
+
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks
+# Stats : Accuracy: 0.8402 | Precision(+): 0.7240 | Recall(+): 0.9357 | F1(+): 0.8163 | F1-macro: 0.8374
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# Stats: Accuracy: 0.8848 | Precision(+): 0.8281 | Recall(+): 0.8789 | F1(+): 0.8528 | F1-macro: 0.8791
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, cross entropy with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# Stats: Accuracy: 0.8841 | Precision(+): 0.8062 | Recall(+): 0.9146 | F1(+): 0.8570 | F1-macro: 0.8798
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# heavy data augmentation
+# Stats : Accuracy: 0.8906 | Precision(+): 0.8582 | Recall(+): 0.8526 | F1(+): 0.8554 | F1-macro: 0.8837
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Train 2019 -> Test 2022 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# heavy data augmentation
+# Stats : Accuracy: 0.6912 | Precision(+): 0.9923 | Recall(+): 0.5465 | F1(+): 0.7048 | F1-macro: 0.6905
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Train 2019 -> Test 2022 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# heavy data augmentation, but with threshold tuning
+# Stats : Threshold | Acc | Prec | Rec | F1
+#         0.10 | 0.8451 | 0.9219 | 0.8418 | 0.8800
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# new learning rates resent 3e-6 / weight decay 0.01 | head 2e-4 / weight decay 0.1 | body 2e-5 / weight decay 0.05
+
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# Stats : Accuracy: 0.8584 | Precision(+): 0.7521 | Recall(+): 0.9351 | F1(+): 0.8337 | F1-macro: 0.8552
+
+# new learning rates resent 1e-5 / weight decay 0.01 | head 5e-4 / weight decay 0.1 | body 1e-4 / weight decay 0.05 | weight decay global 0.01
+
+# Train 2022 -> Test 2019 (100 epochs), both pretrained, using modified new_model, focal loss with warm up and then cos anl, sill different LR, modified bridge / attention blocks, but better
+# Stats : Accuracy: 0.8810 | Precision(+): 0.8601 | Recall(+): 0.8199 | F1(+): 0.8395 | F1-macro: 0.8725

@@ -3,9 +3,8 @@ import shutil
 from pathlib import Path
 
 SOURCE_DIR = Path("../current_data") # has 2019/ and 2022/, each with 0/ and 1/
-OUTPUT_DIR = Path("../DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2_2022train_2019test")
+OUTPUT_DIR = Path("../DeepLearning_PlantDiseases-master/Scripts/PlantVillage_2_2022train_2019test") # will contain train/ test/
 USE_SYMLINKS = False  # set True if you prefer symlinks instead of copying (faster, saves disk)
-# ======================
 
 CLASS_MAPPING = {
     "0": "other (Not alternaria solani)",
@@ -16,7 +15,6 @@ YEAR_2019 = SOURCE_DIR / "2019"
 YEAR_2022 = SOURCE_DIR / "2022"
 
 def _ensure_clean_dirs():
-    # make clean train/test class dirs
     for split in ["train", "test"]:
         for cname in CLASS_MAPPING.values():
             d = OUTPUT_DIR / split / cname
@@ -44,8 +42,8 @@ def create_train_test():
 
     _ensure_clean_dirs()
 
-    # -------- 2022 -> train (ALL) --------
-    print("Processing 2022 -> train (ALL images)")
+    # 2022 -> train
+    print("2022 -> train (ALL images)")
     for cls_id, cls_name in CLASS_MAPPING.items():
         src_dir = YEAR_2022 / cls_id
         imgs = _list_images(src_dir)
@@ -56,8 +54,8 @@ def create_train_test():
         for p in imgs:
             _place(p, OUTPUT_DIR / "train" / cls_name / p.name)
 
-    # -------- 2019 -> test (ALL) --------
-    print("Processing 2019 -> test (ALL images)")
+    # 2019 -> test
+    print("2019 -> test (ALL images)")
     total_2019 = 0
     for cls_id, cls_name in CLASS_MAPPING.items():
         src_dir = YEAR_2019 / cls_id
@@ -77,7 +75,7 @@ def create_train_test():
             n = len(list((OUTPUT_DIR / split / cname).glob("*")))
             print(f"    - {cname}: {n} files")
 
-    print(f"\n2022 -> train (100%), 2019 -> test (100%).")
+    print(f"\n2022 -> train (100%), 2019 -> test (100%)")
 
 if __name__ == "__main__":
     create_train_test()

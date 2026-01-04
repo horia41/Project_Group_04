@@ -2,10 +2,9 @@ import torch
 import torch.nn as nn
 import timm
 from einops.layers.torch import Rearrange
-from cswin_fpn_hybrid.cswin.models import CSWin_64_12211_tiny_224
 
 class ResNetCSWinHybrid(nn.Module):
-    def __init__(self, num_classes=2, resnet_pretrained=True):
+    def __init__(self, num_classes=2, resnet_pretrained=True, cswin_pretrained=True):
         super().__init__()
 
         # --- 1. ResNet50 Stem ---
@@ -22,19 +21,31 @@ class ResNetCSWinHybrid(nn.Module):
         # We create a CSWin-Tiny model just to borrow its building blocks.
         # We will use its stage3, merge3, stage4, and final norm.
         # This model is NOT trained (its weights are random).
-        cswin_tiny = CSWin_64_12211_tiny_224()
+        cswin_tiny = timm.create_model(
+            'CSWin_64_12211_tiny_224',
+            pretrained=cswin_pretrained,
+        )
 
         # Input to CSWin stage3 is embed_dim * 4 = 64 * 4 = 256
         self.cswin_input_dim = cswin_tiny.stage3[0].dim
 
         # --- 3. Bridge Layer ---
         # We need to project ResNet's 1024 channels down to CSWin's 256
-        self.bridge = nn.Conv2d(1024, self.cswin_input_dim, kernel_size=1)
+        # self.bridge = nn.Conv2d(1024, self.cswin_input_dim, kernel_size=1)
+        self.bridge = nn.Sequential(
+            nn.Conv2d(1024, self.cswin_input_dim, kernel_size=1, bias=False),
+            nn.BatchNorm2d(self.cswin_input_dim),
+            nn.GELU()
+        )
 
         # --- 4. Tokenizer ---
         # Flatten the 2D feature map from the bridge into tokens
         # Input: [B, 256, 14, 14] -> Output: [B, 196, 256]
         self.tokenizer = Rearrange('b c h w -> b (h w) c')
+
+        # addition for positional embedding because rearrange destroys 2d structure
+        self.pos_embed = nn.Parameter(torch.zeros(1, 14 * 14, self.cswin_input_dim))
+        nn.init.trunc_normal_(self.pos_embed, std=0.02)
 
         # --- 5. CSWin Body (Borrowed) ---
         # We "steal" the pre-built stages from the CSWin instance
@@ -63,10 +74,10 @@ class ResNetCSWinHybrid(nn.Module):
         # 3. Tokenizer
         x_tokens = self.tokenizer(x_bridge) # Shape: [B, 196, 256]
 
-        # --- START CORRECTED CODE ---
-        # 4. CSWin Body
+        # Add learnable position info so the Transformer knows spatial context
+        x_tokens = x_tokens + self.pos_embed
 
-        # Manually iterate through Stage 3
+        # 4. Manually iterate through Stage 3 & CSWin part
         x_s3 = x_tokens
         for blk in self.stage3:
             # Note: We are not using checkpointing here for simplicity
