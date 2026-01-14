@@ -3,6 +3,8 @@ import torch.nn as nn
 import timm
 from einops.layers.torch import Rearrange
 import math
+from cswin_fpn_hybrid.cswin import models
+from cswin_fpn_hybrid.cswin.models import CSWin_64_12211_tiny_224
 
 
 class ECA(nn.Module):
