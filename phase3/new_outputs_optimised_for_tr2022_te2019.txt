@@ -1,1 +1,56 @@
 Cell 1.2.2
+Experiments
+Final result: acc: 0.8826, 0.8572, (drop: 0.82%, 0.50%) - 0.05
+Final result: acc: 0.8795, 0.8526, (drop: 1.13%, 0.96%) - 0.10
+Final result: acc: 0.8806, 0.8552, (drop: 1.02%, 0.70%) - 0.08
+
+Final used - 0.04
+Goal: 4.0% resnet, 4.0% trans
+Schedule: 6 steps, 10 epochs/step
+Per step pruning rate - resnet: 0.0068, trans: 0.0068
+Baseline before acc: 0.8908, F1: 0.8623
+
+Step 1/6
+Applying pruning
+Global Sparsity: 0.71%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0391
+   Epoch 10/10 | Loss: 0.0487
+Step 1 result: acc: 0.8777 (drop: 1.31%)
+Step 2/6
+Applying pruning
+Global Sparsity: 1.42%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0412
+   Epoch 10/10 | Loss: 0.0419
+Step 2 result: acc: 0.8917 (drop: -0.09%)
+Step 3/6
+Applying pruning
+Global Sparsity: 2.13%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0395
+   Epoch 10/10 | Loss: 0.0376
+Step 3 result: acc: 0.8875 (drop: 0.33%)
+Step 4/6
+Applying pruning
+Global Sparsity: 2.84%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0402
+   Epoch 10/10 | Loss: 0.0377
+Step 4 result: acc: 0.8923 (drop: -0.16%)
+Step 5/6
+Applying pruning
+Global Sparsity: 3.55%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0398
+   Epoch 10/10 | Loss: 0.0383
+Step 5 result: acc: 0.8788 (drop: 1.20%)
+Step 6/6
+Applying pruning
+Global Sparsity: 4.25%
+Finetuning for 10 epochs
+   Epoch 5/10 | Loss: 0.0418
+   Epoch 10/10 | Loss: 0.0381
+Step 6 result: acc: 0.8881 (drop: 0.27%)
+Final result: acc: 0.8881, 0.8639, (drop: 0.27%, -0.16%)
+Global Sparsity: 4.25%
