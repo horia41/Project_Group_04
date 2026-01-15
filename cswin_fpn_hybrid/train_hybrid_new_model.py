@@ -17,6 +17,7 @@ import numpy as np
 from cswin_fpn_hybrid.resnet50_cswin.new_model import ResNetCSWinHybrid
 
 
+
 use_gpu = torch.cuda.is_available()
 print("For mac gpu available: ", torch.backends.mps.is_available())
 print("For windows gpu available: ", torch.cuda.is_available())
@@ -212,7 +213,7 @@ def load_data():
         ]),
     }
 
-    data_dir = 'DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1_2019train_2022test'
+    data_dir = '/Users/horiaionescu/Desktop/de toate/lectii facultate MSc Y1/project semester 1 everything/project semester 1 code/DeepLearning_PlantDiseases-master/Scripts/PlantVillage_1_2019train_2022test'
 
     dsets = {split: datasets.ImageFolder(os.path.join(data_dir, split), data_transforms[split])
              for split in ['train', 'test']}

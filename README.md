@@ -83,25 +83,33 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 * **Efficient Channel Attention (ECA):** Adds lightweight channel-wise attention without significant computational overhead.
 * **Stochastic Depth:** Implemented via `drop_path_rate` inside the CSWin blocks to improve training robustness.
 
-## Results so far with the hybrid (one run)
+## Results so far with the hybrid_v2 (one run)
 
-| Train / Test Split                   | Metric | ResNetCSWinHybrid |
-|:-------------------------------------| :--- |:-----------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |       0.85        |
-|                                      | F1 Score |       0.89        |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |       0.89        |
-|                                      | F1 Score |       0.86        |
+| Train / Test Split                   | Metric | ResNetCSWinHybrid_HeavyAug | ResNetCSWinHybrid_BasicAug |
+|:-------------------------------------| :--- |:--------------------------:|:--------------------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |            **0.85**            |            0.84            |
+|                                      | F1 Score |            **0.89**            |            0.86            |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |            **0.89**            |            0.88            |
+|                                      | F1 Score |            **0.86**            |            0.85            |
+<br>
 
-So, even though we didn't manage to outperform by a lot (case of train 2022/test 2019) the baselines or to match their performance (case of train 2019/test 2022), we can justify this by mentioning the following:
-1. Limited data (transformers can't show their best performance with just thousands of images)
-2. Domain gap (model pretrained on imagenet which is RGB, ours are NIR, though still helped, without pretrained, performance was poor)
-3. etc we can think of more
+## Results with model3 so far
+| Train / Test Split                   | Metric | Model3_HeavyAug | Model3_BasicAug | Model3_noResNet | 
+|:-------------------------------------| :--- |:---------------:|:---------------:|:---------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |      **0.91**       |      0.90       |      0.68       |
+|                                      | F1 Score |      **0.93**       |      0.92       |      0.80       |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |      **0.88**       |      0.86       |      0.47       |
+|                                      | F1 Score |      **0.85**       |      0.82       |      0.56       |
+<br>
 
-# To do:
-1. We still need to run the hybrid for 9 more runs in each case (Train 2019/Test 2022 and vice versa) in order to average the results so we can compare with the paper's model and with our baselines. I can do this on colab, because even with an A100, it takes 30 minutes to train one run.
-2. Proceed with phase 3 stuff, model compression, shouldn't take much. You guys could already start to do something on this. On the google drive, there will be a folder named `model_saves` where I have saved the models from the one run I mentioned above from each cross year configuration. The model code can be found at `cswin_fpn_hybrid/resnet50_cswin/new_model.py`, in case you need to take a look at it. The saves I mentioned are from this model.
+## Interesting finding
+| Train / Test Split                   | Metric | Model3_HeavyAug | ResNetCSWinHybrid_HeavyAug |
+|:-------------------------------------| :--- |:---------------:|:--------------------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |    **0.91**     |            0.85            |
+|                                      | F1 Score |    **0.93**     |            0.89            |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |      0.88       |            **0.89**            |
+|                                      | F1 Score |      0.85       |            **0.86**            |
 
-For phase 3 stuff, look into **quantization**, **pruning**, **knowledge distillation**. This is what we have to use. One of them or a combination of them, which way turns out to be the best.
 <br><br>
 ## Normalization entries
 * 2019 train entirely:

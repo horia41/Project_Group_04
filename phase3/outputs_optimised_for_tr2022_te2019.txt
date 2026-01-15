@@ -1,0 +1,41 @@
+Cell 1
+No pruning baseline acc, f1: 0.8908, 0.8623
+Starting Pruning
+Target is 8.0% on ResNet part, 8.0% on Transformer part
+Pruning Applied: 48 layers at 0.08 rate, 131 layers at 0.08 rate.
+Zeros injected.
+Global Sparsity: 8.00%
+Checking Pruned Accuracy (No Retraining)
+Pruned Accuracy, F1: 0.8930, 0.8647
+Drop due to pruning: -0.22%, -0.24%
+
+Best values from what I experimented here :
+amount cnn       |      amount trans        |      Drop due to pruning
+    0.10                    0.10                         -0.13%
+    0.15                    0.10                          0.51%
+    0.20                    0.05                         1.80%
+    0.12                    0.08                         0.09%
+    0.05                    0.05                         -0.04%
+    0.10                    0.15                         -0.13%
+    0.20                    0.10                         1.80%
+    0.10                    0.05                         -0.13%
+    0.05                    0.10                         -0.04%
+    0.08                    0.08                         -0.22%       BEST
+    0.07                    0.07                          -0.20%
+    0.09                    0.09                          0.02%
+    0.11                     0.11                         -0.02%
+
+
+Cell 2
+Finalizing Compression
+Pruning masks removed. Weights are permanently sparse.
+Model: Pruned FP32     | Size: 121.75 MB
+Quantization Results
+Model: Quantized INT8  | Size: 62.82 MB
+Size Reduction: 48.40%
+
+Cell 3
+Testing Efficient Model
+NEW Compressed Model Accuracy: 0.8930
+NEW Compressed Model F1: 0.8649
+Inference Time: 317.62 seconds
