@@ -22,7 +22,9 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 |                                      | F1 Score | **0.90** ± 0.02 | 0.87 ± 0.02 |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy |   0.88 ± 0.01   | 0.88 ± 0.01 |
 |                                      | F1 Score |   0.86 ± 0.01   | 0.86 ± 0.01 |
+
 <br><br>
+
 ## Baseline overview from paper for cross-year testing (Avg 10 runs)
 | Train / Test Split                   | Metric   | AlternarAI  |
 |:-------------------------------------|:---------|:-----------:|
@@ -30,6 +32,7 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 |                                      | F1 Score | 0.82 ± 0.02 |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy | 0.91 ± 0.03 |
 |                                      | F1 Score | 0.83 ± 0.03 |
+
 <br><br>
 
 # Phase 2 - Hybrid model (v2)
@@ -93,6 +96,7 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 |                                      | F1 Score |         ***0.89***         |            0.86            |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy |         ***0.89***         |            0.88            |
 |                                      | F1 Score |         ***0.86***         |            0.85            |
+
 <br>
 
 ## Results with model3 so far
@@ -102,6 +106,7 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 |                                      | F1 Score |   ***0.93***    |      0.92       |      0.80       |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy |   ***0.88***    |      0.86       |      0.47       |
 |                                      | F1 Score |   ***0.85***    |      0.82       |      0.56       |
+
 <br>
 
 ## Interesting finding
@@ -111,6 +116,7 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 |                                      | F1 Score |   ***0.93***    |            0.89            |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy |      0.88       |         ***0.89***         |
 |                                      | F1 Score |      0.85       |         ***0.86***         |
+
 <br>
 
 # Phase 3
@@ -122,6 +128,7 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 |                                      | F1 Score |                       ***0.93*** --->   0.91                       |                                       -                                        |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy |                                 -                                  |                             ***0.89*** --->   0.88                             |
 |                                      | F1 Score |                                 -                                  |                             ***0.86*** --->  0.86                              |
+<br>
 Here, we only did this on the best performing model for each cross year configuration.
 
 ## Iterative structured pruning
