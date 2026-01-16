@@ -5,34 +5,36 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 <br><br>
 
 ## Dataset overview
-| Dataset Year | Class Description | Label | Image Count | Dimensions |
-| :--- | :--- | :---: | :---: | :---: |
-| **2019** | Not *Alternaria Solani* | 0 | 1,710 | 256x256x3 |
-| | *Alternaria Solani* | 1 | 2,795 | 256x256x3 |
-| **2022** | Not *Alternaria Solani* | 0 | 2,130 | 256x256x3 |
-| | *Alternaria Solani* | 1 | 1,027 | 256x256x3 |
-| **Total** | **Combined** | **-** | **7,662** | **-** |
-<br><br>
+| Dataset Year | Class Description       | Label | Image Count | Dimensions |
+|:-------------|:------------------------|:-----:|:-----------:|:----------:|
+| **2019**     | Not *Alternaria Solani* |   0   |    1,710    | 256x256x3  |
+|              | *Alternaria Solani*     |   1   |    2,795    | 256x256x3  |
+| **2022**     | Not *Alternaria Solani* |   0   |    2,130    | 256x256x3  |
+|              | *Alternaria Solani*     |   1   |    1,027    | 256x256x3  |
+| **Total**    | **Combined**            | **-** |  **7,662**  |   **-**    |
+
+# Phase 2 - Replication of baselines
+
 ## Baseline replication overview for cross-year testing (Avg 10 runs)
-| Train / Test Split                   | Metric | ResNet50 (DTL) | VGG11 (DTL) |
-|:-------------------------------------| :--- | :---: | :---: |
+| Train / Test Split                   | Metric   | ResNet50 (DTL)  | VGG11 (DTL) |
+|:-------------------------------------|:---------|:---------------:|:-----------:|
 | **Train '19 $\rightarrow$ Test '22** | Accuracy | **0.88** ± 0.02 | 0.85 ± 0.02 |
 |                                      | F1 Score | **0.90** ± 0.02 | 0.87 ± 0.02 |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy | 0.88 ± 0.01 | 0.88 ± 0.01 |
-|                                      | F1 Score | 0.86 ± 0.01 | 0.86 ± 0.01 |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |   0.88 ± 0.01   | 0.88 ± 0.01 |
+|                                      | F1 Score |   0.86 ± 0.01   | 0.86 ± 0.01 |
 <br><br>
 ## Baseline overview from paper for cross-year testing (Avg 10 runs)
-| Train / Test Split                   | Metric | AlternarAI  |
-|:-------------------------------------| :--- |:-----------:|
+| Train / Test Split                   | Metric   | AlternarAI  |
+|:-------------------------------------|:---------|:-----------:|
 | **Train '19 $\rightarrow$ Test '22** | Accuracy | 0.87 ± 0.02 |
 |                                      | F1 Score | 0.82 ± 0.02 |
 | **Train '22 $\rightarrow$ Test '19** | Accuracy | 0.91 ± 0.03 |
 |                                      | F1 Score | 0.83 ± 0.03 |
 <br><br>
 
-# Hybrid model
+# Phase 2 - Hybrid model (v2)
 <img src="DeepLearning_PlantDiseases-master/Scripts/hybrid_diagram.png" width="1024" height="256"/>
-## How it works
+
 
 The data flow through the network consists of five distinct stages:
 
@@ -85,30 +87,46 @@ The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) 
 
 ## Results so far with the hybrid_v2 (one run)
 
-| Train / Test Split                   | Metric | ResNetCSWinHybrid_HeavyAug | ResNetCSWinHybrid_BasicAug |
-|:-------------------------------------| :--- |:--------------------------:|:--------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |            **0.85**            |            0.84            |
-|                                      | F1 Score |            **0.89**            |            0.86            |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |            **0.89**            |            0.88            |
-|                                      | F1 Score |            **0.86**            |            0.85            |
+| Train / Test Split                   | Metric   | ResNetCSWinHybrid_HeavyAug | ResNetCSWinHybrid_BasicAug |
+|:-------------------------------------|:---------|:--------------------------:|:--------------------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |         ***0.85***         |            0.84            |
+|                                      | F1 Score |         ***0.89***         |            0.86            |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |         ***0.89***         |            0.88            |
+|                                      | F1 Score |         ***0.86***         |            0.85            |
 <br>
 
 ## Results with model3 so far
-| Train / Test Split                   | Metric | Model3_HeavyAug | Model3_BasicAug | Model3_noResNet | 
-|:-------------------------------------| :--- |:---------------:|:---------------:|:---------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |      **0.91**       |      0.90       |      0.68       |
-|                                      | F1 Score |      **0.93**       |      0.92       |      0.80       |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |      **0.88**       |      0.86       |      0.47       |
-|                                      | F1 Score |      **0.85**       |      0.82       |      0.56       |
+| Train / Test Split                   | Metric   | Model3_HeavyAug | Model3_BasicAug | Model3_noResNet | 
+|:-------------------------------------|:---------|:---------------:|:---------------:|:---------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |   ***0.91***    |      0.90       |      0.68       |
+|                                      | F1 Score |   ***0.93***    |      0.92       |      0.80       |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |   ***0.88***    |      0.86       |      0.47       |
+|                                      | F1 Score |   ***0.85***    |      0.82       |      0.56       |
 <br>
 
 ## Interesting finding
-| Train / Test Split                   | Metric | Model3_HeavyAug | ResNetCSWinHybrid_HeavyAug |
-|:-------------------------------------| :--- |:---------------:|:--------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |    **0.91**     |            0.85            |
-|                                      | F1 Score |    **0.93**     |            0.89            |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |      0.88       |            **0.89**            |
-|                                      | F1 Score |      0.85       |            **0.86**            |
+| Train / Test Split                   | Metric   | Model3_HeavyAug | ResNetCSWinHybrid_HeavyAug |
+|:-------------------------------------|:---------|:---------------:|:--------------------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |   ***0.91***    |            0.85            |
+|                                      | F1 Score |   ***0.93***    |            0.89            |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |      0.88       |         ***0.89***         |
+|                                      | F1 Score |      0.85       |         ***0.86***         |
+<br>
+
+# Phase 3
+
+## Knowledge Distillation
+| Train / Test Split                   | Metric   | Model3_HeavyAug ---> EfficientNet_b0<br/>(alpha = 0.5, temp = 4.0) | ResNetCSWinHybrid_HeavyAug ---> EfficientNet_b0<br/>(alpha = 0.3, temp = 2.0 ) |
+|:-------------------------------------|:---------|:------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |                       ***0.91*** --->   0.87                       |                                       -                                        |
+|                                      | F1 Score |                       ***0.93*** --->   0.91                       |                                       -                                        |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |                                 -                                  |                             ***0.89*** --->   0.88                             |
+|                                      | F1 Score |                                 -                                  |                             ***0.86*** --->  0.86                              |
+Here, we only did this on the best performing model for each cross year configuration.
+
+## Iterative structured pruning
+
+## Quantization (INT8)
 
 <br><br>
 ## Normalization entries

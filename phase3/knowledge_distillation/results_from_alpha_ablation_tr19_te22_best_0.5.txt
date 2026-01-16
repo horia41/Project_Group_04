@@ -1,0 +1,1437 @@
+================================================================================
+Knowledge Distillation Experiment Suite
+Teacher: ResNetCSWinHybrid (model3)
+Student: EfficientNet variants
+================================================================================
+
+================================================================================
+EXPERIMENT SET: Alpha Ablation Study
+================================================================================
+Using ORIGINAL dataset: PlantVillage_1_2019train_2022test
+Augmentation mode: Original Heavy Online
+
+================================================================================
+EXPERIMENT: alpha_ablation_A0.3
+================================================================================
+Student Model: efficientnet_b0
+Teacher: cswin_fpn_hybrid/model_saves/threshold_0.50_hybrid_Tr2019_Te2022.pth
+Temperature: 4.0
+Alpha: 0.3
+Epochs: 100
+Backbone LR: 0.0001
+Head LR: 0.0005
+================================================================================
+
+
+============================================================
+Loading Teacher Model: ResNetCSWinHybrid
+============================================================
+/usr/local/lib/python3.12/dist-packages/torchvision/transforms/v2/_deprecated.py:42: UserWarning: The transform `ToTensor()` is deprecated and will be removed in a future release. Instead, please use `v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])`.Output is equivalent up to float precision.
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_auth.py:94: UserWarning:
+The secret `HF_TOKEN` does not exist in your Colab secrets.
+To authenticate with the Hugging Face Hub, create a token in your settings tab (https://huggingface.co/settings/tokens), set it as secret in your Google Colab and restart your session.
+You will be able to reuse this secret in all of your notebooks.
+Please note that authentication is recommended but still optional to access public models or datasets.
+  warnings.warn(
+model.safetensors: 100%
+ 102M/102M [00:02<00:00, 75.0MB/s]
+WARNING: No checkpoint provided. Using randomly initialized teacher.
+For effective distillation, please provide a trained teacher model.
+Teacher parameters: 24,440,066
+============================================================
+
+
+============================================================
+Loading Student Model: efficientnet_b0
+============================================================
+model.safetensors: 100%
+ 21.4M/21.4M [00:00<00:00, 38.8MB/s]
+Student total parameters: 4,010,110
+Student trainable parameters: 4,010,110
+============================================================
+
+
+============================================================
+Training Configuration
+============================================================
+Epochs: 100
+Batch size: 128
+Temperature: 4.0
+Alpha (distillation weight): 0.3
+Backbone LR: 1e-4
+Head LR: 5e-4
+Weight decay: 0.05
+============================================================
+
+Epoch 1/100: 100%|██████████| 36/36 [00:15<00:00,  2.38it/s, Total=3.039, Distill=5.028, Student=2.187]
+Epoch 1/100 - Average Loss: 3.0376
+Epoch 2/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=2.617, Distill=4.379, Student=1.862]
+Epoch 2/100 - Average Loss: 2.4170
+Epoch 3/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=1.908, Distill=2.798, Student=1.526]
+Epoch 3/100 - Average Loss: 1.7859
+Epoch 4/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=1.491, Distill=2.079, Student=1.239]
+Epoch 4/100 - Average Loss: 1.4756
+Epoch 5/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=1.331, Distill=1.838, Student=1.114]
+Epoch 5/100 - Average Loss: 1.2922
+Epoch 6/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=1.161, Distill=1.657, Student=0.948]
+Epoch 6/100 - Average Loss: 1.1645
+Epoch 7/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=1.073, Distill=1.544, Student=0.872]
+Epoch 7/100 - Average Loss: 1.0867
+Epoch 8/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.995, Distill=1.351, Student=0.842]
+Epoch 8/100 - Average Loss: 1.0041
+Epoch 9/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.958, Distill=1.296, Student=0.813]
+Epoch 9/100 - Average Loss: 0.9372
+Epoch 10/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.860, Distill=1.106, Student=0.755]Epoch 10/100 - Average Loss: 0.8582
+
+Evaluating student model at epoch 10...
+
+Accuracy: 0.5534
+New best model saved! Accuracy: 0.5534
+Epoch 11/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.733, Distill=0.926, Student=0.651]
+Epoch 11/100 - Average Loss: 0.7327
+Epoch 12/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.688, Distill=0.833, Student=0.626]
+Epoch 12/100 - Average Loss: 0.6619
+Epoch 13/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.573, Distill=0.601, Student=0.560]
+Epoch 13/100 - Average Loss: 0.5492
+Epoch 14/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.478, Distill=0.439, Student=0.494]
+Epoch 14/100 - Average Loss: 0.4914
+Epoch 15/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.437, Distill=0.346, Student=0.476]
+Epoch 15/100 - Average Loss: 0.4210
+Epoch 16/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.440, Distill=0.348, Student=0.480]
+Epoch 16/100 - Average Loss: 0.4055
+Epoch 17/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.346, Distill=0.262, Student=0.382]
+Epoch 17/100 - Average Loss: 0.3457
+Epoch 18/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.336, Distill=0.263, Student=0.368]
+Epoch 18/100 - Average Loss: 0.3331
+Epoch 19/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.336, Distill=0.263, Student=0.367]
+Epoch 19/100 - Average Loss: 0.3341
+Epoch 20/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.322, Distill=0.251, Student=0.352]Epoch 20/100 - Average Loss: 0.3219
+
+Evaluating student model at epoch 20...
+
+Accuracy: 0.7957
+New best model saved! Accuracy: 0.7957
+Epoch 21/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.313, Distill=0.253, Student=0.338]
+Epoch 21/100 - Average Loss: 0.3120
+Epoch 22/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.307, Distill=0.268, Student=0.324]
+Epoch 22/100 - Average Loss: 0.3098
+Epoch 23/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.307, Distill=0.248, Student=0.331]
+Epoch 23/100 - Average Loss: 0.3026
+Epoch 24/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.293, Distill=0.266, Student=0.305]
+Epoch 24/100 - Average Loss: 0.2944
+Epoch 25/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.289, Distill=0.270, Student=0.297]
+Epoch 25/100 - Average Loss: 0.2902
+Epoch 26/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.283, Distill=0.280, Student=0.284]
+Epoch 26/100 - Average Loss: 0.2896
+Epoch 27/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.287, Distill=0.274, Student=0.293]
+Epoch 27/100 - Average Loss: 0.2862
+Epoch 28/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.282, Distill=0.300, Student=0.275]
+Epoch 28/100 - Average Loss: 0.2817
+Epoch 29/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.277, Distill=0.296, Student=0.269]
+Epoch 29/100 - Average Loss: 0.2787
+Epoch 30/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.273, Distill=0.289, Student=0.266]Epoch 30/100 - Average Loss: 0.2749
+
+Evaluating student model at epoch 30...
+
+Accuracy: 0.7327
+Epoch 31/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.275, Distill=0.307, Student=0.262]
+Epoch 31/100 - Average Loss: 0.2755
+Epoch 32/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.269, Distill=0.311, Student=0.251]
+Epoch 32/100 - Average Loss: 0.2741
+Epoch 33/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.276, Distill=0.302, Student=0.265]
+Epoch 33/100 - Average Loss: 0.2779
+Epoch 34/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.279, Distill=0.298, Student=0.270]
+Epoch 34/100 - Average Loss: 0.2772
+Epoch 35/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.267, Distill=0.316, Student=0.246]
+Epoch 35/100 - Average Loss: 0.2672
+Epoch 36/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.261, Distill=0.306, Student=0.242]
+Epoch 36/100 - Average Loss: 0.2629
+Epoch 37/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.260, Distill=0.313, Student=0.237]
+Epoch 37/100 - Average Loss: 0.2623
+Epoch 38/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.260, Distill=0.315, Student=0.236]
+Epoch 38/100 - Average Loss: 0.2646
+Epoch 39/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.263, Distill=0.316, Student=0.241]
+Epoch 39/100 - Average Loss: 0.2640
+Epoch 40/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.261, Distill=0.303, Student=0.243]Epoch 40/100 - Average Loss: 0.2620
+
+Evaluating student model at epoch 40...
+
+Accuracy: 0.7723
+Epoch 41/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.253, Distill=0.311, Student=0.228]
+Epoch 41/100 - Average Loss: 0.2540
+Epoch 42/100: 100%|██████████| 36/36 [00:12<00:00,  2.91it/s, Total=0.254, Distill=0.315, Student=0.228]
+Epoch 42/100 - Average Loss: 0.2541
+Epoch 43/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.255, Distill=0.317, Student=0.229]
+Epoch 43/100 - Average Loss: 0.2540
+Epoch 44/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.253, Distill=0.314, Student=0.228]
+Epoch 44/100 - Average Loss: 0.2539
+Epoch 45/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.251, Distill=0.316, Student=0.224]
+Epoch 45/100 - Average Loss: 0.2509
+Epoch 46/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.251, Distill=0.317, Student=0.223]
+Epoch 46/100 - Average Loss: 0.2507
+Epoch 47/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.253, Distill=0.321, Student=0.224]
+Epoch 47/100 - Average Loss: 0.2532
+Epoch 48/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.251, Distill=0.312, Student=0.226]
+Epoch 48/100 - Average Loss: 0.2508
+Epoch 49/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.249, Distill=0.323, Student=0.218]
+Epoch 49/100 - Average Loss: 0.2486
+Epoch 50/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.249, Distill=0.328, Student=0.214]Epoch 50/100 - Average Loss: 0.2498
+
+Evaluating student model at epoch 50...
+
+Accuracy: 0.7498
+Epoch 51/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.250, Distill=0.316, Student=0.221]
+Epoch 51/100 - Average Loss: 0.2485
+Epoch 52/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.249, Distill=0.322, Student=0.218]
+Epoch 52/100 - Average Loss: 0.2503
+Epoch 53/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.248, Distill=0.322, Student=0.216]
+Epoch 53/100 - Average Loss: 0.2479
+Epoch 54/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.248, Distill=0.320, Student=0.217]
+Epoch 54/100 - Average Loss: 0.2472
+Epoch 55/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.247, Distill=0.313, Student=0.219]
+Epoch 55/100 - Average Loss: 0.2477
+Epoch 56/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.246, Distill=0.326, Student=0.212]
+Epoch 56/100 - Average Loss: 0.2458
+Epoch 57/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.247, Distill=0.320, Student=0.216]
+Epoch 57/100 - Average Loss: 0.2466
+Epoch 58/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.245, Distill=0.322, Student=0.212]
+Epoch 58/100 - Average Loss: 0.2457
+Epoch 59/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.247, Distill=0.315, Student=0.218]
+Epoch 59/100 - Average Loss: 0.2471
+Epoch 60/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.245, Distill=0.326, Student=0.210]Epoch 60/100 - Average Loss: 0.2446
+
+Evaluating student model at epoch 60...
+
+Accuracy: 0.8030
+New best model saved! Accuracy: 0.8030
+Epoch 61/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.246, Distill=0.321, Student=0.214]
+Epoch 61/100 - Average Loss: 0.2448
+Epoch 62/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.243, Distill=0.321, Student=0.210]
+Epoch 62/100 - Average Loss: 0.2436
+Epoch 63/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.244, Distill=0.318, Student=0.212]
+Epoch 63/100 - Average Loss: 0.2443
+Epoch 64/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.244, Distill=0.320, Student=0.211]
+Epoch 64/100 - Average Loss: 0.2440
+Epoch 65/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.245, Distill=0.328, Student=0.209]
+Epoch 65/100 - Average Loss: 0.2463
+Epoch 66/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.244, Distill=0.323, Student=0.210]
+Epoch 66/100 - Average Loss: 0.2429
+Epoch 67/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.244, Distill=0.318, Student=0.212]
+Epoch 67/100 - Average Loss: 0.2449
+Epoch 68/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.245, Distill=0.323, Student=0.212]
+Epoch 68/100 - Average Loss: 0.2455
+Epoch 69/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.243, Distill=0.326, Student=0.208]
+Epoch 69/100 - Average Loss: 0.2431
+Epoch 70/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.242, Distill=0.329, Student=0.205]Epoch 70/100 - Average Loss: 0.2428
+
+Evaluating student model at epoch 70...
+
+Accuracy: 0.7589
+Epoch 71/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.242, Distill=0.329, Student=0.204]
+Epoch 71/100 - Average Loss: 0.2434
+Epoch 72/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.242, Distill=0.323, Student=0.208]
+Epoch 72/100 - Average Loss: 0.2429
+Epoch 73/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.243, Distill=0.324, Student=0.209]
+Epoch 73/100 - Average Loss: 0.2422
+Epoch 74/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.314, Student=0.210]
+Epoch 74/100 - Average Loss: 0.2415
+Epoch 75/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.242, Distill=0.322, Student=0.208]
+Epoch 75/100 - Average Loss: 0.2435
+Epoch 76/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.242, Distill=0.319, Student=0.210]
+Epoch 76/100 - Average Loss: 0.2430
+Epoch 77/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.242, Distill=0.335, Student=0.203]
+Epoch 77/100 - Average Loss: 0.2425
+Epoch 78/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.242, Distill=0.333, Student=0.203]
+Epoch 78/100 - Average Loss: 0.2415
+Epoch 79/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.240, Distill=0.327, Student=0.203]
+Epoch 79/100 - Average Loss: 0.2412
+Epoch 80/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.240, Distill=0.322, Student=0.206]Epoch 80/100 - Average Loss: 0.2411
+
+Evaluating student model at epoch 80...
+
+Accuracy: 0.7700
+Epoch 81/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.243, Distill=0.324, Student=0.208]
+Epoch 81/100 - Average Loss: 0.2424
+Epoch 82/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.240, Distill=0.329, Student=0.202]
+Epoch 82/100 - Average Loss: 0.2413
+Epoch 83/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.321, Student=0.207]
+Epoch 83/100 - Average Loss: 0.2424
+Epoch 84/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.239, Distill=0.321, Student=0.204]
+Epoch 84/100 - Average Loss: 0.2408
+Epoch 85/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.242, Distill=0.317, Student=0.210]
+Epoch 85/100 - Average Loss: 0.2420
+Epoch 86/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.242, Distill=0.329, Student=0.205]
+Epoch 86/100 - Average Loss: 0.2419
+Epoch 87/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.239, Distill=0.321, Student=0.204]
+Epoch 87/100 - Average Loss: 0.2397
+Epoch 88/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.316, Student=0.209]
+Epoch 88/100 - Average Loss: 0.2414
+Epoch 89/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.240, Distill=0.323, Student=0.204]
+Epoch 89/100 - Average Loss: 0.2404
+Epoch 90/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.239, Distill=0.325, Student=0.202]Epoch 90/100 - Average Loss: 0.2418
+
+Evaluating student model at epoch 90...
+
+Accuracy: 0.7666
+Epoch 91/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.240, Distill=0.316, Student=0.208]
+Epoch 91/100 - Average Loss: 0.2423
+Epoch 92/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.241, Distill=0.325, Student=0.206]
+Epoch 92/100 - Average Loss: 0.2404
+Epoch 93/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.242, Distill=0.321, Student=0.208]
+Epoch 93/100 - Average Loss: 0.2414
+Epoch 94/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.326, Student=0.204]
+Epoch 94/100 - Average Loss: 0.2404
+Epoch 95/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.325, Student=0.205]
+Epoch 95/100 - Average Loss: 0.2411
+Epoch 96/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.240, Distill=0.319, Student=0.206]
+Epoch 96/100 - Average Loss: 0.2406
+Epoch 97/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.241, Distill=0.325, Student=0.205]
+Epoch 97/100 - Average Loss: 0.2416
+Epoch 98/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.240, Distill=0.320, Student=0.206]
+Epoch 98/100 - Average Loss: 0.2403
+Epoch 99/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.241, Distill=0.323, Student=0.206]
+Epoch 99/100 - Average Loss: 0.2414
+Epoch 100/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.241, Distill=0.322, Student=0.206]Epoch 100/100 - Average Loss: 0.2416
+
+Evaluating student model at epoch 100...
+
+Accuracy: 0.7479
+
+============================================================
+Final Evaluation
+============================================================
+
+Finding best threshold for student:
+Test Set (3157 images)
+
+
+Threshold  | Acc      | Prec     | Rec      | F1
+-------------------------------------------------------
+0.01       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.03       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.05       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.07       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.09       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.11       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.13       | 0.6737   | 0.6748   | 0.9967   | 0.8048
+0.15       | 0.6788   | 0.6791   | 0.9934   | 0.8067
+0.17       | 0.7076   | 0.7038   | 0.9784   | 0.8187
+0.19       | 0.7868   | 0.7740   | 0.9662   | 0.8595
+0.21       | 0.8404   | 0.8371   | 0.9479   | 0.8890
+0.23       | 0.8575   | 0.8678   | 0.9305   | 0.8981
+0.25       | 0.8635   | 0.8874   | 0.9136   | 0.9003
+0.27       | 0.8619   | 0.9003   | 0.8944   | 0.8973
+0.29       | 0.8578   | 0.9142   | 0.8709   | 0.8920
+0.31       | 0.8533   | 0.9233   | 0.8535   | 0.8870
+0.33       | 0.8438   | 0.9288   | 0.8324   | 0.8779
+0.35       | 0.8359   | 0.9338   | 0.8146   | 0.8701
+0.37       | 0.8283   | 0.9416   | 0.7948   | 0.8620
+0.39       | 0.8166   | 0.9444   | 0.7737   | 0.8506
+0.41       | 0.8065   | 0.9476   | 0.7549   | 0.8403
+0.43       | 0.7938   | 0.9523   | 0.7310   | 0.8271
+0.45       | 0.7814   | 0.9540   | 0.7103   | 0.8143
+0.47       | 0.7678   | 0.9586   | 0.6854   | 0.7993
+0.49       | 0.7551   | 0.9619   | 0.6634   | 0.7852
+0.51 (*)    | 0.7399   | 0.9658   | 0.6371   | 0.7678
+0.53       | 0.7247   | 0.9681   | 0.6122   | 0.7501
+0.55       | 0.7118   | 0.9729   | 0.5892   | 0.7339
+0.57       | 0.6934   | 0.9747   | 0.5601   | 0.7114
+0.59       | 0.6775   | 0.9744   | 0.5362   | 0.6917
+0.61       | 0.6595   | 0.9765   | 0.5075   | 0.6679
+0.63       | 0.6367   | 0.9786   | 0.4718   | 0.6367
+0.65       | 0.6177   | 0.9782   | 0.4432   | 0.6100
+0.67       | 0.5987   | 0.9832   | 0.4122   | 0.5809
+0.69       | 0.5708   | 0.9838   | 0.3700   | 0.5377
+0.71       | 0.5493   | 0.9849   | 0.3371   | 0.5023
+0.73       | 0.5214   | 0.9889   | 0.2939   | 0.4531
+0.75       | 0.4935   | 0.9890   | 0.2521   | 0.4018
+0.77       | 0.4663   | 0.9933   | 0.2103   | 0.3472
+0.79       | 0.4327   | 0.9942   | 0.1601   | 0.2758
+0.81       | 0.3934   | 0.9909   | 0.1019   | 0.1848
+0.83       | 0.3595   | 0.9909   | 0.0512   | 0.0973
+0.85       | 0.3402   | 0.9796   | 0.0225   | 0.0441
+0.87       | 0.3304   | 1.0000   | 0.0075   | 0.0149
+0.89       | 0.3263   | 1.0000   | 0.0014   | 0.0028
+0.91       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.93       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.95       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+-------------------------------------------------------
+Default (0.50) row marked (*)
+Optimal (best F1) threshold: 0.25 | F1: 0.9003
+
+Optimal Threshold: 0.25
+
+Student model evaluation at best threshold:
+Threshold: 0.25 | Acc: 0.8635 | Prec(+): 0.8874 | Rec(+): 0.9136 | F1(+): 0.9003 | F1-macro: 0.8419
+
+Student model evaluation at default threshold (0.5):
+Threshold: 0.50 | Acc: 0.7479 | Prec(+): 0.9651 | Rec(+): 0.6498 | F1(+): 0.7767 | F1-macro: 0.7436
+
+Final student model saved to /content/drive/MyDrive/cswin_fpn_hybrid/cswin_fpn_hybrid/model_saves/student_efficientnet_b0_final_threshold_0.25.pth
+
+Experiment model saved: cswin_fpn_hybrid/model_saves/experiments/alpha_ablation_A0.3_efficientnet_b0.pth
+
+================================================================================
+EXPERIMENT: alpha_ablation_A0.5
+================================================================================
+Student Model: efficientnet_b0
+Teacher: cswin_fpn_hybrid/model_saves/threshold_0.50_hybrid_Tr2019_Te2022.pth
+Temperature: 4.0
+Alpha: 0.5
+Epochs: 100
+Backbone LR: 0.0001
+Head LR: 0.0005
+================================================================================
+
+
+============================================================
+Loading Teacher Model: ResNetCSWinHybrid
+============================================================
+WARNING: No checkpoint provided. Using randomly initialized teacher.
+For effective distillation, please provide a trained teacher model.
+Teacher parameters: 24,440,066
+============================================================
+
+
+============================================================
+Loading Student Model: efficientnet_b0
+============================================================
+Student total parameters: 4,010,110
+Student trainable parameters: 4,010,110
+============================================================
+
+
+============================================================
+Training Configuration
+============================================================
+Epochs: 100
+Batch size: 128
+Temperature: 4.0
+Alpha (distillation weight): 0.5
+Backbone LR: 1e-4
+Head LR: 5e-4
+Weight decay: 0.05
+============================================================
+
+Epoch 1/100: 100%|██████████| 36/36 [00:13<00:00,  2.76it/s, Total=3.310, Distill=4.049, Student=2.571]
+Epoch 1/100 - Average Loss: 3.2348
+Epoch 2/100: 100%|██████████| 36/36 [00:13<00:00,  2.73it/s, Total=2.710, Distill=3.272, Student=2.148]
+Epoch 2/100 - Average Loss: 2.5058
+Epoch 3/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=1.922, Distill=2.315, Student=1.529]
+Epoch 3/100 - Average Loss: 1.8653
+Epoch 4/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=1.518, Distill=1.702, Student=1.333]
+Epoch 4/100 - Average Loss: 1.4828
+Epoch 5/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=1.397, Distill=1.593, Student=1.202]
+Epoch 5/100 - Average Loss: 1.3498
+Epoch 6/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=1.205, Distill=1.299, Student=1.112]
+Epoch 6/100 - Average Loss: 1.1915
+Epoch 7/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=1.084, Distill=1.163, Student=1.006]
+Epoch 7/100 - Average Loss: 1.0850
+Epoch 8/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=1.025, Distill=1.086, Student=0.964]
+Epoch 8/100 - Average Loss: 0.9973
+Epoch 9/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.959, Distill=0.987, Student=0.931]
+Epoch 9/100 - Average Loss: 0.9416
+Epoch 10/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.831, Distill=0.801, Student=0.861]Epoch 10/100 - Average Loss: 0.8024
+
+Evaluating student model at epoch 10...
+
+Accuracy: 0.5394
+New best model saved! Accuracy: 0.5394
+Epoch 11/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.718, Distill=0.676, Student=0.760]
+Epoch 11/100 - Average Loss: 0.7159
+Epoch 12/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.604, Distill=0.497, Student=0.712]
+Epoch 12/100 - Average Loss: 0.5619
+Epoch 13/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.449, Distill=0.288, Student=0.611]
+Epoch 13/100 - Average Loss: 0.4217
+Epoch 14/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.364, Distill=0.183, Student=0.544]
+Epoch 14/100 - Average Loss: 0.3454
+Epoch 15/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.307, Distill=0.101, Student=0.513]
+Epoch 15/100 - Average Loss: 0.3053
+Epoch 16/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.282, Distill=0.087, Student=0.477]
+Epoch 16/100 - Average Loss: 0.2818
+Epoch 17/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.275, Distill=0.079, Student=0.470]
+Epoch 17/100 - Average Loss: 0.2803
+Epoch 18/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.263, Distill=0.080, Student=0.446]
+Epoch 18/100 - Average Loss: 0.2630
+Epoch 19/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.266, Distill=0.094, Student=0.438]
+Epoch 19/100 - Average Loss: 0.2656
+Epoch 20/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.265, Distill=0.091, Student=0.438]Epoch 20/100 - Average Loss: 0.2626
+
+Evaluating student model at epoch 20...
+
+Accuracy: 0.5936
+New best model saved! Accuracy: 0.5936
+Epoch 21/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.254, Distill=0.085, Student=0.423]
+Epoch 21/100 - Average Loss: 0.2560
+Epoch 22/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.255, Distill=0.093, Student=0.418]
+Epoch 22/100 - Average Loss: 0.2562
+Epoch 23/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.250, Distill=0.087, Student=0.414]
+Epoch 23/100 - Average Loss: 0.2500
+Epoch 24/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.247, Distill=0.090, Student=0.403]
+Epoch 24/100 - Average Loss: 0.2481
+Epoch 25/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.248, Distill=0.095, Student=0.401]
+Epoch 25/100 - Average Loss: 0.2464
+Epoch 26/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.244, Distill=0.092, Student=0.395]
+Epoch 26/100 - Average Loss: 0.2445
+Epoch 27/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.247, Distill=0.096, Student=0.398]
+Epoch 27/100 - Average Loss: 0.2467
+Epoch 28/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.244, Distill=0.099, Student=0.389]
+Epoch 28/100 - Average Loss: 0.2452
+Epoch 29/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.252, Distill=0.104, Student=0.401]
+Epoch 29/100 - Average Loss: 0.2485
+Epoch 30/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.240, Distill=0.097, Student=0.384]Epoch 30/100 - Average Loss: 0.2414
+
+Evaluating student model at epoch 30...
+
+Accuracy: 0.6522
+New best model saved! Accuracy: 0.6522
+Epoch 31/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.240, Distill=0.105, Student=0.375]
+Epoch 31/100 - Average Loss: 0.2400
+Epoch 32/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.236, Distill=0.101, Student=0.371]
+Epoch 32/100 - Average Loss: 0.2372
+Epoch 33/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.235, Distill=0.100, Student=0.370]
+Epoch 33/100 - Average Loss: 0.2364
+Epoch 34/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.238, Distill=0.112, Student=0.363]
+Epoch 34/100 - Average Loss: 0.2385
+Epoch 35/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.237, Distill=0.104, Student=0.370]
+Epoch 35/100 - Average Loss: 0.2357
+Epoch 36/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.237, Distill=0.108, Student=0.366]
+Epoch 36/100 - Average Loss: 0.2371
+Epoch 37/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.232, Distill=0.107, Student=0.357]
+Epoch 37/100 - Average Loss: 0.2348
+Epoch 38/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.237, Distill=0.109, Student=0.365]
+Epoch 38/100 - Average Loss: 0.2358
+Epoch 39/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.233, Distill=0.106, Student=0.361]
+Epoch 39/100 - Average Loss: 0.2301
+Epoch 40/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.234, Distill=0.110, Student=0.359]Epoch 40/100 - Average Loss: 0.2310
+
+Evaluating student model at epoch 40...
+
+Accuracy: 0.6047
+Epoch 41/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.231, Distill=0.108, Student=0.354]
+Epoch 41/100 - Average Loss: 0.2300
+Epoch 42/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.228, Distill=0.112, Student=0.345]
+Epoch 42/100 - Average Loss: 0.2274
+Epoch 43/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.227, Distill=0.115, Student=0.340]
+Epoch 43/100 - Average Loss: 0.2287
+Epoch 44/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.230, Distill=0.115, Student=0.345]
+Epoch 44/100 - Average Loss: 0.2286
+Epoch 45/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.230, Distill=0.114, Student=0.345]
+Epoch 45/100 - Average Loss: 0.2275
+Epoch 46/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.228, Distill=0.111, Student=0.345]
+Epoch 46/100 - Average Loss: 0.2284
+Epoch 47/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.229, Distill=0.113, Student=0.344]
+Epoch 47/100 - Average Loss: 0.2276
+Epoch 48/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.226, Distill=0.113, Student=0.340]
+Epoch 48/100 - Average Loss: 0.2271
+Epoch 49/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.227, Distill=0.118, Student=0.336]
+Epoch 49/100 - Average Loss: 0.2255
+Epoch 50/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.225, Distill=0.114, Student=0.335]Epoch 50/100 - Average Loss: 0.2258
+
+Evaluating student model at epoch 50...
+
+Accuracy: 0.7247
+New best model saved! Accuracy: 0.7247
+Epoch 51/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.225, Distill=0.117, Student=0.333]
+Epoch 51/100 - Average Loss: 0.2242
+Epoch 52/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.225, Distill=0.113, Student=0.336]
+Epoch 52/100 - Average Loss: 0.2251
+Epoch 53/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.225, Distill=0.114, Student=0.336]
+Epoch 53/100 - Average Loss: 0.2279
+Epoch 54/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.222, Distill=0.115, Student=0.330]
+Epoch 54/100 - Average Loss: 0.2229
+Epoch 55/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.223, Distill=0.117, Student=0.328]
+Epoch 55/100 - Average Loss: 0.2221
+Epoch 56/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.222, Distill=0.119, Student=0.326]
+Epoch 56/100 - Average Loss: 0.2245
+Epoch 57/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.222, Distill=0.118, Student=0.325]
+Epoch 57/100 - Average Loss: 0.2218
+Epoch 58/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.220, Distill=0.120, Student=0.320]
+Epoch 58/100 - Average Loss: 0.2206
+Epoch 59/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.225, Distill=0.121, Student=0.329]
+Epoch 59/100 - Average Loss: 0.2226
+Epoch 60/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.219, Distill=0.120, Student=0.318]Epoch 60/100 - Average Loss: 0.2216
+
+Evaluating student model at epoch 60...
+
+Accuracy: 0.7178
+Epoch 61/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.220, Distill=0.122, Student=0.318]
+Epoch 61/100 - Average Loss: 0.2198
+Epoch 62/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.220, Distill=0.120, Student=0.320]
+Epoch 62/100 - Average Loss: 0.2198
+Epoch 63/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.220, Distill=0.124, Student=0.316]
+Epoch 63/100 - Average Loss: 0.2204
+Epoch 64/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.218, Distill=0.122, Student=0.314]
+Epoch 64/100 - Average Loss: 0.2187
+Epoch 65/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.221, Distill=0.120, Student=0.322]
+Epoch 65/100 - Average Loss: 0.2202
+Epoch 66/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.220, Distill=0.119, Student=0.322]
+Epoch 66/100 - Average Loss: 0.2197
+Epoch 67/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.219, Distill=0.121, Student=0.317]
+Epoch 67/100 - Average Loss: 0.2190
+Epoch 68/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.220, Distill=0.118, Student=0.322]
+Epoch 68/100 - Average Loss: 0.2200
+Epoch 69/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.218, Distill=0.121, Student=0.315]
+Epoch 69/100 - Average Loss: 0.2182
+Epoch 70/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.218, Distill=0.120, Student=0.316]Epoch 70/100 - Average Loss: 0.2203
+
+Evaluating student model at epoch 70...
+
+Accuracy: 0.6668
+Epoch 71/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.221, Distill=0.121, Student=0.322]
+Epoch 71/100 - Average Loss: 0.2182
+Epoch 72/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.122, Student=0.312]
+Epoch 72/100 - Average Loss: 0.2173
+Epoch 73/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.219, Distill=0.122, Student=0.316]
+Epoch 73/100 - Average Loss: 0.2182
+Epoch 74/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.218, Distill=0.126, Student=0.310]
+Epoch 74/100 - Average Loss: 0.2171
+Epoch 75/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.215, Distill=0.124, Student=0.307]
+Epoch 75/100 - Average Loss: 0.2174
+Epoch 76/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.124, Student=0.311]
+Epoch 76/100 - Average Loss: 0.2174
+Epoch 77/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.218, Distill=0.123, Student=0.313]
+Epoch 77/100 - Average Loss: 0.2189
+Epoch 78/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.217, Distill=0.120, Student=0.315]
+Epoch 78/100 - Average Loss: 0.2178
+Epoch 79/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.219, Distill=0.120, Student=0.317]
+Epoch 79/100 - Average Loss: 0.2180
+Epoch 80/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.217, Distill=0.123, Student=0.311]Epoch 80/100 - Average Loss: 0.2173
+
+Evaluating student model at epoch 80...
+
+Accuracy: 0.6563
+Epoch 81/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.216, Distill=0.123, Student=0.309]
+Epoch 81/100 - Average Loss: 0.2181
+Epoch 82/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.216, Distill=0.120, Student=0.311]
+Epoch 82/100 - Average Loss: 0.2171
+Epoch 83/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.217, Distill=0.122, Student=0.311]
+Epoch 83/100 - Average Loss: 0.2164
+Epoch 84/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.125, Student=0.309]
+Epoch 84/100 - Average Loss: 0.2166
+Epoch 85/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.217, Distill=0.123, Student=0.310]
+Epoch 85/100 - Average Loss: 0.2168
+Epoch 86/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.217, Distill=0.121, Student=0.313]
+Epoch 86/100 - Average Loss: 0.2160
+Epoch 87/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.122, Student=0.312]
+Epoch 87/100 - Average Loss: 0.2159
+Epoch 88/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.216, Distill=0.123, Student=0.309]
+Epoch 88/100 - Average Loss: 0.2172
+Epoch 89/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.123, Student=0.311]
+Epoch 89/100 - Average Loss: 0.2154
+Epoch 90/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.216, Distill=0.123, Student=0.309]Epoch 90/100 - Average Loss: 0.2176
+
+Evaluating student model at epoch 90...
+
+Accuracy: 0.6655
+Epoch 91/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.215, Distill=0.122, Student=0.308]
+Epoch 91/100 - Average Loss: 0.2166
+Epoch 92/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.215, Distill=0.123, Student=0.308]
+Epoch 92/100 - Average Loss: 0.2162
+Epoch 93/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.216, Distill=0.125, Student=0.307]
+Epoch 93/100 - Average Loss: 0.2164
+Epoch 94/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.126, Student=0.309]
+Epoch 94/100 - Average Loss: 0.2172
+Epoch 95/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.217, Distill=0.120, Student=0.315]
+Epoch 95/100 - Average Loss: 0.2169
+Epoch 96/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.216, Distill=0.123, Student=0.310]
+Epoch 96/100 - Average Loss: 0.2162
+Epoch 97/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.217, Distill=0.126, Student=0.309]
+Epoch 97/100 - Average Loss: 0.2172
+Epoch 98/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.216, Distill=0.122, Student=0.309]
+Epoch 98/100 - Average Loss: 0.2162
+Epoch 99/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.217, Distill=0.121, Student=0.313]
+Epoch 99/100 - Average Loss: 0.2173
+Epoch 100/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.216, Distill=0.120, Student=0.311]Epoch 100/100 - Average Loss: 0.2169
+
+Evaluating student model at epoch 100...
+
+Accuracy: 0.6763
+
+============================================================
+Final Evaluation
+============================================================
+
+Finding best threshold for student:
+Test Set (3157 images)
+
+
+Threshold  | Acc      | Prec     | Rec      | F1
+-------------------------------------------------------
+0.01       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.03       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.05       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.07       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.09       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.11       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.13       | 0.6750   | 0.6749   | 1.0000   | 0.8059
+0.15       | 0.6763   | 0.6759   | 0.9995   | 0.8064
+0.17       | 0.6836   | 0.6819   | 0.9953   | 0.8093
+0.19       | 0.7146   | 0.7056   | 0.9901   | 0.8240
+0.21       | 0.7843   | 0.7661   | 0.9793   | 0.8597
+0.23       | 0.8404   | 0.8276   | 0.9643   | 0.8907
+0.25       | 0.8625   | 0.8661   | 0.9418   | 0.9024
+0.27       | 0.8708   | 0.8907   | 0.9216   | 0.9059
+0.29       | 0.8676   | 0.9072   | 0.8953   | 0.9012
+0.31       | 0.8606   | 0.9187   | 0.8704   | 0.8939
+0.33       | 0.8486   | 0.9271   | 0.8418   | 0.8824
+0.35       | 0.8353   | 0.9319   | 0.8155   | 0.8698
+0.37       | 0.8188   | 0.9386   | 0.7826   | 0.8536
+0.39       | 0.7992   | 0.9426   | 0.7479   | 0.8340
+0.41       | 0.7840   | 0.9519   | 0.7160   | 0.8173
+0.43       | 0.7656   | 0.9572   | 0.6831   | 0.7973
+0.45       | 0.7418   | 0.9621   | 0.6427   | 0.7706
+0.47       | 0.7219   | 0.9665   | 0.6089   | 0.7471
+0.49       | 0.6915   | 0.9707   | 0.5596   | 0.7099
+0.51 (*)    | 0.6633   | 0.9734   | 0.5150   | 0.6736
+0.53       | 0.6392   | 0.9787   | 0.4756   | 0.6401
+0.55       | 0.6180   | 0.9823   | 0.4418   | 0.6095
+0.57       | 0.5908   | 0.9850   | 0.3995   | 0.5685
+0.59       | 0.5591   | 0.9881   | 0.3507   | 0.5177
+0.61       | 0.5233   | 0.9890   | 0.2967   | 0.4565
+0.63       | 0.4973   | 0.9927   | 0.2568   | 0.4081
+0.65       | 0.4650   | 0.9911   | 0.2089   | 0.3451
+0.67       | 0.4321   | 0.9941   | 0.1592   | 0.2744
+0.69       | 0.3978   | 0.9957   | 0.1080   | 0.1948
+0.71       | 0.3627   | 1.0000   | 0.0554   | 0.1050
+0.73       | 0.3389   | 1.0000   | 0.0202   | 0.0396
+0.75       | 0.3294   | 1.0000   | 0.0061   | 0.0121
+0.77       | 0.3263   | 1.0000   | 0.0014   | 0.0028
+0.79       | 0.3256   | 1.0000   | 0.0005   | 0.0009
+0.81       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.83       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.85       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.87       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.89       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.91       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.93       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.95       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+-------------------------------------------------------
+Default (0.50) row marked (*)
+Optimal (best F1) threshold: 0.27 | F1: 0.9059
+
+Optimal Threshold: 0.27
+
+Student model evaluation at best threshold:
+Threshold: 0.27 | Acc: 0.8708 | Prec(+): 0.8907 | Rec(+): 0.9216 | F1(+): 0.9059 | F1-macro: 0.8499
+
+Student model evaluation at default threshold (0.5):
+Threshold: 0.50 | Acc: 0.6763 | Prec(+): 0.9711 | Rec(+): 0.5362 | F1(+): 0.6909 | F1-macro: 0.6756
+
+Final student model saved to /content/drive/MyDrive/cswin_fpn_hybrid/cswin_fpn_hybrid/model_saves/student_efficientnet_b0_final_threshold_0.27.pth
+
+Experiment model saved: cswin_fpn_hybrid/model_saves/experiments/alpha_ablation_A0.5_efficientnet_b0.pth
+
+================================================================================
+EXPERIMENT: alpha_ablation_A0.7
+================================================================================
+Student Model: efficientnet_b0
+Teacher: cswin_fpn_hybrid/model_saves/threshold_0.50_hybrid_Tr2019_Te2022.pth
+Temperature: 4.0
+Alpha: 0.7
+Epochs: 100
+Backbone LR: 0.0001
+Head LR: 0.0005
+================================================================================
+
+
+============================================================
+Loading Teacher Model: ResNetCSWinHybrid
+============================================================
+WARNING: No checkpoint provided. Using randomly initialized teacher.
+For effective distillation, please provide a trained teacher model.
+Teacher parameters: 24,440,066
+============================================================
+
+
+============================================================
+Loading Student Model: efficientnet_b0
+============================================================
+Student total parameters: 4,010,110
+Student trainable parameters: 4,010,110
+============================================================
+
+
+============================================================
+Training Configuration
+============================================================
+Epochs: 100
+Batch size: 128
+Temperature: 4.0
+Alpha (distillation weight): 0.7
+Backbone LR: 1e-4
+Head LR: 5e-4
+Weight decay: 0.05
+============================================================
+
+Epoch 1/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=4.019, Distill=4.359, Student=3.224]
+Epoch 1/100 - Average Loss: 4.0034
+Epoch 2/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=3.340, Distill=3.601, Student=2.733]
+Epoch 2/100 - Average Loss: 3.0388
+Epoch 3/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=2.109, Distill=2.205, Student=1.885]
+Epoch 3/100 - Average Loss: 1.9769
+Epoch 4/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=1.594, Distill=1.647, Student=1.473]
+Epoch 4/100 - Average Loss: 1.5667
+Epoch 5/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=1.419, Distill=1.445, Student=1.359]
+Epoch 5/100 - Average Loss: 1.3962
+Epoch 6/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=1.244, Distill=1.224, Student=1.290]
+Epoch 6/100 - Average Loss: 1.2385
+Epoch 7/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=1.172, Distill=1.141, Student=1.244]
+Epoch 7/100 - Average Loss: 1.1424
+Epoch 8/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=1.020, Distill=0.975, Student=1.124]
+Epoch 8/100 - Average Loss: 1.0077
+Epoch 9/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.877, Distill=0.798, Student=1.062]
+Epoch 9/100 - Average Loss: 0.8561
+Epoch 10/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.772, Distill=0.680, Student=0.986]Epoch 10/100 - Average Loss: 0.7239
+
+Evaluating student model at epoch 10...
+
+Accuracy: 0.4843
+New best model saved! Accuracy: 0.4843
+Epoch 11/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.601, Distill=0.482, Student=0.879]
+Epoch 11/100 - Average Loss: 0.5717
+Epoch 12/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.507, Distill=0.377, Student=0.811]
+Epoch 12/100 - Average Loss: 0.5076
+Epoch 13/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.384, Distill=0.229, Student=0.746]
+Epoch 13/100 - Average Loss: 0.3515
+Epoch 14/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.245, Distill=0.078, Student=0.636]
+Epoch 14/100 - Average Loss: 0.2436
+Epoch 15/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.206, Distill=0.034, Student=0.608]
+Epoch 15/100 - Average Loss: 0.2034
+Epoch 16/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.195, Distill=0.028, Student=0.585]
+Epoch 16/100 - Average Loss: 0.1941
+Epoch 17/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.191, Distill=0.028, Student=0.574]
+Epoch 17/100 - Average Loss: 0.1910
+Epoch 18/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.191, Distill=0.030, Student=0.568]
+Epoch 18/100 - Average Loss: 0.1921
+Epoch 19/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.194, Distill=0.028, Student=0.580]
+Epoch 19/100 - Average Loss: 0.1926
+Epoch 20/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.188, Distill=0.031, Student=0.557]Epoch 20/100 - Average Loss: 0.1900
+
+Evaluating student model at epoch 20...
+
+Accuracy: 0.6177
+New best model saved! Accuracy: 0.6177
+Epoch 21/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.191, Distill=0.032, Student=0.562]
+Epoch 21/100 - Average Loss: 0.1896
+Epoch 22/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.188, Distill=0.028, Student=0.560]
+Epoch 22/100 - Average Loss: 0.1892
+Epoch 23/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.189, Distill=0.031, Student=0.558]
+Epoch 23/100 - Average Loss: 0.1894
+Epoch 24/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.187, Distill=0.032, Student=0.549]
+Epoch 24/100 - Average Loss: 0.1870
+Epoch 25/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.188, Distill=0.032, Student=0.550]
+Epoch 25/100 - Average Loss: 0.1874
+Epoch 26/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.187, Distill=0.032, Student=0.548]
+Epoch 26/100 - Average Loss: 0.1858
+Epoch 27/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.186, Distill=0.033, Student=0.541]
+Epoch 27/100 - Average Loss: 0.1858
+Epoch 28/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.184, Distill=0.033, Student=0.539]
+Epoch 28/100 - Average Loss: 0.1855
+Epoch 29/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.185, Distill=0.032, Student=0.541]
+Epoch 29/100 - Average Loss: 0.1850
+Epoch 30/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.184, Distill=0.034, Student=0.534]Epoch 30/100 - Average Loss: 0.1847
+
+Evaluating student model at epoch 30...
+
+Accuracy: 0.6240
+New best model saved! Accuracy: 0.6240
+Epoch 31/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.185, Distill=0.032, Student=0.540]
+Epoch 31/100 - Average Loss: 0.1847
+Epoch 32/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.188, Distill=0.036, Student=0.544]
+Epoch 32/100 - Average Loss: 0.1867
+Epoch 33/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.185, Distill=0.037, Student=0.531]
+Epoch 33/100 - Average Loss: 0.1838
+Epoch 34/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.184, Distill=0.035, Student=0.530]
+Epoch 34/100 - Average Loss: 0.1839
+Epoch 35/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.184, Distill=0.034, Student=0.532]
+Epoch 35/100 - Average Loss: 0.1837
+Epoch 36/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.182, Distill=0.035, Student=0.527]
+Epoch 36/100 - Average Loss: 0.1828
+Epoch 37/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.184, Distill=0.035, Student=0.529]
+Epoch 37/100 - Average Loss: 0.1830
+Epoch 38/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.182, Distill=0.034, Student=0.527]
+Epoch 38/100 - Average Loss: 0.1817
+Epoch 39/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.184, Distill=0.035, Student=0.531]
+Epoch 39/100 - Average Loss: 0.1836
+Epoch 40/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.182, Distill=0.036, Student=0.522]Epoch 40/100 - Average Loss: 0.1813
+
+Evaluating student model at epoch 40...
+
+Accuracy: 0.6829
+New best model saved! Accuracy: 0.6829
+Epoch 41/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.182, Distill=0.036, Student=0.522]
+Epoch 41/100 - Average Loss: 0.1817
+Epoch 42/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.181, Distill=0.037, Student=0.517]
+Epoch 42/100 - Average Loss: 0.1808
+Epoch 43/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.181, Distill=0.035, Student=0.521]
+Epoch 43/100 - Average Loss: 0.1799
+Epoch 44/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.181, Distill=0.036, Student=0.520]
+Epoch 44/100 - Average Loss: 0.1811
+Epoch 45/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.181, Distill=0.038, Student=0.514]
+Epoch 45/100 - Average Loss: 0.1817
+Epoch 46/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.180, Distill=0.037, Student=0.514]
+Epoch 46/100 - Average Loss: 0.1804
+Epoch 47/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.180, Distill=0.038, Student=0.514]
+Epoch 47/100 - Average Loss: 0.1797
+Epoch 48/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.180, Distill=0.036, Student=0.515]
+Epoch 48/100 - Average Loss: 0.1798
+Epoch 49/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.181, Distill=0.037, Student=0.517]
+Epoch 49/100 - Average Loss: 0.1800
+Epoch 50/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.180, Distill=0.038, Student=0.511]Epoch 50/100 - Average Loss: 0.1792
+
+Evaluating student model at epoch 50...
+
+Accuracy: 0.6186
+Epoch 51/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.179, Distill=0.038, Student=0.509]
+Epoch 51/100 - Average Loss: 0.1796
+Epoch 52/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.178, Distill=0.038, Student=0.506]
+Epoch 52/100 - Average Loss: 0.1788
+Epoch 53/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.180, Distill=0.039, Student=0.510]
+Epoch 53/100 - Average Loss: 0.1798
+Epoch 54/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.179, Distill=0.041, Student=0.501]
+Epoch 54/100 - Average Loss: 0.1786
+Epoch 55/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.178, Distill=0.040, Student=0.498]
+Epoch 55/100 - Average Loss: 0.1787
+Epoch 56/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.179, Distill=0.038, Student=0.506]
+Epoch 56/100 - Average Loss: 0.1786
+Epoch 57/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.178, Distill=0.038, Student=0.505]
+Epoch 57/100 - Average Loss: 0.1787
+Epoch 58/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.178, Distill=0.040, Student=0.499]
+Epoch 58/100 - Average Loss: 0.1778
+Epoch 59/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.179, Distill=0.039, Student=0.504]
+Epoch 59/100 - Average Loss: 0.1785
+Epoch 60/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.178, Distill=0.040, Student=0.500]Epoch 60/100 - Average Loss: 0.1784
+
+Evaluating student model at epoch 60...
+
+Accuracy: 0.6462
+Epoch 61/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.179, Distill=0.039, Student=0.503]
+Epoch 61/100 - Average Loss: 0.1790
+Epoch 62/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.178, Distill=0.039, Student=0.503]
+Epoch 62/100 - Average Loss: 0.1784
+Epoch 63/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.178, Distill=0.039, Student=0.502]
+Epoch 63/100 - Average Loss: 0.1782
+Epoch 64/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.177, Distill=0.039, Student=0.499]
+Epoch 64/100 - Average Loss: 0.1772
+Epoch 65/100: 100%|██████████| 36/36 [00:12<00:00,  2.90it/s, Total=0.177, Distill=0.041, Student=0.496]
+Epoch 65/100 - Average Loss: 0.1771
+Epoch 66/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.178, Distill=0.039, Student=0.500]
+Epoch 66/100 - Average Loss: 0.1770
+Epoch 67/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.177, Distill=0.040, Student=0.496]
+Epoch 67/100 - Average Loss: 0.1772
+Epoch 68/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.177, Distill=0.040, Student=0.497]
+Epoch 68/100 - Average Loss: 0.1769
+Epoch 69/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.177, Distill=0.041, Student=0.493]
+Epoch 69/100 - Average Loss: 0.1770
+Epoch 70/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.039, Student=0.496]Epoch 70/100 - Average Loss: 0.1768
+
+Evaluating student model at epoch 70...
+
+Accuracy: 0.7441
+New best model saved! Accuracy: 0.7441
+Epoch 71/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.177, Distill=0.041, Student=0.494]
+Epoch 71/100 - Average Loss: 0.1771
+Epoch 72/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.177, Distill=0.041, Student=0.493]
+Epoch 72/100 - Average Loss: 0.1769
+Epoch 73/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.177, Distill=0.041, Student=0.494]
+Epoch 73/100 - Average Loss: 0.1761
+Epoch 74/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.176, Distill=0.042, Student=0.490]
+Epoch 74/100 - Average Loss: 0.1765
+Epoch 75/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.041, Student=0.489]
+Epoch 75/100 - Average Loss: 0.1761
+Epoch 76/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.042, Student=0.488]
+Epoch 76/100 - Average Loss: 0.1755
+Epoch 77/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.042, Student=0.490]
+Epoch 77/100 - Average Loss: 0.1756
+Epoch 78/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.041, Student=0.492]
+Epoch 78/100 - Average Loss: 0.1760
+Epoch 79/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.041, Student=0.490]
+Epoch 79/100 - Average Loss: 0.1757
+Epoch 80/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.042, Student=0.491]Epoch 80/100 - Average Loss: 0.1762
+
+Evaluating student model at epoch 80...
+
+Accuracy: 0.6896
+Epoch 81/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.042, Student=0.486]
+Epoch 81/100 - Average Loss: 0.1760
+Epoch 82/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.041, Student=0.489]
+Epoch 82/100 - Average Loss: 0.1759
+Epoch 83/100: 100%|██████████| 36/36 [00:12<00:00,  2.89it/s, Total=0.175, Distill=0.042, Student=0.486]
+Epoch 83/100 - Average Loss: 0.1751
+Epoch 84/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.176, Distill=0.042, Student=0.488]
+Epoch 84/100 - Average Loss: 0.1757
+Epoch 85/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.176, Distill=0.042, Student=0.488]
+Epoch 85/100 - Average Loss: 0.1754
+Epoch 86/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.175, Distill=0.041, Student=0.488]
+Epoch 86/100 - Average Loss: 0.1755
+Epoch 87/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.176, Distill=0.041, Student=0.490]
+Epoch 87/100 - Average Loss: 0.1757
+Epoch 88/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.174, Distill=0.041, Student=0.487]
+Epoch 88/100 - Average Loss: 0.1755
+Epoch 89/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.176, Distill=0.042, Student=0.489]
+Epoch 89/100 - Average Loss: 0.1754
+Epoch 90/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.175, Distill=0.042, Student=0.485]Epoch 90/100 - Average Loss: 0.1751
+
+Evaluating student model at epoch 90...
+
+Accuracy: 0.7165
+Epoch 91/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.041, Student=0.489]
+Epoch 91/100 - Average Loss: 0.1748
+Epoch 92/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.175, Distill=0.043, Student=0.485]
+Epoch 92/100 - Average Loss: 0.1753
+Epoch 93/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.041, Student=0.489]
+Epoch 93/100 - Average Loss: 0.1753
+Epoch 94/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.041, Student=0.488]
+Epoch 94/100 - Average Loss: 0.1748
+Epoch 95/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.175, Distill=0.042, Student=0.484]
+Epoch 95/100 - Average Loss: 0.1751
+Epoch 96/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.175, Distill=0.042, Student=0.485]
+Epoch 96/100 - Average Loss: 0.1749
+Epoch 97/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.176, Distill=0.042, Student=0.489]
+Epoch 97/100 - Average Loss: 0.1757
+Epoch 98/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.175, Distill=0.042, Student=0.486]
+Epoch 98/100 - Average Loss: 0.1755
+Epoch 99/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.175, Distill=0.042, Student=0.486]
+Epoch 99/100 - Average Loss: 0.1755
+Epoch 100/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.176, Distill=0.041, Student=0.489]Epoch 100/100 - Average Loss: 0.1758
+
+Evaluating student model at epoch 100...
+
+Accuracy: 0.6908
+
+============================================================
+Final Evaluation
+============================================================
+
+Finding best threshold for student:
+Test Set (3157 images)
+
+
+Threshold  | Acc      | Prec     | Rec      | F1
+-------------------------------------------------------
+0.01       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.03       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.05       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.07       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.09       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.11       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.13       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.15       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.17       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.19       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.21       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.23       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.25       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.27       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.29       | 0.6753   | 0.6752   | 0.9995   | 0.8060
+0.31       | 0.6794   | 0.6787   | 0.9967   | 0.8075
+0.33       | 0.7095   | 0.7014   | 0.9915   | 0.8216
+0.35       | 0.7653   | 0.7488   | 0.9812   | 0.8494
+0.37       | 0.8293   | 0.8161   | 0.9643   | 0.8840
+0.39       | 0.8549   | 0.8644   | 0.9310   | 0.8965
+0.41       | 0.8537   | 0.8949   | 0.8873   | 0.8911
+0.43       | 0.8312   | 0.9183   | 0.8230   | 0.8680
+0.45       | 0.8020   | 0.9393   | 0.7554   | 0.8374
+0.47       | 0.7596   | 0.9525   | 0.6775   | 0.7918
+0.49       | 0.7143   | 0.9623   | 0.6000   | 0.7392
+0.51 (*)    | 0.6684   | 0.9705   | 0.5244   | 0.6809
+0.53       | 0.6037   | 0.9731   | 0.4244   | 0.5910
+0.55       | 0.5455   | 0.9780   | 0.3338   | 0.4977
+0.57       | 0.4891   | 0.9832   | 0.2469   | 0.3947
+0.59       | 0.4400   | 0.9840   | 0.1728   | 0.2939
+0.61       | 0.4064   | 0.9848   | 0.1221   | 0.2172
+0.63       | 0.3741   | 0.9936   | 0.0728   | 0.1356
+0.65       | 0.3491   | 1.0000   | 0.0352   | 0.0680
+0.67       | 0.3351   | 1.0000   | 0.0146   | 0.0287
+0.69       | 0.3288   | 1.0000   | 0.0052   | 0.0103
+0.71       | 0.3269   | 1.0000   | 0.0023   | 0.0047
+0.73       | 0.3259   | 1.0000   | 0.0009   | 0.0019
+0.75       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.77       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.79       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.81       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.83       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.85       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.87       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.89       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.91       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.93       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.95       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+-------------------------------------------------------
+Default (0.50) row marked (*)
+Optimal (best F1) threshold: 0.39 | F1: 0.8965
+
+Optimal Threshold: 0.39
+
+Student model evaluation at best threshold:
+Threshold: 0.39 | Acc: 0.8549 | Prec(+): 0.8644 | Rec(+): 0.9310 | F1(+): 0.8965 | F1-macro: 0.8271
+
+Student model evaluation at default threshold (0.5):
+Threshold: 0.50 | Acc: 0.6908 | Prec(+): 0.9668 | Rec(+): 0.5610 | F1(+): 0.7100 | F1-macro: 0.6895
+
+Final student model saved to /content/drive/MyDrive/cswin_fpn_hybrid/cswin_fpn_hybrid/model_saves/student_efficientnet_b0_final_threshold_0.39.pth
+
+Experiment model saved: cswin_fpn_hybrid/model_saves/experiments/alpha_ablation_A0.7_efficientnet_b0.pth
+
+================================================================================
+EXPERIMENT: alpha_ablation_A0.9
+================================================================================
+Student Model: efficientnet_b0
+Teacher: cswin_fpn_hybrid/model_saves/threshold_0.50_hybrid_Tr2019_Te2022.pth
+Temperature: 4.0
+Alpha: 0.9
+Epochs: 100
+Backbone LR: 0.0001
+Head LR: 0.0005
+================================================================================
+
+
+============================================================
+Loading Teacher Model: ResNetCSWinHybrid
+============================================================
+WARNING: No checkpoint provided. Using randomly initialized teacher.
+For effective distillation, please provide a trained teacher model.
+Teacher parameters: 24,440,066
+============================================================
+
+
+============================================================
+Loading Student Model: efficientnet_b0
+============================================================
+Student total parameters: 4,010,110
+Student trainable parameters: 4,010,110
+============================================================
+
+
+============================================================
+Training Configuration
+============================================================
+Epochs: 100
+Batch size: 128
+Temperature: 4.0
+Alpha (distillation weight): 0.9
+Backbone LR: 1e-4
+Head LR: 5e-4
+Weight decay: 0.05
+============================================================
+
+Epoch 1/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=5.275, Distill=5.444, Student=3.752]
+Epoch 1/100 - Average Loss: 5.1490
+Epoch 2/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=3.841, Distill=3.933, Student=3.017]
+Epoch 2/100 - Average Loss: 3.3928
+Epoch 3/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=2.231, Distill=2.255, Student=2.017]
+Epoch 3/100 - Average Loss: 2.1127
+Epoch 4/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=1.635, Distill=1.639, Student=1.597]
+Epoch 4/100 - Average Loss: 1.5788
+Epoch 5/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=1.389, Distill=1.376, Student=1.510]
+Epoch 5/100 - Average Loss: 1.3581
+Epoch 6/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=1.174, Distill=1.147, Student=1.412]
+Epoch 6/100 - Average Loss: 1.1692
+Epoch 7/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=1.120, Distill=1.092, Student=1.367]
+Epoch 7/100 - Average Loss: 1.0879
+Epoch 8/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.936, Distill=0.905, Student=1.211]
+Epoch 8/100 - Average Loss: 0.9170
+Epoch 9/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.821, Distill=0.781, Student=1.183]
+Epoch 9/100 - Average Loss: 0.7939
+Epoch 10/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.721, Distill=0.673, Student=1.152]Epoch 10/100 - Average Loss: 0.6973
+
+Evaluating student model at epoch 10...
+
+Accuracy: 0.4910
+New best model saved! Accuracy: 0.4910
+Epoch 11/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.562, Distill=0.509, Student=1.043]
+Epoch 11/100 - Average Loss: 0.5043
+Epoch 12/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.369, Distill=0.309, Student=0.911]
+Epoch 12/100 - Average Loss: 0.3565
+Epoch 13/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.266, Distill=0.206, Student=0.812]
+Epoch 13/100 - Average Loss: 0.2970
+Epoch 14/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.240, Distill=0.181, Student=0.772]
+Epoch 14/100 - Average Loss: 0.2119
+Epoch 15/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.177, Distill=0.113, Student=0.745]
+Epoch 15/100 - Average Loss: 0.1458
+Epoch 16/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.086, Distill=0.020, Student=0.677]
+Epoch 16/100 - Average Loss: 0.0830
+Epoch 17/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.076, Distill=0.010, Student=0.677]
+Epoch 17/100 - Average Loss: 0.0768
+Epoch 18/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.077, Distill=0.011, Student=0.671]
+Epoch 18/100 - Average Loss: 0.0768
+Epoch 19/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.077, Distill=0.010, Student=0.674]
+Epoch 19/100 - Average Loss: 0.0796
+Epoch 20/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.075, Distill=0.009, Student=0.673]Epoch 20/100 - Average Loss: 0.0756
+
+Evaluating student model at epoch 20...
+
+Accuracy: 0.6455
+New best model saved! Accuracy: 0.6455
+Epoch 21/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.074, Distill=0.007, Student=0.677]
+Epoch 21/100 - Average Loss: 0.0734
+Epoch 22/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.073, Distill=0.006, Student=0.671]
+Epoch 22/100 - Average Loss: 0.0727
+Epoch 23/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.073, Distill=0.006, Student=0.673]
+Epoch 23/100 - Average Loss: 0.0723
+Epoch 24/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.073, Distill=0.006, Student=0.677]
+Epoch 24/100 - Average Loss: 0.0729
+Epoch 25/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.072, Distill=0.006, Student=0.673]
+Epoch 25/100 - Average Loss: 0.0720
+Epoch 26/100: 100%|██████████| 36/36 [00:12<00:00,  2.84it/s, Total=0.072, Distill=0.006, Student=0.668]
+Epoch 26/100 - Average Loss: 0.0717
+Epoch 27/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.072, Distill=0.006, Student=0.667]
+Epoch 27/100 - Average Loss: 0.0715
+Epoch 28/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.662]
+Epoch 28/100 - Average Loss: 0.0713
+Epoch 29/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.072, Distill=0.005, Student=0.671]
+Epoch 29/100 - Average Loss: 0.0720
+Epoch 30/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.072, Distill=0.006, Student=0.668]Epoch 30/100 - Average Loss: 0.0719
+
+Evaluating student model at epoch 30...
+
+Accuracy: 0.6804
+New best model saved! Accuracy: 0.6804
+Epoch 31/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.072, Distill=0.005, Student=0.667]
+Epoch 31/100 - Average Loss: 0.0715
+Epoch 32/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.072, Distill=0.005, Student=0.668]
+Epoch 32/100 - Average Loss: 0.0718
+Epoch 33/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.072, Distill=0.005, Student=0.669]
+Epoch 33/100 - Average Loss: 0.0714
+Epoch 34/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.665]
+Epoch 34/100 - Average Loss: 0.0712
+Epoch 35/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.668]
+Epoch 35/100 - Average Loss: 0.0716
+Epoch 36/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.666]
+Epoch 36/100 - Average Loss: 0.0708
+Epoch 37/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.667]
+Epoch 37/100 - Average Loss: 0.0716
+Epoch 38/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.661]
+Epoch 38/100 - Average Loss: 0.0708
+Epoch 39/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.071, Distill=0.005, Student=0.664]
+Epoch 39/100 - Average Loss: 0.0708
+Epoch 40/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.660]Epoch 40/100 - Average Loss: 0.0709
+
+Evaluating student model at epoch 40...
+
+Accuracy: 0.6918
+New best model saved! Accuracy: 0.6918
+Epoch 41/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.666]
+Epoch 41/100 - Average Loss: 0.0708
+Epoch 42/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.071, Distill=0.005, Student=0.664]
+Epoch 42/100 - Average Loss: 0.0712
+Epoch 43/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.669]
+Epoch 43/100 - Average Loss: 0.0712
+Epoch 44/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.661]
+Epoch 44/100 - Average Loss: 0.0705
+Epoch 45/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.661]
+Epoch 45/100 - Average Loss: 0.0710
+Epoch 46/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.663]
+Epoch 46/100 - Average Loss: 0.0709
+Epoch 47/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.667]
+Epoch 47/100 - Average Loss: 0.0712
+Epoch 48/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.666]
+Epoch 48/100 - Average Loss: 0.0712
+Epoch 49/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.664]
+Epoch 49/100 - Average Loss: 0.0703
+Epoch 50/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.663]Epoch 50/100 - Average Loss: 0.0704
+
+Evaluating student model at epoch 50...
+
+Accuracy: 0.6877
+Epoch 51/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.662]
+Epoch 51/100 - Average Loss: 0.0707
+Epoch 52/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.659]
+Epoch 52/100 - Average Loss: 0.0703
+Epoch 53/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.071, Distill=0.005, Student=0.660]
+Epoch 53/100 - Average Loss: 0.0707
+Epoch 54/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.662]
+Epoch 54/100 - Average Loss: 0.0703
+Epoch 55/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.659]
+Epoch 55/100 - Average Loss: 0.0704
+Epoch 56/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.662]
+Epoch 56/100 - Average Loss: 0.0705
+Epoch 57/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.658]
+Epoch 57/100 - Average Loss: 0.0702
+Epoch 58/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.660]
+Epoch 58/100 - Average Loss: 0.0704
+Epoch 59/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.664]
+Epoch 59/100 - Average Loss: 0.0703
+Epoch 60/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.071, Distill=0.004, Student=0.670]Epoch 60/100 - Average Loss: 0.0701
+
+Evaluating student model at epoch 60...
+
+Accuracy: 0.6772
+Epoch 61/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.071, Distill=0.005, Student=0.664]
+Epoch 61/100 - Average Loss: 0.0706
+Epoch 62/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.662]
+Epoch 62/100 - Average Loss: 0.0707
+Epoch 63/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.661]
+Epoch 63/100 - Average Loss: 0.0702
+Epoch 64/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.657]
+Epoch 64/100 - Average Loss: 0.0699
+Epoch 65/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.663]
+Epoch 65/100 - Average Loss: 0.0707
+Epoch 66/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.659]
+Epoch 66/100 - Average Loss: 0.0702
+Epoch 67/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.661]
+Epoch 67/100 - Average Loss: 0.0703
+Epoch 68/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.659]
+Epoch 68/100 - Average Loss: 0.0706
+Epoch 69/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.005, Student=0.659]
+Epoch 69/100 - Average Loss: 0.0707
+Epoch 70/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.663]Epoch 70/100 - Average Loss: 0.0704
+
+Evaluating student model at epoch 70...
+
+Accuracy: 0.6709
+Epoch 71/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.661]
+Epoch 71/100 - Average Loss: 0.0706
+Epoch 72/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.659]
+Epoch 72/100 - Average Loss: 0.0706
+Epoch 73/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.004, Student=0.660]
+Epoch 73/100 - Average Loss: 0.0700
+Epoch 74/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.659]
+Epoch 74/100 - Average Loss: 0.0703
+Epoch 75/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.655]
+Epoch 75/100 - Average Loss: 0.0699
+Epoch 76/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.657]
+Epoch 76/100 - Average Loss: 0.0700
+Epoch 77/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.658]
+Epoch 77/100 - Average Loss: 0.0701
+Epoch 78/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.657]
+Epoch 78/100 - Average Loss: 0.0704
+Epoch 79/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.071, Distill=0.004, Student=0.666]
+Epoch 79/100 - Average Loss: 0.0703
+Epoch 80/100: 100%|██████████| 36/36 [00:12<00:00,  2.84it/s, Total=0.069, Distill=0.004, Student=0.656]Epoch 80/100 - Average Loss: 0.0698
+
+Evaluating student model at epoch 80...
+
+Accuracy: 0.6804
+Epoch 81/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.004, Student=0.663]
+Epoch 81/100 - Average Loss: 0.0698
+Epoch 82/100: 100%|██████████| 36/36 [00:12<00:00,  2.88it/s, Total=0.070, Distill=0.005, Student=0.658]
+Epoch 82/100 - Average Loss: 0.0697
+Epoch 83/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.069, Distill=0.005, Student=0.651]
+Epoch 83/100 - Average Loss: 0.0695
+Epoch 84/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.662]
+Epoch 84/100 - Average Loss: 0.0703
+Epoch 85/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.069, Distill=0.004, Student=0.656]
+Epoch 85/100 - Average Loss: 0.0701
+Epoch 86/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.665]
+Epoch 86/100 - Average Loss: 0.0703
+Epoch 87/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.004, Student=0.659]
+Epoch 87/100 - Average Loss: 0.0698
+Epoch 88/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.664]
+Epoch 88/100 - Average Loss: 0.0699
+Epoch 89/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.004, Student=0.664]
+Epoch 89/100 - Average Loss: 0.0699
+Epoch 90/100: 100%|██████████| 36/36 [00:12<00:00,  2.85it/s, Total=0.070, Distill=0.005, Student=0.654]Epoch 90/100 - Average Loss: 0.0696
+
+Evaluating student model at epoch 90...
+
+Accuracy: 0.6845
+Epoch 91/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.658]
+Epoch 91/100 - Average Loss: 0.0698
+Epoch 92/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.659]
+Epoch 92/100 - Average Loss: 0.0696
+Epoch 93/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.004, Student=0.660]
+Epoch 93/100 - Average Loss: 0.0701
+Epoch 94/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.069, Distill=0.004, Student=0.653]
+Epoch 94/100 - Average Loss: 0.0696
+Epoch 95/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.005, Student=0.654]
+Epoch 95/100 - Average Loss: 0.0698
+Epoch 96/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.005, Student=0.659]
+Epoch 96/100 - Average Loss: 0.0699
+Epoch 97/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.657]
+Epoch 97/100 - Average Loss: 0.0697
+Epoch 98/100: 100%|██████████| 36/36 [00:12<00:00,  2.87it/s, Total=0.070, Distill=0.004, Student=0.660]
+Epoch 98/100 - Average Loss: 0.0701
+Epoch 99/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.657]
+Epoch 99/100 - Average Loss: 0.0699
+Epoch 100/100: 100%|██████████| 36/36 [00:12<00:00,  2.86it/s, Total=0.070, Distill=0.004, Student=0.657]Epoch 100/100 - Average Loss: 0.0699
+
+Evaluating student model at epoch 100...
+
+Accuracy: 0.6915
+
+============================================================
+Final Evaluation
+============================================================
+
+Finding best threshold for student:
+Test Set (3157 images)
+
+
+Threshold  | Acc      | Prec     | Rec      | F1
+-------------------------------------------------------
+0.01       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.03       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.05       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.07       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.09       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.11       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.13       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.15       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.17       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.19       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.21       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.23       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.25       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.27       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.29       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.31       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.33       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.35       | 0.6747   | 0.6747   | 1.0000   | 0.8057
+0.37       | 0.6750   | 0.6749   | 1.0000   | 0.8059
+0.39       | 0.6775   | 0.6768   | 0.9991   | 0.8070
+0.41       | 0.6817   | 0.6806   | 0.9953   | 0.8084
+0.43       | 0.6896   | 0.6886   | 0.9854   | 0.8107
+0.45       | 0.6984   | 0.7042   | 0.9535   | 0.8101
+0.47       | 0.7080   | 0.7320   | 0.8948   | 0.8052
+0.49       | 0.6994   | 0.7668   | 0.7967   | 0.7815
+0.51 (*)    | 0.6722   | 0.8043   | 0.6793   | 0.7366
+0.53       | 0.6310   | 0.8535   | 0.5469   | 0.6667
+0.55       | 0.5670   | 0.9020   | 0.4019   | 0.5560
+0.57       | 0.4979   | 0.9332   | 0.2756   | 0.4255
+0.59       | 0.4511   | 0.9606   | 0.1944   | 0.3233
+0.61       | 0.4070   | 0.9674   | 0.1254   | 0.2219
+0.63       | 0.3665   | 0.9851   | 0.0620   | 0.1166
+0.65       | 0.3443   | 0.9839   | 0.0286   | 0.0557
+0.67       | 0.3320   | 1.0000   | 0.0099   | 0.0195
+0.69       | 0.3266   | 1.0000   | 0.0019   | 0.0037
+0.71       | 0.3256   | 1.0000   | 0.0005   | 0.0009
+0.73       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.75       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.77       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.79       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.81       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.83       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.85       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.87       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.89       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.91       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.93       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+0.95       | 0.3253   | 0.0000   | 0.0000   | 0.0000
+-------------------------------------------------------
+Default (0.50) row marked (*)
+Optimal (best F1) threshold: 0.43 | F1: 0.8107
+
+Optimal Threshold: 0.43
+
+Student model evaluation at best threshold:
+Threshold: 0.43 | Acc: 0.6896 | Prec(+): 0.6886 | Rec(+): 0.9854 | F1(+): 0.8107 | F1-macro: 0.4740
+
+Student model evaluation at default threshold (0.5):
+Threshold: 0.50 | Acc: 0.6915 | Prec(+): 0.7861 | Rec(+): 0.7455 | F1(+): 0.7653 | F1-macro: 0.6576
+
+Final student model saved to /content/drive/MyDrive/cswin_fpn_hybrid/cswin_fpn_hybrid/model_saves/student_efficientnet_b0_final_threshold_0.43.pth
+
+Experiment model saved: cswin_fpn_hybrid/model_saves/experiments/alpha_ablation_A0.9_efficientnet_b0.pth
+
+================================================================================
+All Experiments Complete!
+================================================================================
+
+alpha  thresh      acc        f1
+0.3	 |	0.25  |	 86.35%	 |  0.9003
+0.5	 |	0.27  |	 87.08%	 |  0.9059	 BEST
+0.7	 |	0.39  |	 85.49%	 |  0.8965
+0.9	 |  0.43  |	 68.96%	 |  0.8107
