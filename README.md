@@ -136,21 +136,23 @@ Here, we only did this on the best performing model for each cross year configur
 |:-------------------------------------|:---------|:-------------------------------------------------------------:|:----------------------------------------------------------------------:|
 | **Train '19 $\rightarrow$ Test '22** | Accuracy |                    ***0.91*** --->   0.89                     |                                   -                                    |
 |                                      | F1 Score |                    ***0.93*** --->   0.92                     |                                   -                                    |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |                               -                               |                         ***0.89*** --->   0.89                         |
-|                                      | F1 Score |                               -                               |                         ***0.86*** --->  0.86                          |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |                               -                               |                            0.89 --->   0.89                            |
+|                                      | F1 Score |                               -                               |                            0.86 --->  0.86                             |
 <br>
-Reason for choosing `20%` for resnet and `15%` (pretty big cut) for transformer on the train 19 / train 22 configuration was 
-Reason for choosing `5%` for resnet and `10%` (small cut) for transformer on the train 19 / train 22 configuration was 
+Reason for choosing `20%` for resnet and `15%` (pretty big cut) for transformer on the train 19 / train 22 configuration was...<br>
+Reason for choosing `5%` for resnet and `10%` (small cut) for transformer on the train 19 / train 22 configuration was... 
 
 ## Quantization (INT8)
 | Train / Test Split                   | Metric   | Model3_HeavyAug ---> Pruned + quantized | ResNetCSWinHybrid_HeavyAug ---> Pruned + quantized |
 |:-------------------------------------|:---------|:---------------------------------------:|:--------------------------------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |             ***0.91*** --->             |                         -                          |
-|                                      | F1 Score |             ***0.93*** --->             |                         -                          |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |                    -                    |                  ***0.89*** --->                   |
-|                                      | F1 Score |                    -                    |                  ***0.86*** --->                   |
+| **Train '19 $\rightarrow$ Test '22** | Accuracy |          ***0.91*** --->  0.89          |                         -                          |
+|                                      | F1 Score |         ***0.93*** --->   0.92          |                         -                          |
+| **Train '22 $\rightarrow$ Test '19** | Accuracy |                    -                    |                  0.89 --->  0.89                   |
+|                                      | F1 Score |                    -                    |                  0.86 --->   0.86                  |
 <br>
 
+Finally, Pruning + Quantization for Train 19, Test 22. <br>
+KD for Train 22, Test 19.
 
 <br><br>
 ## Normalization entries

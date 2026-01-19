@@ -1,0 +1,25 @@
+Model: Pruned FP32     | Size: 121.74 MB
+Quantization Results
+Model: Quantized INT8  | Size: 62.82 MB
+Size Reduction: 48.40%
+
+Checking what was quantized:
+Layer Name                               | Module Type                    | Weight Dtype
+------------------------------------------------------------------------------------------
+resnet_stem.conv1                        | Conv2d                         | torch.float32
+------------------------------------------------------------------------------------------
+stage3.0.qkv                             | Linear                         | torch.qint8
+
+
+Testing Pruned and Quantized Model
+Processed batch 0/36
+Processed batch 5/36
+Processed batch 10/36
+Processed batch 15/36
+Processed batch 20/36
+Processed batch 25/36
+Processed batch 30/36
+Processed batch 35/36
+NEW Compressed Model Accuracy: 0.8892
+NEW Compressed Model F1: 0.8572
+Inference Time: 1417.72 seconds
