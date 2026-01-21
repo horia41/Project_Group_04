@@ -15,8 +15,7 @@ PlantVillage_2_2022train_2019test/
 PlantVillage_2019/
 !PlantVillage_2019/random
 PlantVillage_2022/
-!PlantVillage_2019/random
-cswin_fpn_hybrid/dataset/
+phase_performance_hybrids/dataset/
 
 # C extensions
 *.so

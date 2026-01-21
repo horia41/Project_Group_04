@@ -1,10 +1,33 @@
 # Efficient multiscale computer vision targeting and evidence-based response to crop diseases - Group 4
-Data used can be found on the Google Drive. Download the zipped file you find there. <br>
-<br>After unzipping it, you should have 2 folders : `2019` and `2022`. Take those 2 and put them in the `current_data` folder. <br>
-<br>Afterward, go to `prepare_datasets` folder and run everything from there except `get_mean_std_for_normalization.py`. These will split the data as needed for all our cases to make direct comparisons with the paper.
-<br><br>
 
-## Dataset overview
+## Overview
+
+This repository contains the implementation of our research on **Real-time detection of Early Blight (*Alternaria Solani*) in potato crops using Unmanned Aerial Vehicle (UAV) imagery.**
+
+Modern precision agriculture demands a difficult trade-off: deep learning models must be complex enough to generalize across different growing seasons (Domain Generalization) yet lightweight enough to run on drone hardware (Edge Efficiency). To address this, we developed and benchmarked novel **Hybrid CNN-Transformer architectures** that combine the local feature extraction of **ResNet50** with the global context modeling of **CSWin Transformers**.
+
+## Key features of this proejct
+* **Novel Hybrid Architectures:** Implementations of both **Sequential** (v2) and **Parallel** (v3) integration strategies to test Feature Refinement vs. Zero-Shot Robustness.
+* **Cross-Year Validation:** rigorous testing on UAV dataset (Alternaria solani dataset, Belgium, https://zenodo.org/records/10727413) spanning two distinct agricultural seasons (2019 & 2022) to ensure temporal generalization.
+* **Edge Optimization Pipeline:** A complete efficiency benchmark comparing **Knowledge Distillation** (Teacher-Student) against **Iterative Structured Pruning + Dynamic Quantization**.
+* **Near-Infrared (NIR) Analysis:** leveraged multispectral sensor data to exploit chlorophyll degradation signatures invisible to standard RGB cameras.
+
+
+## Dataset
+Utilized dataset can be found in the link provided above. Download the zipped file you find there and after unzipping it, you should have 2 folders : `2019` and `2022`. Take those 2 and put them in the `current_data` folder present in the repository. Afterwards, go to `prepare_datasets` folder and run everything from there. These will split the data as needed for all our cases.
+<br>
+
+Running `prepare_datasets/get_mean_std_for_normalization.py` should return the following:
+* 2019 train entirely:
+    * mean: `0.7553`, `0.3109`, `0.1059`
+    * std: `0.1774`, `0.1262`, `0.0863`
+* 2022 train entirely:
+    * mean: `0.7083`, `0.2776`, `0.0762`
+    * std: `0.1704`, `0.1296`, `0.0815`
+
+
+    
+### Dataset overview
 | Dataset Year | Class Description       | Label | Image Count | Dimensions |
 |:-------------|:------------------------|:-----:|:-----------:|:----------:|
 | **2019**     | Not *Alternaria Solani* |   0   |    1,710    | 256x256x3  |
@@ -13,153 +36,51 @@ Data used can be found on the Google Drive. Download the zipped file you find th
 |              | *Alternaria Solani*     |   1   |    1,027    | 256x256x3  |
 | **Total**    | **Combined**            | **-** |  **7,662**  |   **-**    |
 
-# Phase 2 - Replication of baselines
 
-## Baseline replication overview for cross-year testing (Avg 10 runs)
-| Train / Test Split                   | Metric   | ResNet50 (DTL)  | VGG11 (DTL) |
-|:-------------------------------------|:---------|:---------------:|:-----------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy | **0.88** ± 0.02 | 0.85 ± 0.02 |
-|                                      | F1 Score | **0.90** ± 0.02 | 0.87 ± 0.02 |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |   0.88 ± 0.01   | 0.88 ± 0.01 |
-|                                      | F1 Score |   0.86 ± 0.01   | 0.86 ± 0.01 |
+## Baselines and Hybrid Architectures
+Baslines:
+1. ResNet50 (DTL) (`phase_performance_baselines/train_deep.py`)
+2. VGG11 (DTL) (`phase_performance_baselines/train_deep.py`)
 
+Hybrids:
+1. Sequential Model v1 (`phase_performance_hybrids/resnet50_cswin/model_v1.py`)
+2. Sequential Model v2 (`phase_performance_hybrids/resnet50_cswin/model_v2.py`)
+3. Parallel Model v3 (`phase_performance_hybrids/resnet50_cswin/model_v3.py`)
+4. Parallel Model v3 without ResNet50 (`phase_performance_hybrids/resnet50_cswin/model_v3_noresnet.py`)
+
+
+## Project Structure
+- `cross_year_configurations_data` — Cross-year configured data after running scripts from `prepare_datasets`
+- `current_data` — Dataset folder
+- `phase_efficiency` — Folder containing Jupyter Notebook for Knowledge Distillation, Iterative Structured Pruning and Dynamic Quantization along with their results
+- `phase_performance_baselines` — Folder containing the replication of our baselines and their results
+- `phase_performance_hybrids` — Folder containing the implementation of all hybrid models, including their training script and results
+- `prepare_datasets` — Folder containing script for data splits and calculating mean & standard deviation for them
+- `README.md` — README file
 <br><br>
+In case of finding any folder named `out_of_usage`, please ignore them as they contain all kinds of code for things we did not include in our final work and findings.
 
-## Baseline overview from paper for cross-year testing (Avg 10 runs)
-| Train / Test Split                   | Metric   | AlternarAI  |
-|:-------------------------------------|:---------|:-----------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy | 0.87 ± 0.02 |
-|                                      | F1 Score | 0.82 ± 0.02 |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy | 0.91 ± 0.03 |
-|                                      | F1 Score | 0.83 ± 0.03 |
+## Results Summary
+| Experiment / Area          | Key Finding                                                   | Metrics / Comparison                                                              | Implication                                                                                                           |
+|:---------------------------|:--------------------------------------------------------------|:----------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| **Baselines**              | **ResNet50 (DTL)** established as the optimal baseline.       | Matched *AlternarAI* accuracy (~88-91%) but with better F1 balance than VGG11.    | Deep Transfer Learning is sufficient to match current SOTA; Hybrid models must beat this standard.                    |
+| **Augmentation**           | **Heavy Augmentation** is essential for Hybrid architectures. | Improved F1-score by **2-3%** compared to Basic Augmentation.                     | Synthetic variance (Random Erasing, Gaussian Blur) forces the Transformer to learn global context over local texture. |
+| **Architecture (Forward)** | **Parallel (v3)** excels at Zero-Shot Generalization.         | **91% Accuracy** (v3) vs. 85% (v2) on '19 $\to$ '22 split.                        | Parallel design builds independent global representations, making it more robust to unseen future domains.            |
+| **Architecture (Inverse)** | **Sequential (v2)** excels at Feature Refinement.             | **89% Accuracy** (v2) vs. 88% (v3) on '22 $\to$ '19 split.                        | Sequential design polishes CNN features better when training data is abundant/diverse.                                |
+| **Ablation Study**         | **Convolutional Stem** is non-negotiable.                     | Removing ResNet caused a catastrophic drop: **91% $\to$ 68%** Accuracy.           | Vision Transformers lack the inductive bias to detect high-frequency lesion boundaries without a CNN stem.            |
+| **Efficiency (Forward)**   | **Pruning + Quantization** is superior for robustness.        | Retained **0.92 F1** (vs. 0.91 for Distillation) while reducing size to **35MB**. | For mission-critical tasks, compressing the Hybrid model is better than distilling it to a lightweight student.       |
+| **Efficiency (Inverse)**   | **Distillation** is sufficient for data-rich regimes.         | EfficientNet-B0 matched Hybrid performance (**0.86 F1**) at just **15.6MB**.      | When training data is abundant, the complex Hybrid backbone becomes redundant for inference.                          |
+| **Data Efficiency**        | Performance gains were incremental, not exponential.          | Hybrid models saturated quickly due to limited data (**~7,600 patches**).         | The "Data Hunger" of Transformers bottlenecked peak performance; larger datasets are needed to unlock full potential. |
 
-<br><br>
+## How to run
+After following the steps presented under `Dataset`, you should be able to run any file we have in this repository. <br>
+Due to GitHub upload limitations, we can't provide model checkpoints, for which we have saved after every experiment and training phase we have performed. In case this is needed, feel free to contact any of us, so we can grant you access to the Google Drive. <br>
 
-# Phase 2 - Hybrid model (v2)
-<img src="DeepLearning_PlantDiseases-master/Scripts/hybrid_diagram.png" width="1024" height="256"/>
 
-
-The data flow through the network consists of five distinct stages:
-
-### 1. CNN Stem (`ResNet50`)
-* **Input:** Batch of images `[B, 3, 224, 224]`.
-* **Mechanism:** The model utilizes the first three stages of a standard ResNet50 (pretrained on ImageNet).
-* **Function:** Extracts low-to-mid-level visual features (edges, textures, shapes).
-* **Output:** Feature maps from the 3rd stage (`layer3`).
-* **Dimensions:** `[B, 1024, 14, 14]`.
-
-### 2. Gated ECA Bridge (`GatedECABridge`)
-This custom module acts as an intelligent transition layer between the CNN and the Transformer, performing channel reduction and feature refinement. It consists of three parallel tracks:
-
-1.  **Residual Track:** A direct 1x1 convolution projecting the input to the target dimension to preserve original information.
-2.  **Feature Branch:** A standard projection (Conv1x1 + GroupNorm) to extract features.
-3.  **Gating Branch:** A parallel path (Conv1x1 + GroupNorm + Tanh) that learns a soft mask.
-
-* **Gating Mechanism:** The features are modulated by the gate: $X_{out} = X_{feat} \times (0.5 + 0.5 \times X_{gate})$. This allows the network to selectively suppress or emphasize specific spatial areas before they enter the transformer.
-* **ECA (Efficient Channel Attention):** Applies 1D convolution across channels to dynamically weight the importance of different feature maps.
-* **Fusion:** The gated, attended features are added to the residual track: $Y = Act(ECA(X_{gated})) + X_{res}$.
-* **Output:** `[B, 256, 14, 14]`.
-
-### 3. Tokenizer & Positional Embedding
-* **Flattening:** The 2D feature maps are flattened into a sequence of tokens using `Rearrange`.
-    * Transformation: `[B, 256, 14, 14] -> [B, 196, 256]` (where $196 = 14 \times 14$).
-* **Positional Encoding:** Learnable positional embeddings are added to the sequence to retain spatial information lost during flattening.
-
-### 4. Transformer Body (CSWin-Tiny)
-The model uses the deeper stages of the CSWin Transformer (Cross-Shaped Window) to process global context.
-
-* **Stage 3:** Processes the sequence of 196 tokens.
-* **Merge Layer:** A downsampling operation that merges tokens, reducing the sequence length while increasing channel depth.
-    * Transition: `[B, 196, 256] -> [B, 49, 512]`.
-* **Stage 4:** Processes the reduced sequence of 49 tokens for high-level semantic abstraction.
-* **Final Norm:** Layer normalization applied to the final token sequence.
-
-### 5. Classification Head
-* **Global Average Pooling:** The sequence of 49 tokens is averaged to produce a single vector per image.
-    * Transition: `[B, 49, 512] -> [B, 512]`.
-* **Dropout:** Applied for regularization (`drop_rate=0.2`).
-* **Linear Classifier:** A final fully connected layer maps the features to the class scores.
-* **Final Output:** `[B, num_classes]`.
-
-## Key Technical Features
-
-* **Hybrid Design:** Leverages CNNs for early spatial processing (efficient edge detection) and Transformers for semantic understanding (global context).
-* **Group Normalization:** Used in the bridge instead of Batch Normalization to provide stable statistics even with smaller batch sizes.
-* **Efficient Channel Attention (ECA):** Adds lightweight channel-wise attention without significant computational overhead.
-* **Stochastic Depth:** Implemented via `drop_path_rate` inside the CSWin blocks to improve training robustness.
-
-## Results so far with the hybrid_v2 (one run)
-
-| Train / Test Split                   | Metric   | ResNetCSWinHybrid_HeavyAug | ResNetCSWinHybrid_BasicAug |
-|:-------------------------------------|:---------|:--------------------------:|:--------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |         ***0.85***         |            0.84            |
-|                                      | F1 Score |         ***0.89***         |            0.86            |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |         ***0.89***         |            0.88            |
-|                                      | F1 Score |         ***0.86***         |            0.85            |
-
-<br>
-
-## Results with model3 so far
-| Train / Test Split                   | Metric   | Model3_HeavyAug | Model3_BasicAug | Model3_noResNet | 
-|:-------------------------------------|:---------|:---------------:|:---------------:|:---------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |   ***0.91***    |      0.90       |      0.68       |
-|                                      | F1 Score |   ***0.93***    |      0.92       |      0.80       |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |   ***0.88***    |      0.86       |      0.47       |
-|                                      | F1 Score |   ***0.85***    |      0.82       |      0.56       |
-
-<br>
-
-## Interesting finding
-| Train / Test Split                   | Metric   | Model3_HeavyAug | ResNetCSWinHybrid_HeavyAug |
-|:-------------------------------------|:---------|:---------------:|:--------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |   ***0.91***    |            0.85            |
-|                                      | F1 Score |   ***0.93***    |            0.89            |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |      0.88       |         ***0.89***         |
-|                                      | F1 Score |      0.85       |         ***0.86***         |
-
-<br>
-
-# Phase 3
-
-## Knowledge Distillation
-| Train / Test Split                   | Metric   | Model3_HeavyAug ---> EfficientNet_b0<br/>(alpha = 0.5, temp = 4.0) | ResNetCSWinHybrid_HeavyAug ---> EfficientNet_b0<br/>(alpha = 0.3, temp = 2.0 ) |
-|:-------------------------------------|:---------|:------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |                       ***0.91*** --->   0.87                       |                                       -                                        |
-|                                      | F1 Score |                       ***0.93*** --->   0.91                       |                                       -                                        |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |                                 -                                  |                             ***0.89*** --->   0.88                             |
-|                                      | F1 Score |                                 -                                  |                             ***0.86*** --->  0.86                              |
-<br>
-Here, we only did this on the best performing model for each cross year configuration.
-
-## Iterative structured pruning
-| Train / Test Split                   | Metric   | Model3_HeavyAug ---> Pruned <br/> (20.0% resnet, 15.0% trans) | ResNetCSWinHybrid_HeavyAug ---> Pruned <br/>(5.0% resnet, 10.0% trans) |
-|:-------------------------------------|:---------|:-------------------------------------------------------------:|:----------------------------------------------------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |                    ***0.91*** --->   0.89                     |                                   -                                    |
-|                                      | F1 Score |                    ***0.93*** --->   0.92                     |                                   -                                    |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |                               -                               |                            0.89 --->   0.89                            |
-|                                      | F1 Score |                               -                               |                            0.86 --->  0.86                             |
-<br>
-Reason for choosing `20%` for resnet and `15%` (pretty big cut) for transformer on the train 19 / train 22 configuration was...<br>
-Reason for choosing `5%` for resnet and `10%` (small cut) for transformer on the train 19 / train 22 configuration was... 
-
-## Quantization (INT8)
-| Train / Test Split                   | Metric   | Model3_HeavyAug ---> Pruned + quantized | ResNetCSWinHybrid_HeavyAug ---> Pruned + quantized |
-|:-------------------------------------|:---------|:---------------------------------------:|:--------------------------------------------------:|
-| **Train '19 $\rightarrow$ Test '22** | Accuracy |          ***0.91*** --->  0.89          |                         -                          |
-|                                      | F1 Score |         ***0.93*** --->   0.92          |                         -                          |
-| **Train '22 $\rightarrow$ Test '19** | Accuracy |                    -                    |                  0.89 --->  0.89                   |
-|                                      | F1 Score |                    -                    |                  0.86 --->   0.86                  |
-<br>
-
-Finally, Pruning + Quantization for Train 19, Test 22. <br>
-KD for Train 22, Test 19.
-
-<br><br>
-## Normalization entries
-* 2019 train entirely:
-    * mean: `0.7553`, `0.3109`, `0.1059`
-    * std: `0.1774`, `0.1262`, `0.0863`
-* 2022 train entirely:
-    * mean: `0.7083`, `0.2776`, `0.0762`
-    * std: `0.1704`, `0.1296`, `0.0815`
+## Authors
+**[Horia Ionescu](mailto:h.ionescu@student.maastrichtuniversity.nl), [Dan Loznean](mailto:d.loznean@student.maastrichtuniversity.nl), [Janik Euskirchen](mailto:j.euskirchen@student.maastrichtuniversity.nl), [Vasile Mereuţă](mailto:v.mereuta@student.maastrichtuniversity.nl), [Stan Ostaszewski](mailto:s.ostaszewski@student.maastrichtuniversity.nl), [Gunes Özmen Bakan](mailto:g.ozmen@student.maastrichtuniversity.nl)**  
+**Supervisors: [Dr. Charis Kouzinopoulos](mailto:charis.kouzinopoulos@maastrichtuniversity.nl), [Dr. Marcin Pietrasik](mailto:marcin.pietrasik@maastrichtuniversity.nl)** <br>
+**Coordinator: [Dr. Gijs Schoenmakers](mailto:gm.schoenmakers@maastrichtuniversity.nl)** <br>
+[Department of Advanced Computing Sciences](https://www.maastrichtuniversity.nl/research/department-advanced-computing-sciences)  
+Faculty of Science and Engineering, Maastricht University, The Netherlands
 

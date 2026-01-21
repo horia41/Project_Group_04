@@ -1,8 +1,0 @@
-numpy
-matplotlib
-torch
-torchvision
-timm
-einops
-jupyter 
-# pandas

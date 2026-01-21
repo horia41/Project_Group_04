@@ -9,7 +9,6 @@ Usage:
     python generate_offline_augmentation.py --source PlantVillage_2_2022train_2019test --multiplier 3.17
 """
 
-import os
 import json
 import shutil
 import argparse
