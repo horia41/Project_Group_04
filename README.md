@@ -76,6 +76,14 @@ In case of finding any folder named `out_of_usage`, please ignore them as they c
 After following the steps presented under `Dataset`, you should be able to run any file we have in this repository. <br>
 Due to GitHub upload limitations, we can't provide model checkpoints, for which we have saved after every experiment and training phase we have performed. In case this is needed, feel free to contact any of us, so we can grant you access to the Google Drive. <br>
 
+## Package requirements
+Before running the code, make sure you have the following Python Packages intalled:
+1. `torch>=2.4.0`
+2. `torchvision.*`
+3. `timm`
+4. `einops`
+5. `numpy`
+6. `scikit-learn`
 
 ## Authors
 **[Horia Ionescu](mailto:h.ionescu@student.maastrichtuniversity.nl), [Dan Loznean](mailto:d.loznean@student.maastrichtuniversity.nl), [Janik Euskirchen](mailto:j.euskirchen@student.maastrichtuniversity.nl), [Vasile Mereuţă](mailto:v.mereuta@student.maastrichtuniversity.nl), [Stan Ostaszewski](mailto:s.ostaszewski@student.maastrichtuniversity.nl), [Gunes Özmen Bakan](mailto:g.ozmen@student.maastrichtuniversity.nl)**  
