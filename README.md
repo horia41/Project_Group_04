@@ -85,6 +85,9 @@ Before running the code, make sure you have the following Python Packages intall
 5. `numpy`
 6. `scikit-learn`
 
+## Note
+All our training processes and experiments have been conducted on on an NVIDIA A100-SXM4-40GB GPU enabled through Google Colab Environment.
+
 ## Authors
 **[Horia Ionescu](mailto:h.ionescu@student.maastrichtuniversity.nl), [Dan Loznean](mailto:d.loznean@student.maastrichtuniversity.nl), [Janik Euskirchen](mailto:j.euskirchen@student.maastrichtuniversity.nl), [Vasile Mereuţă](mailto:v.mereuta@student.maastrichtuniversity.nl), [Stan Ostaszewski](mailto:s.ostaszewski@student.maastrichtuniversity.nl), [Gunes Özmen Bakan](mailto:g.ozmen@student.maastrichtuniversity.nl)**  
 **Supervisors: [Dr. Charis Kouzinopoulos](mailto:charis.kouzinopoulos@maastrichtuniversity.nl), [Dr. Marcin Pietrasik](mailto:marcin.pietrasik@maastrichtuniversity.nl)** <br>
